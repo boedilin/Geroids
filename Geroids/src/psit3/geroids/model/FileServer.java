@@ -37,7 +37,7 @@ public class FileServer
         //resource_handler.setDirectoriesListed(true);
         //brauchts nicht!
         //resource_handler.setWelcomeFiles(new String[]{ "index.html" });
-        resource_handler.setResourceBase(".");
+        resource_handler.setResourceBase("./public");
 
         // Add the ResourceHandler to the server.
         HandlerList handlers = new HandlerList();
