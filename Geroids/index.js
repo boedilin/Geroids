@@ -2,7 +2,7 @@ var ws = new WebSocket("ws://127.0.0.1:8080/");
 
 ws.onopen = function() {
     alert("Opened!");
-    ws.send("Hello Server Brown");
+    ws.send("Hello Server");
 };
 
 ws.onmessage = function (evt) {
