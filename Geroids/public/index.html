@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,7 +10,7 @@
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/specific.css">
+    <link rel="stylesheet" href="css/main.css">
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/modernizr.js"></script>
@@ -21,10 +22,28 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
-  <body >
+</head>
+
+<body>
     <div id="background">
-    <img src="space_sky_stars.jpg" class="stretch" alt="backgroundImage" /></div>
-    <canvas id="canvas"></canvas>
-  </body>
+        <img src="images/background.png" class="stretch" alt="backgroundImage" />
+    </div>
+    <div id=gamePanel>
+        <div class="container-fluid">
+            <div class="row login">
+                <div class="col-xs-7 col-md-8">
+                    <img src="images/logo_black.png" class="startlogo" alt="Geroids" />
+                    <form formaction="toDefine">
+                        <label style="font-family: 'MineCrafter 3 Regular' " for="fname">Please enter your Nickname</label>
+                        <input type="text" id="nickname" placeholder="Nickname" name="firstname">
+                        <label for="fname">And email for coming back at any time</label>
+                        <input type="text" id="email" placeholder="E-Mail" name="email">
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+
+        </div>
+</body>
+
 </html>

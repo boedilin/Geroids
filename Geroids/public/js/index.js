@@ -38,14 +38,23 @@ function canvasApp() {
             // do your drawing stuff here
             cW2 = canvas.width/2;
             cH2 = canvas.height/2;
-            context.fillStyle="red";
+            context.fillStyle="black";
             context.fillRect(0,0,cW2,cH2);
-            context.fillStyle="green";
+            context.fillStyle="white";
             context.fillRect(cW2,0,cW2,cH2);
             context.fillStyle="green";
             context.fillRect(0,cH2,cW2,cH2);
-            context.fillStyle="red";
+            context.fillStyle="white";
             context.fillRect(cW2,cH2,cW2,cH2);
+            context.fillStyle = "white";
+            context.font = "30px arial";
+            context.fillText  ("Hello Wooorld!", 10, 80);
+
+            var helloWorldImage = new Image(); helloWorldImage.onload = function () {
+                
+                context.drawImage(helloWorldImage, 100, 0, helloWorldImage.width/3,helloWorldImage.height/3);
+            }
+            helloWorldImage.src = "images/logo_black.png";
     }
 }
 
