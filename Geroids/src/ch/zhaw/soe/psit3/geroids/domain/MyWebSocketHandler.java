@@ -1,4 +1,4 @@
-package psit3.geroids.model;
+package ch.zhaw.soe.psit3.geroids.domain;
 
 import java.io.IOException;
 import org.eclipse.jetty.websocket.api.Session;

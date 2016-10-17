@@ -1,4 +1,4 @@
-package psit3.geroids.model;
+package ch.zhaw.soe.psit3.geroids.domain;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.DefaultHandler;
