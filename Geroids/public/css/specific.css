@@ -20,3 +20,5 @@ canvas {
     display:block;
     margin-left: 18.75%;
 } /* To remove the scrollbars */
+
+p {font-family: 'MineCrafter 3 Regular';}
