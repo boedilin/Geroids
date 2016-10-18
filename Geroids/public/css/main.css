@@ -3,18 +3,13 @@
     src: url('Minecrafter_3.ttf');
 }
 
-#background {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    left: 0px;
-    top: 0px;
-    z-index: -1;
-}
-
-.stretch {
-    width: 100%;
-    height: 100%;
+body {
+    /* mit /images/background.png kann das Bild nicht gefunden werden. Mit ../images/background.png aber schon! */
+    background: url("../images/background.png") no-repeat center center fixed;
+    background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
 }
 
 * {
@@ -53,7 +48,7 @@ p {
     margin-left: 13%;
 }
 
-#gamePanel {
+#appPanel {
     background-color: black;
     width: 62.5%;
     min-height: 100%;
