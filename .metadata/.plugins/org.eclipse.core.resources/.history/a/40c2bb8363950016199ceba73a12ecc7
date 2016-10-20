@@ -1,0 +1,19 @@
+/build/
+
+.metadata/*
+.metadata
+.settings/*
+.settings
+.DS_Store
+*.class
+*.classpath
+*.project
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+target
+
+bin/*
