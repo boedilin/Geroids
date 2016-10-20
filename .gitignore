@@ -1,5 +1,6 @@
 /build/
 
+.recommenders/*
 .metadata/*
 .metadata
 .settings/*
