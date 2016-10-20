@@ -60,7 +60,7 @@ function canvasApp() {
     }
 }
 
-/** 
+
 var ws = new WebSocket("ws://127.0.0.1:8080/");
 
 ws.onopen = function() {
@@ -68,7 +68,7 @@ ws.onopen = function() {
     ws.send("Hello Server");
 };
 
-ws.onmessage = function (evt) {
+ws.onmessage = function(evt) {
     alert("Message: " + evt.data);
 };
 
@@ -78,4 +78,4 @@ ws.onclose = function() {
 
 ws.onerror = function(err) {
     alert("Error: " + err);
-};*/
+};
