@@ -25,7 +25,9 @@ public class MyWebSocketHandler {
 	public void onConnect(Session session) {
 		System.out.println("Connect: " + session.getRemoteAddress().getAddress());
 		try {
-			session.getRemote().sendString("Hello Webbsdsdsrowser");
+			//getRemote() Return a reference to the RemoteEndpoint object representing the other end of this conversation.
+			//sendString() Send a text message, blocking until all bytes of the message has been transmitted.
+			session.getRemote().sendString("Hallo Client(from Server)!");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
