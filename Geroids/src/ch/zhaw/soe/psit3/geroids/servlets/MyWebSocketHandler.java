@@ -8,6 +8,8 @@ import org.eclipse.jetty.websocket.api.annotations.OnWebSocketError;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 
+import ch.zhaw.soe.psit3.geroids.domain.ConsoleInput;
+
 @WebSocket
 public class MyWebSocketHandler {
 
@@ -28,6 +30,7 @@ public class MyWebSocketHandler {
 			//getRemote() Return a reference to the RemoteEndpoint object representing the other end of this conversation.
 			//sendString() Send a text message, blocking until all bytes of the message has been transmitted.
 			session.getRemote().sendString("Hallo Client(from Server)!");
+			new ConsoleInput("consoleInput", session).start();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

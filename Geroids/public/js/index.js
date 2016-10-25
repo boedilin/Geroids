@@ -64,12 +64,13 @@ function canvasApp() {
 var ws = new WebSocket("ws://127.0.0.1:8080/");
 
 ws.onopen = function() {
-    alert("Opened!");
+    console.log("Websocket opened!");
     ws.send("Hello Server");
 };
 
 ws.onmessage = function(evt) {
-    alert("Message: " + evt.data);
+    var date = new Date();
+    console.log("Message: " + evt.data + " vs " + date.getTime());
 };
 
 ws.onclose = function() {
