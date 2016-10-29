@@ -22,11 +22,12 @@ public class Movement {
 	}
 
 	public void increaseXSpeed(int x) {
-
+		this.xSpeed = xSpeed + x;
 	}
 
 	public void increaseYSpeed(int y) {
-
+		this.ySpeed = ySpeed + y;
 	}
+	
 
 }
