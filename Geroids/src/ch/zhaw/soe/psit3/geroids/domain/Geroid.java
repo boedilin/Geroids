@@ -9,7 +9,7 @@ public abstract class Geroid {
 	private Movement movement;
 
 	public void move() {
-
+		
 	}
 
 	public void die() {

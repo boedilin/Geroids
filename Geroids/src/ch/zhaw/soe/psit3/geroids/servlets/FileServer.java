@@ -28,7 +28,7 @@ public class FileServer {
 			}
 		};
 
-		// Create the ResourceHandler. It is the object that will actually bis ruhig valentin
+		// Create the ResourceHandler. It is the object that will actually
 		// handle the request for a given file. It is
 		// a Jetty Handler object so it is suitable for chaining with other
 		// handlers as you will see in other examples.
