@@ -2,23 +2,28 @@ package ch.zhaw.soe.psit3.geroids.domain;
 
 public class Position {
 
-	private int intx;
-	private int inty;
-
-	public int getIntx() {
-		return intx;
+	private int xCoordiante;
+	private int yCoordiante;
+	
+	
+	public Position(int xCoordiante, int yCoordiante) {
+		super();
+		this.xCoordiante = xCoordiante;
+		this.yCoordiante = yCoordiante;
 	}
-
-	public void setIntx(int intx) {
-		this.intx = intx;
+	
+	public int getxCoordiante() {
+		return xCoordiante;
 	}
-
-	public int getInty() {
-		return inty;
+	public void setxCoordiante(int xCoordiante) {
+		this.xCoordiante = xCoordiante;
 	}
-
-	public void setInty(int inty) {
-		this.inty = inty;
+	public int getyCoordiante() {
+		return yCoordiante;
 	}
+	public void setyCoordiante(int yCoordiante) {
+		this.yCoordiante = yCoordiante;
+	}
+	
 
 }
