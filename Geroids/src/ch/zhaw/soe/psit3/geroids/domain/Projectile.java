@@ -42,12 +42,12 @@ public class Projectile implements Runnable{
 	}
 	
 	
-	/*
+	/**
 	 * Gets called when creating a Thread with a Projecile runnable. 
-	 * It will update the Position of the projectile at the given fps rate until a Collision occurs flag is true
+	 * Update thr projectiles position at the given this.fps rate until DUMMY_COLLISION_OCCURED is true
 	 * 
 	 * @see java.lang.Runnable#run()
-	 */
+	 **/
 	@Override
 	public void run(){
 		timer.scheduleAtFixedRate(new TimerTask() {
