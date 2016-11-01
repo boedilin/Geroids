@@ -20,6 +20,7 @@ function canvasApp() {
 
     // resize the canvas to fill browser window dynamically
     window.addEventListener('resize', resizeCanvas, false);
+    window.addEventListener("keydown", eventKeyPressed, true);
 
     function resizeCanvas() {
         canvas.width = ((window.innerWidth) / 100) * 62.5;
@@ -34,6 +35,10 @@ function canvasApp() {
         drawStuff();
     }
     resizeCanvas();
+
+    function eventKeyPressed(event) {
+        ws.send(event.key);
+    }
 
     function drawStuff() {
         // do your drawing stuff here
@@ -60,12 +65,12 @@ function canvasApp() {
     }
 }
 
-
-var ws = new WebSocket("ws://127.0.0.1:8080/");
+//kann generisch gemacht werden, da der Websocketserver der selbe ist, wie der Server, der das HTML liefert:"ws://" + location.host
+var ws = new WebSocket("ws://" + location.host);
 
 ws.onopen = function() {
     console.log("Websocket opened!");
-    ws.send("Hello Server");
+    ws.send("Hello Serverr");
 };
 
 ws.onmessage = function(evt) {
@@ -74,9 +79,9 @@ ws.onmessage = function(evt) {
 };
 
 ws.onclose = function() {
-    alert("Closed!");
+    console.log("Closed!");
 };
 
 ws.onerror = function(err) {
-    alert("Error: " + err);
+    console.log("Error: " + err);
 };

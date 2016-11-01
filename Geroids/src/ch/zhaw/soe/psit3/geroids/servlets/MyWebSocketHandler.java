@@ -25,6 +25,9 @@ public class MyWebSocketHandler {
 
 	@OnWebSocketConnect
 	public void onConnect(Session session) {
+		//Wenn eine neue Verbindung aufgebaut wird, soll ein neues Game instanziert werden.
+		//Dem Game wird die session übergeben, die die Verbidung zum Client repräsentiert.
+		//
 		System.out.println("Connect: " + session.getRemoteAddress().getAddress());
 		try {
 			//getRemote() Return a reference to the RemoteEndpoint object representing the other end of this conversation.

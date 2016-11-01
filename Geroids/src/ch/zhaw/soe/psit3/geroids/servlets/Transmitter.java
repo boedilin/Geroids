@@ -1,30 +1,47 @@
 package ch.zhaw.soe.psit3.geroids.servlets;
 
-import java.util.HashMap;
+import java.io.IOException;
 
-import ch.zhaw.soe.psit3.geroids.domain.Gamefield;
+import org.eclipse.jetty.websocket.api.RemoteEndpoint;
+
+import ch.zhaw.soe.psit3.geroids.db.Highscore;
+import ch.zhaw.soe.psit3.geroids.domain.Figure;
+import ch.zhaw.soe.psit3.geroids.domain.Parser;
 import ch.zhaw.soe.psit3.geroids.domain.Playscore;
 
 public class Transmitter {
 
-	private Gamefield gamefield;
-	private Playscore score;
-	private HashMap<Integer, Integer> highScoreList;
+	private RemoteEndpoint remoteEndpoint;
 
-	public String sendScore() {
-		return null;
+	public Transmitter(RemoteEndpoint remoteEndpoint){
+		this.remoteEndpoint = remoteEndpoint;
 	}
 
-	public String sendCoordinates() {
-		return null;
+	public void sendScore(Playscore score) {
+		try {
+			remoteEndpoint.sendString(Parser.scoreToJsonString(score));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public String sendHighscore() {
-		return null;
+	public void sendCoordinates(Figure figure) {
+		try {
+			remoteEndpoint.sendString(Parser.figureToJsonString(figure));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public String getHighscores() {
-		return null;
+	public void sendHighscore(Highscore highscore) {
+		try {
+			remoteEndpoint.sendString(Parser.highscoreToJsonString(highscore));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

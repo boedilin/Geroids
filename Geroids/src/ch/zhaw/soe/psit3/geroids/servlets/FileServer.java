@@ -7,6 +7,7 @@ import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.websocket.server.WebSocketHandler;
 import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
+import org.json.simple.JSONObject;
 
 /**
  * Simple Jetty FileServer. This is a simple example of Jetty configured as a

@@ -21,6 +21,7 @@ public class ConsoleInput extends Thread {
 			System.out.println("Enter something for the Client: ");
 			String input = scanner.nextLine();
 			try {
+				System.out.println(session.getRemoteAddress().getAddress());
 				session.getRemote().sendString(input+ " " + new Date().getTime());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
