@@ -33,7 +33,7 @@ public class Position {
 
 	/**
 	 * Returns an Array of Positions, containing every Position of the body, including Expansion;
-	 * @return 
+	 * @return ArrayList with every Position including expansion
 	 */
 	public ArrayList<Position> getPositionArray(){
 		for(int x = 0 ; x <expansion.getxExpansion(); x++){
