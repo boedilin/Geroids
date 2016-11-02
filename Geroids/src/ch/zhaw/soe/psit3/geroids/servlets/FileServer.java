@@ -15,6 +15,7 @@ import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletHandler;
 import org.eclipse.jetty.websocket.server.WebSocketHandler;
 import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
+import org.json.simple.JSONObject;
 
 /**
  * Simple Jetty FileServer. This is a simple example of Jetty configured as a
@@ -79,9 +80,11 @@ public class FileServer {
                               HttpServletResponse response ) throws ServletException,
                                                             IOException
         {
-            response.setContentType("text/html");
+            response.setContentType("application/json");
             response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().println("<h1>Hello from HelloServlet</h1>");
+            JSONObject obj = new JSONObject();
+            obj.put("num", new Integer(100));
+            response.getWriter().println(obj);
         }
     }
 	@SuppressWarnings("serial")
