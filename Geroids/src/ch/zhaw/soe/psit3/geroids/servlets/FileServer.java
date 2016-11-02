@@ -55,7 +55,7 @@ public class FileServer {
 		// Add the ResourceHandler to the server.
 		HandlerList handlers = new HandlerList();
 		ServletHandler handlerServelet = new ServletHandler();
-		handlers.setHandlers(new Handler[] { wsHandler,handlerServelet, resource_handler, new DefaultHandler() });
+		handlers.setHandlers(new Handler[] { wsHandler, resource_handler,handlerServelet, new DefaultHandler() });
 
 		// von mir eingefügt! Der FileServer würde sonst nicht funktiobieren!
 		server.setHandler(handlers);
@@ -88,7 +88,7 @@ public class FileServer {
     public static class H2Servlet extends HttpServlet
     {
         @Override
-        protected void doPost( HttpServletRequest request,
+        protected void doGet( HttpServletRequest request,
                               HttpServletResponse response ) throws ServletException,
                                                             IOException
         {
