@@ -37,6 +37,8 @@ public class MyWebSocketHandler {
 			//sendString() Send a text message, blocking until all bytes of the message has been transmitted.
 			session.getRemote().sendString("Hallo Client(from Server)!");
 			new ConsoleInput("consoleInput", session).start();
+			//Example:
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

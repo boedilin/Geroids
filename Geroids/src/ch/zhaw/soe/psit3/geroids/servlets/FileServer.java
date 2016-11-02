@@ -1,10 +1,18 @@
 package ch.zhaw.soe.psit3.geroids.servlets;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.DefaultHandler;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
+import org.eclipse.jetty.servlet.ServletHandler;
 import org.eclipse.jetty.websocket.server.WebSocketHandler;
 import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
 
@@ -46,10 +54,13 @@ public class FileServer {
 
 		// Add the ResourceHandler to the server.
 		HandlerList handlers = new HandlerList();
-		handlers.setHandlers(new Handler[] { wsHandler, resource_handler, new DefaultHandler() });
+		ServletHandler handlerServelet = new ServletHandler();
+		handlers.setHandlers(new Handler[] { wsHandler,handlerServelet, resource_handler, new DefaultHandler() });
 
 		// von mir eingefügt! Der FileServer würde sonst nicht funktiobieren!
 		server.setHandler(handlers);
+		handlerServelet.addServletWithMapping(HServlet.class, "/g");
+		handlerServelet.addServletWithMapping(H2Servlet.class, "/g2");
 
 		// Start things up! By using the server.join() the server thread will
 		// join with the current thread.
@@ -58,5 +69,32 @@ public class FileServer {
 		// for more details.
 		server.start();
 		server.join();
+		
 	}
+	@SuppressWarnings("serial")
+    public static class HServlet extends HttpServlet
+    {
+        @Override
+        protected void doGet( HttpServletRequest request,
+                              HttpServletResponse response ) throws ServletException,
+                                                            IOException
+        {
+            response.setContentType("text/html");
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.getWriter().println("<h1>Hello from HelloServlet</h1>");
+        }
+    }
+	@SuppressWarnings("serial")
+    public static class H2Servlet extends HttpServlet
+    {
+        @Override
+        protected void doPost( HttpServletRequest request,
+                              HttpServletResponse response ) throws ServletException,
+                                                            IOException
+        {
+            response.setContentType("text/html");
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.getWriter().println("<h1>Hello from HelloServlet g2</h1>");
+        }
+    }
 }
