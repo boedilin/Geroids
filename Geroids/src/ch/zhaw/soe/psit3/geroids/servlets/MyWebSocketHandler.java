@@ -9,9 +9,12 @@ import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 
 import ch.zhaw.soe.psit3.geroids.domain.ConsoleInput;
+import ch.zhaw.soe.psit3.geroids.domain.Game;
 
 @WebSocket
 public class MyWebSocketHandler {
+	
+	private Game game;
 
 	@OnWebSocketClose
 	public void onClose(int statusCode, String reason) {
