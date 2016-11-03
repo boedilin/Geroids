@@ -28,6 +28,7 @@ public class GameServer
         ServletContextHandler context = new ServletContextHandler(
                 ServletContextHandler.SESSIONS);
         context.setContextPath("/");
+        //which folder static files comes from
         context.setResourceBase("./public");
         
         HandlerList handlers = new HandlerList();
@@ -36,7 +37,7 @@ public class GameServer
 
         // Add dump servlet
         context.addServlet(DumpServlet.class, "/dump/*");
-        // Add default servlet
+        // Add default servlet to serve static content from ./public
         context.addServlet(DefaultServlet.class, "/");
 
         server.start();
