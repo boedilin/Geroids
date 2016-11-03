@@ -2,7 +2,8 @@ package ch.zhaw.soe.psit3.geroids.domain;
 
 import org.json.simple.JSONObject;
 
-public abstract class Geroid {
+
+public class Geroid {
 
 	private String name;
 	private int id;
@@ -10,26 +11,47 @@ public abstract class Geroid {
 	private Position position;
 	private Movement movement;
 
+	
+	
+	public Geroid(String name, int id, String shape, Position position, Movement movement) {
+		super();
+		this.name = name;
+		this.id = id;
+		this.shape = shape;
+		this.position = position;
+		this.movement = movement;
+	}
+
 	public void move() {
 		
-		//Beispiel:
-		JSONObject obj = new JSONObject();
-		
-		String name = "kaderli";
-	    obj.put("name", name);
-	    obj.put("num", new Integer(100));
-	    obj.put("balance", new Double(1000.21));
-	    obj.put("is_vip", new Boolean(true));
-
-	    System.out.print(obj);
-	      
-	      //System.out.print(); calls the toString method.
-	      // obj.toJSONString(); machts explizit. 
-		obj.toJSONString();
 		
 	}
 
 	public void die() {
 
+	}
+	
+	/**
+	 * Returns a JSON representation of the Geroid. Included attributes: name, id, shape, position
+	 * @return
+	 */
+	public String toJSON(){
+		
+		
+		//Beispiel:
+				JSONObject obj = new JSONObject();
+				
+				
+			    obj.put("name", name);
+			    obj.put("id", id);
+			    obj.put("shape", shape);
+			    obj.put("position", position.getPositionArray());
+
+			    System.out.print(obj);
+			      
+			      //System.out.print(); calls the toString method.
+			      // obj.toJSONString(); machts explizit. 
+				return obj.toJSONString();
+				
 	}
 }
