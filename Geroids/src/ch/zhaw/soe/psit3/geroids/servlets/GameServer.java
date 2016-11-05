@@ -4,10 +4,8 @@ import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.DefaultHandler;
 import org.eclipse.jetty.server.handler.HandlerList;
-
 import org.eclipse.jetty.websocket.server.WebSocketHandler;
 import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
-
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 
@@ -17,7 +15,9 @@ public class GameServer
     public static void main( String[] args ) throws Exception
     {
         Server server = new Server(8080);
-
+        
+        //Create a simple WebSocketHandler that registers a single
+        //WebSocket POJO that is created on EVERY upgrade request.
         WebSocketHandler wsHandler = new WebSocketHandler() {
 			@Override
 			public void configure(WebSocketServletFactory factory) {

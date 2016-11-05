@@ -2,6 +2,8 @@ package ch.zhaw.soe.psit3.geroids.domain;
 
 import java.util.ArrayList;
 
+import ch.zhaw.soe.psit3.geroids.servlets.MyWebSocketHandler;
+
 public class Game {
 
 	private Account account;
@@ -14,12 +16,15 @@ public class Game {
 	private boolean collisionWithFigure = false;
 	private int xRange = 1000;
 	private int yRange = 1000;
+	private MyWebSocketHandler websocketHandler;
 
-	public Game(Account account, Gamefield gamefield){
+	public Game(Account account, Gamefield gamefield, MyWebSocketHandler websocketHandler){
 		this.gamefield = new Gamefield(xRange, yRange);
 		this.score = new Playscore(0);
 		this.figure = new Figure(account.getActiveType(), account.getActiveSkin(), xRange/2, 0);
 		this.geroids = this.gamefield.getGeroidList();
+		this.websocketHandler = websocketHandler;
+		websocketHandler.sendMessage("hello! you start a new game"+new Date().getTime());
 		start();
 	}
 	
@@ -69,4 +74,12 @@ public class Game {
 	public boolean isRunning(){
 		return isRunning;
 	}
+	
+	//Message from websocket respectively from client
+	//do something with the input from the user
+	//preferable protocol is JSON		//read the mail from jens fischer WEB3 <-> valentin how to manage messages with identifiers
+	public void receiveMessage(String message){
+		System.out.println("i work with the message from the user: "+message);
+	}
+
 }
