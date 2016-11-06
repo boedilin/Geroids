@@ -6,8 +6,15 @@ public class Gamefield {
 
 	private Figure figure;
 	private ArrayList<Geroid> geroidList;
+	private ArrayList<Projectile> projectileList;
 	private int gamefield[][];
 
+	public Gamefield(int xRange, int yRange){
+		this.gamefield = new int[xRange][yRange];
+		this.projectileList = new ArrayList<Projectile>();
+		this.geroidList = new ArrayList<Geroid>();
+	}
+	
 	public void addGeroid(Geroid geroid) {
 
 	}
@@ -20,11 +27,11 @@ public class Gamefield {
 
 	}
 
-	public int getXSize() {
+	public int getXRange() {
 		return -1;
 	}
 
-	public int getYSize() {
+	public int getYRange() {
 		return -1;
 	}
 
@@ -51,4 +58,13 @@ public class Gamefield {
 	public void setGamefield(int[][] gamefield) {
 		this.gamefield = gamefield;
 	}
+
+	public ArrayList<Projectile> getProjectileList() {
+		return projectileList;
+	}
+
+	public void setProjectileList(ArrayList<Projectile> projectileList) {
+		this.projectileList = projectileList;
+	}
+	
 }

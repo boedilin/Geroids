@@ -13,7 +13,7 @@ public class Playscore {
 		this.game = game;
 		new Thread();
 		{
-			while(game.isRunning())
+			while(this.game.isRunning())
 				addingScoreIfGeroidKilled();
 				addingScoreForTimeBonus();
 		}
@@ -29,7 +29,7 @@ public class Playscore {
 	
 	public void addingScoreIfGeroidKilled(){
 		if(geroidKilled){
-			this.score += killBonus;
+			score += killBonus;
 			geroidKilled = false;
 		}
 	}

@@ -1,5 +1,6 @@
 package ch.zhaw.soe.psit3.geroids.domain;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 

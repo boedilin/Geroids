@@ -27,8 +27,8 @@ public class Geroid {
 		
 	}
 
-	public void die() {
-
+	public void die(Gamefield gamefield) {
+		gamefield.getGeroidList().remove(this);
 	}
 	
 	public String getName() {
