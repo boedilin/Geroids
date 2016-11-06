@@ -33,7 +33,7 @@ public class MyWebSocketHandler {
 		session.setIdleTimeout(200000); // 200 second timeout
 		
 		//Wenn eine neue Verbindung aufgebaut wird, soll ein neues Game instanziert werden.
-		//Dem Game wird die session übergeben, die die Verbidung zum Client repräsentiert.
+		//Dem Game wird der Websockethandler übergeben, der die Verbidung zum Client handelt.
 		game = new Game(this);
 		/*
 		System.out.println("Connect: " + session.getRemoteAddress().getAddress());
