@@ -10,8 +10,8 @@ public class Account {
 	private String prename;
 	private String surname;
 	private ArrayList<Microtransaction> mytransactions;
-	private Skin activeSkin = Skin defaultSkin;
-	private Type activeType = Type defaultType;
+	private Skin activeSkin = new Defaultskin();
+	private Type activeType = new Defaulttype();
 
 	public String getNickname() {
 		return nickname;

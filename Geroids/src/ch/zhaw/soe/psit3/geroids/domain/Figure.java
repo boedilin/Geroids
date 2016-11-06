@@ -9,11 +9,11 @@ public class Figure extends Thread{
 	private Position position;
 	private Skin skin;
 	private Type type;
-	private boolean isShooting = false;
+	private static int SHOOTING_DELAY_IN_MS = 300;
 	private static int MOVING_DELAY_IN_MS = 500;
-	private static int NO_MOVING = 0;
-	private static int MOVING_LEFT = 1;
-	private static int MOVING_RIGHT = 2;
+	private boolean movingLeft = false;
+	private boolean movingRight = false;
+	private boolean shooting = false;
 	
 	public Figure(Game game, Type type, Skin skin, int x, int y){
 		this.game = game;
@@ -25,16 +25,28 @@ public class Figure extends Thread{
 	
 	public void run(){
 		while(game.isRunning()){
-			if(checkIfMoving() != 0){
+			if(shooting){
 				try {
 					lock.lock();
-					if(checkIfMoving() == 1){
+					shoot();
+					sleep(SHOOTING_DELAY_IN_MS);
+					lock.unlock();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(movingLeft || movingRight){
+				try {
+					lock.lock();
+					if(movingLeft){
 						moveLeft();
 					}
-					else if (checkIfMoving() == 2){
+					else if (movingRight){
 						moveRight();
 					}
 					sleep(MOVING_DELAY_IN_MS);
+					lock.unlock();
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -43,34 +55,43 @@ public class Figure extends Thread{
 		}
 	}
 	
-	public int checkIfMoving(){//<<<hier kommt ein "Checking-Parameter", falls links oder rechts gedrückt wurde
-		if(){//<<< hier kommt die Abfrage für den Parameter
-			moveLeft();
-			return MOVING_LEFT;
-		}
-		else if (){
-			moveRight();
-			return MOVING_RIGHT;
-		}
-		return NO_MOVING;
-		
+	public boolean isMovingLeft() {
+		return movingLeft;
 	}
-	
+
+	public void setMovingLeft(boolean movingLeft) {
+		this.movingLeft = movingLeft;
+	}
+
+	public boolean isMovingRight() {
+		return movingRight;
+	}
+
+	public void setMovingRight(boolean movingRight) {
+		this.movingRight = movingRight;
+	}
+
+	public boolean isShooting() {
+		return shooting;
+	}
+
+	public void setShooting(boolean shooting) {
+		this.shooting = shooting;
+	}
+
 	public void moveLeft(){
 		this.position.setxCoordiante(this.position.getxCoordiante()-1);
+		movingLeft = false;
 	}
 	
 	public void moveRight(){
 		this.position.setxCoordiante(this.position.getxCoordiante()+1);
+		movingRight = false;
 	}
 	
-	public boolean shoot(){
-		return isShooting = true;
-	}
-	
-	//zum Testen
-	public String getName(){
-		return "figure";
+	public void shoot(){
+		game.getProjectiles().add(new Projectile(game, new Position(game.getFigure().getPosition().getxCoordiante(), game.getFigure().getPosition().getyCoordiante()), game.getAccount().getActiveType().getMovement()));
+		shooting = false;
 	}
 
 	public Position getPosition() {

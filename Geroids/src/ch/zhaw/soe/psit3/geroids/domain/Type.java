@@ -3,6 +3,7 @@ package ch.zhaw.soe.psit3.geroids.domain;
 public abstract class Type {
 
 	private String typeName;
+	private Movement movement;
 	private int movementBonus;
 	private int lifeBonus;
 	private int damageBonus;
@@ -15,8 +16,8 @@ public abstract class Type {
 		return lifeBonus;
 	}
 
-	public int getDamageBonus() {
-		return damageBonus;
+	public Movement getMovement() {
+		return movement;
 	}
 
 }

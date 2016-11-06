@@ -5,7 +5,7 @@ import java.util.Date;
 
 import ch.zhaw.soe.psit3.geroids.servlets.MyWebSocketHandler;
 
-public class Game {
+public class Game extends Thread{
 
 	private Account account;
 	private Gamefield gamefield;
@@ -14,7 +14,6 @@ public class Game {
 	private Figure figure;
 	private ArrayList<Projectile> projectiles;
 	private boolean isRunning = false;
-	private boolean collisionWithProjectile = false;
 	private boolean collisionWithFigure = false;
 	private int xRange = 1000;
 	private int yRange = 1000;
@@ -23,44 +22,32 @@ public class Game {
 	public Game(Account account, Gamefield gamefield, MyWebSocketHandler websocketHandler){
 		this.gamefield = new Gamefield(xRange, yRange);
 		this.score = new Playscore(0, this);
-		this.figure = new Figure(account.getActiveType(), account.getActiveSkin(), xRange/2, 0);
+		this.figure = new Figure(this, account.getActiveType(), account.getActiveSkin(), xRange/2, 0);
 		this.projectiles = this.gamefield.getProjectileList();
 		this.geroids = this.gamefield.getGeroidList();
 		this.websocketHandler = websocketHandler;
 		websocketHandler.sendMessage("hello! you start a new game"+new Date().getTime());
-		run();
+		start();
 	}
 	
 	public void run() {
-		new Thread();
-		{
-			Thread.currentThread().start();
-			while(isRunning){
-				
-			}
+		while(isRunning){
+			checkCollision();
+			checkFigureAction();
 		};
 	}
-
-	public boolean isGameover() {
-		if(collisionWithFigure){
-			isRunning = false;
-			return true;
-		}
-		return false;
-	}
 	
-	private void checkCollision(Gamefield gamefield){
+	private void checkCollision(){
 		for(int i = 0; i < gamefield.getGeroidList().size();i++){
 			if(checkIfGeroidIsCollidingWithFigure(i)){
-				collisionWithFigure = true;
+				isRunning = false;
+				//hier kommt noch die Methode für den GameOverBanner
 			}
 			for(int j = 0; j< gamefield.getProjectileList().size();j++){
 				if(checkIfGeroidIsCollidingWithProjectile(i, j))
 				{
-					collisionWithProjectile = true;
-					if(geroids.get(j).getPosition()){
-						
-					}
+					geroids.get(i).die(gamefield);
+					projectiles.get(j).hit();
 				}
 			}
 		}
@@ -98,4 +85,107 @@ public class Game {
 		}
 		return false;
 	}
+
+	public Gamefield getGamefield() {
+		return gamefield;
+	}
+	
+	public void checkFigureAction(){
+		if(true//Abfrage ob Schiess-Knopf gedrückt
+		   ||
+		  true//Abfrage ob Links- oder Rechts-Knopf gedrückt
+		   ){
+			if(true){ //Abfrage ob Schiess-Knopf gedrückt
+				figure.setShooting(true);
+			}
+			else if (true){//Abfrage ob Links-Knopf gedrückt
+				figure.setMovingLeft(true);
+				}
+			else
+			{
+				figure.setMovingRight(true);
+			}
+		}
+	}
+
+	public ArrayList<Projectile> getProjectiles() {
+		return projectiles;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	public ArrayList<Geroid> getGeroids() {
+		return geroids;
+	}
+
+	public void setGeroids(ArrayList<Geroid> geroids) {
+		this.geroids = geroids;
+	}
+
+	public Playscore getScore() {
+		return score;
+	}
+
+	public void setScore(Playscore score) {
+		this.score = score;
+	}
+
+	public Figure getFigure() {
+		return figure;
+	}
+
+	public void setFigure(Figure figure) {
+		this.figure = figure;
+	}
+
+	public boolean isCollisionWithFigure() {
+		return collisionWithFigure;
+	}
+
+	public void setCollisionWithFigure(boolean collisionWithFigure) {
+		this.collisionWithFigure = collisionWithFigure;
+	}
+
+	public int getxRange() {
+		return xRange;
+	}
+
+	public void setxRange(int xRange) {
+		this.xRange = xRange;
+	}
+
+	public int getyRange() {
+		return yRange;
+	}
+
+	public void setyRange(int yRange) {
+		this.yRange = yRange;
+	}
+
+	public MyWebSocketHandler getWebsocketHandler() {
+		return websocketHandler;
+	}
+
+	public void setWebsocketHandler(MyWebSocketHandler websocketHandler) {
+		this.websocketHandler = websocketHandler;
+	}
+
+	public void setGamefield(Gamefield gamefield) {
+		this.gamefield = gamefield;
+	}
+
+	public void setProjectiles(ArrayList<Projectile> projectiles) {
+		this.projectiles = projectiles;
+	}
+
+	public void setRunning(boolean isRunning) {
+		this.isRunning = isRunning;
+	}
+	
 }

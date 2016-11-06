@@ -20,7 +20,7 @@ public class Gamefield {
 	}
 
 	public void addProjectile(Projectile projectile) {
-
+		projectileList.add(projectile);
 	}
 
 	public void addFigure(Figure figure) {

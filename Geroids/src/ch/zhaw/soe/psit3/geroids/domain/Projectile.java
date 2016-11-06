@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Projectile implements Runnable{
+public class Projectile extends Thread{
 
+	private Game game;
 	private Position position;
 	private Movement movement;
-	private Timer timer = new Timer();
-	private int fps;
+	private static int MOVEMENT_PER_TIME_IN_MS = 100;
+	private boolean isAlive = true;
 	
-	private boolean DUMMY_COLLISION_OCCURED = false; // Replace by boolean with real collision detections
-	
-	public Projectile(Position position, Movement movement, int fps) {
+	public Projectile(Game game, Position position, Movement movement) {
 		super();
+		this.game = game;
 		this.position = position;
 		this.movement = movement;
-		this.fps = fps;
+		start();
 	}
 
 	public Position getPosition() {
@@ -37,9 +37,7 @@ public class Projectile implements Runnable{
 	}
 
 	private void updatePosition(){
-		this.position.setxCoordiante(this.position.getxCoordiante() + this.movement.getxSpeed());
 		this.position.setyCoordiante(this.position.getyCoordiante() + this.movement.getySpeed());
-
 	}
 	
 	
@@ -51,16 +49,20 @@ public class Projectile implements Runnable{
 	 **/
 	@Override
 	public void run(){
-		timer.scheduleAtFixedRate(new TimerTask() {
-			
-			@Override
-			public void run() {
+		while(isAlive){
+			try {
 				updatePosition();
-				if(DUMMY_COLLISION_OCCURED){
-					timer.cancel();
-				}
+				sleep(MOVEMENT_PER_TIME_IN_MS);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		},0,new Long(1000/fps));
-		
+		}
 	}
+
+	public void hit() {
+		isAlive = false;
+		game.getGamefield().getProjectileList().remove(this);
+	}
+	
 }
