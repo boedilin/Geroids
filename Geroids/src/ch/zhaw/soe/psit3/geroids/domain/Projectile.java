@@ -36,16 +36,20 @@ public class Projectile extends Thread{
 		this.movement = movement;
 	}
 
+	/**
+	 * Updates the position of the object for one timestep, according to his movement object.
+	 */
 	private void updatePosition(){
 		this.position.setyCoordiante(this.position.getyCoordiante() + this.movement.getySpeed());
+		this.position.setxCoordiante(this.position.getxCoordiante() + this.movement.getxSpeed());
+
 	}
 	
 	
 	/**
-	 * Gets called when creating a Thread with a Projecile runnable. 
-	 * Update thr projectiles position at the given this.fps rate until DUMMY_COLLISION_OCCURED is true
+	 * Gets called when creating a Thread with a Projectile runnable. 
+	 * Update the Position of the Projectile every 100ms as long isAlive = true;
 	 * 
-	 * @see java.lang.Runnable#run()
 	 **/
 	@Override
 	public void run(){
@@ -60,6 +64,11 @@ public class Projectile extends Thread{
 		}
 	}
 
+	
+	/**
+	 * Changes the isAlive flag to false thus stopping the next execution of the run function. 
+	 * Removes this Object from the projectileList the projectile was in.
+	 */
 	public void hit() {
 		isAlive = false;
 		game.getGamefield().getProjectileList().remove(this);
