@@ -18,3 +18,4 @@
 target
 
 Geroids/bin/*
+Geroids/bin/.gitignore
