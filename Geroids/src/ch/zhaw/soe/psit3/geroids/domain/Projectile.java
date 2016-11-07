@@ -47,12 +47,11 @@ public class Projectile extends Thread{
 	 * 
 	 * @see java.lang.Runnable#run()
 	 **/
-	@Override
 	public void run(){
-		while(isAlive){
+		while(isAlive){ 
 			try {
 				updatePosition();
-				sleep(MOVEMENT_PER_TIME_IN_MS);
+				Thread.sleep(MOVEMENT_PER_TIME_IN_MS);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
