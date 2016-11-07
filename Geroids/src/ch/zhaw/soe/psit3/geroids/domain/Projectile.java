@@ -1,3 +1,5 @@
+//TODO implement ToJSON method
+
 package ch.zhaw.soe.psit3.geroids.domain;
 
 import java.util.ArrayList;

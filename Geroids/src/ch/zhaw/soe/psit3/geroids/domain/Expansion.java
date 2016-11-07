@@ -1,7 +1,7 @@
 package ch.zhaw.soe.psit3.geroids.domain;
 /*
  * Defines the Expansion of the body relatively to his Position point;
- * For Prototype just square Expansions
+ * For Prototype just square Expansions where the position is top right point of expansion
  * 
  */
 public class Expansion {

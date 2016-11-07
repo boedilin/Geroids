@@ -1,3 +1,5 @@
+//TODO implement ToJSON() method
+
 package ch.zhaw.soe.psit3.geroids.domain;
 
 import org.json.simple.JSONObject;
@@ -77,21 +79,24 @@ public class Geroid {
 	 */
 	public String toJSON(){
 		
-		
 		//Beispiel:
-				JSONObject obj = new JSONObject();
-				
-				
-			    obj.put("name", name);
-			    obj.put("id", id);
-			    obj.put("shape", shape);
-			    obj.put("position", position.getPositionArray());
+		
+		
+		
+		
+		
+			JSONObject obj = new JSONObject();
+								
+		    obj.put("name", name);
+		    obj.put("id", id);
+		    obj.put("shape", shape);
+			obj.put("position", position.getPositionArray());
 
 			    System.out.print(obj);
 			      
-			      //System.out.print(); calls the toString method.
-			      // obj.toJSONString(); machts explizit. 
-				return obj.toJSONString();
+			   //System.out.print(); calls the toString method.
+			  // obj.toJSONString(); machts explizit. 
+			return obj.toJSONString();
 				
 	}
 }
