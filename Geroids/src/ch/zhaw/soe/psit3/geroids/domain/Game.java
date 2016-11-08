@@ -32,7 +32,7 @@ public class Game extends Thread{
 		while(isRunning){
 			collisionHandler.checkCollision();
 			checkFigureAction();
-			isRunning = collisionHandler.noCollision();
+			isRunning = collisionHandler.isCollisionWithFigure();
 		};
 	}
 	

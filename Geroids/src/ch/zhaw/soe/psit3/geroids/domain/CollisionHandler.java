@@ -8,7 +8,6 @@ public class CollisionHandler {
 	private Gamefield gamefield;
 	private Figure figure;
 	private ArrayList<Projectile> projectiles;
-	private boolean isRunning = false;
 	private boolean collisionWithFigure = false;
 	
 	public CollisionHandler(Gamefield gamefield, Figure figure){
@@ -22,7 +21,7 @@ public class CollisionHandler {
 	public void checkCollision(){
 		for(int i = 0; i < gamefield.getGeroidList().size();i++){
 			if(checkIfGeroidIsCollidingWithFigure(i)){
-				isRunning = false;
+				collisionWithFigure = true;
 				//hier kommt noch die Methode f�r den GameOverBanner
 			}
 			for(int j = 0; j< gamefield.getProjectileList().size();j++){
@@ -63,9 +62,5 @@ public class CollisionHandler {
 
 	public void setCollisionWithFigure(boolean collisionWithFigure) {
 		this.collisionWithFigure = collisionWithFigure;
-	}
-	
-	public boolean noCollision(){
-		return isRunning;
 	}
 }
