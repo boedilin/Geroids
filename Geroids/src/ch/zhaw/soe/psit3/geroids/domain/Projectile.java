@@ -4,7 +4,11 @@ package ch.zhaw.soe.psit3.geroids.domain;
 
 import java.util.ArrayList;
 
-
+/**
+ * 
+ * @author Matthias
+ * Allows creating a projectile and setting his behaviour.
+ */
 
 public class Projectile{
 
@@ -15,7 +19,6 @@ public class Projectile{
 	private boolean isAlive = true;
 	
 	public Projectile(Game game, Position position, Movement movement) {
-		super();
 		this.game = game;
 		this.position = position;
 		this.movement = movement;

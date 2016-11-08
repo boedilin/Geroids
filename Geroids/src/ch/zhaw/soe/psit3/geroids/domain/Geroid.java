@@ -57,7 +57,6 @@ public class Geroid {
 		    obj.put("shape", shape);
 			obj.put("position", JSONPositionArray);
   
-			//System.out.println(obj.toJSONString());
 			return obj.toJSONString();	
 	}
 	
