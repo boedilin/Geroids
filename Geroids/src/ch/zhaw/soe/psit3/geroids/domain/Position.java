@@ -1,9 +1,6 @@
-//TODO add ToJSON
-
 package ch.zhaw.soe.psit3.geroids.domain;
 
 import java.util.ArrayList;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class Position {
@@ -63,7 +60,7 @@ public class Position {
 	
 	/**
 	 * Converts the Position into a JSON String. String contains the start Coordinates for x any y as well as the x and y Length relative to the start point
-	 * @return JSON representation of the Position.
+	 * @return JSON representation of the Position object.
 	 */
 	@SuppressWarnings("unchecked")
 	public String toJSON(){
@@ -78,6 +75,22 @@ public class Position {
 		
 	}
 	
+	/**
+	 * Converts the Position into a JSONObject for further usage. Contains the start Coordinates for x any y as well as the x and y Length relative to the start point
+	 * @return JSONObject Representation of the Position object.
+	 */
+	@SuppressWarnings("unchecked")
+	public JSONObject toJSONObject(){
+		
+		JSONObject myPosition = new JSONObject();
+		myPosition.put("xStart", xCoordiante);
+		myPosition.put("yStart", yCoordiante);
+		myPosition.put("xLength", xLength);
+		myPosition.put("yLength", yLength);
+		
+		return myPosition;
+		
+	}
 	
 
 }
