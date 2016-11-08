@@ -3,14 +3,18 @@
 package ch.zhaw.soe.psit3.geroids.domain;
 
 import java.util.ArrayList;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+/**
+ * 
+ * @author Matthias
+ *
+ * Allows creating and setting behaviour of a geroid.
+ */
 
 public class Geroid {
 
-	private String name;
 	private int id;
 	private String shape;
 	private Position position;
@@ -18,9 +22,8 @@ public class Geroid {
 	private final String  delimeterForJSONPositions = ":";
 	
 	
-	public Geroid(String name, int id, String shape, Position position, Movement movement) {
+	public Geroid(int id, String shape, Position position, Movement movement) {
 		super();
-		this.name = name;
 		this.id = id;
 		this.shape = shape;
 		this.position = position;
@@ -59,18 +62,9 @@ public class Geroid {
 	}
 	
 	public void setShapeSize(int length, int width){
-		
 		this.position.setExpansion(length, width);
 	}
 	
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public int getId() {
 		return id;
 	}
