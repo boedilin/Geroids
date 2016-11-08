@@ -21,7 +21,6 @@ public class Geroid {
 	
 	
 	public Geroid(int id, String shape, Position position, Movement movement) {
-		super();
 		this.id = id;
 		this.shape = shape;
 		this.position = position;
@@ -29,7 +28,7 @@ public class Geroid {
 	}
 
 	public void move() {
-		
+		position.update(movement);
 		
 	}
 

@@ -12,7 +12,6 @@ public class Position {
 	private int yLength;
 
 	public Position(int xCoordiante, int yCoordiante) {
-		super();
 		this.xCoordiante = xCoordiante;
 		this.yCoordiante = yCoordiante;
 		this.xLength = 1;
@@ -21,7 +20,6 @@ public class Position {
 	}
 
 	public Position(int xCoordiante, int yCoordiante, int xLength, int yLength) {
-		super();
 		this.xCoordiante = xCoordiante;
 		this.yCoordiante = yCoordiante;
 		this.xLength = xLength;
@@ -36,25 +34,10 @@ public class Position {
 			}
 		}
 	}
-
-	public ArrayList<Position> getPositionArray() {
-		return positionArray;
-	}
-
-	public int getxCoordiante() {
-		return xCoordiante;
-	}
-
-	public void setxCoordiante(int xCoordiante) {
-		this.xCoordiante = xCoordiante;
-	}
-
-	public int getyCoordiante() {
-		return yCoordiante;
-	}
-
-	public void setyCoordiante(int yCoordiante) {
-		this.yCoordiante = yCoordiante;
+	
+	public void update(Movement movement){
+		this.xCoordiante += movement.getxSpeed();
+		this.yCoordiante += movement.getySpeed();
 	}
 	
 	
@@ -91,6 +74,28 @@ public class Position {
 		return myPosition;
 		
 	}
+	public ArrayList<Position> getPositionArray() {
+		return positionArray;
+	}
+
+	public int getxCoordiante() {
+		return xCoordiante;
+	}
+
+	public void setxCoordiante(int xCoordiante) {
+		this.xCoordiante = xCoordiante;
+	}
+
+	public int getyCoordiante() {
+		return yCoordiante;
+	}
+
+	public void setyCoordiante(int yCoordiante) {
+		this.yCoordiante = yCoordiante;
+	}
+	
+	
+
 	
 
 }
