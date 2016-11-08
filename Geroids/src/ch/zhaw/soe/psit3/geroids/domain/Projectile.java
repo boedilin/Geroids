@@ -3,10 +3,10 @@
 package ch.zhaw.soe.psit3.geroids.domain;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
-public class Projectile extends Thread{
+
+
+public class Projectile{
 
 	private Game game;
 	private Position position;
@@ -19,7 +19,7 @@ public class Projectile extends Thread{
 		this.game = game;
 		this.position = position;
 		this.movement = movement;
-		start();
+		
 	}
 
 	public Position getPosition() {
@@ -39,37 +39,18 @@ public class Projectile extends Thread{
 	}
 
 	/**
-	 * Updates the position of the object for one timestep, according to his movement object.
+	 * Updates the position of the object for one timestep. Duration of timestep is defined by attribute MOVEMENT_PER_TIME_IN_MS. 
+	 * Amount of change in position is described in movement attribute.
 	 */
+	
 	private void updatePosition(){
 		this.position.setyCoordiante(this.position.getyCoordiante() + this.movement.getySpeed());
 		this.position.setxCoordiante(this.position.getxCoordiante() + this.movement.getxSpeed());
-
-	}
-	
-	
-	/**
-	 * Gets called when creating a Thread with a Projectile runnable. 
-	 * Update the Position of the Projectile every 100ms as long isAlive = true;
-	 * 
-	 **/
-	@Override
-	public void run(){
-		while(isAlive){
-			try {
-				updatePosition();
-				sleep(MOVEMENT_PER_TIME_IN_MS);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 	}
 
-	
 	/**
-	 * Changes the isAlive flag to false thus stopping the next execution of the run function. 
-	 * Removes this Object from the projectileList the projectile was in.
+	 * Removes this Object from the projectileList the projectile was in. 
+	 * Occurs when it hit a geroid or is outside the borders of the gamefield.
 	 */
 	public void hit() {
 		isAlive = false;
