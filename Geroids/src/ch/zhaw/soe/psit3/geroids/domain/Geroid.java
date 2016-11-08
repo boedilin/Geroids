@@ -2,8 +2,6 @@
 
 package ch.zhaw.soe.psit3.geroids.domain;
 
-import java.util.ArrayList;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
@@ -40,22 +38,35 @@ public class Geroid {
 	}
 	
 	/**
-	 * Returns a JSON representation of the Geroid. Included attributes: id, shape, positions
-	 * @return
+	 * Returns a JSON String representation of the Geroid. Included attributes: id, shape, position
+	 * @return String Object in JSON Format representing current Geroid.
 	 */
 	@SuppressWarnings("unchecked")
 	public String toJSON(){
 			
-			ArrayList<Position> positionArray= position.getPositionArray();
-			JSONArray JSONPositionArray = new JSONArray();
-			for(Position x : positionArray){
-				JSONPositionArray.add(x.getxCoordiante() + delimeterForJSONPositions + x.getyCoordiante() );
-			}
+			JSONObject JSONposition = position.toJSONObject();
 			
 			JSONObject obj = new JSONObject();
 		    obj.put("id", id);
 		    obj.put("shape", shape);
-			obj.put("position", JSONPositionArray);
+			obj.put("position", JSONposition.toJSONString());
+  
+			return obj.toJSONString();	
+	}
+	
+	/**
+	 * Returns a JSONObject representation of the Geroid for further usage. Included attributes: id, shape, position
+	 * @return JSONObject representing current Geroid.
+	 */
+	@SuppressWarnings("unchecked")
+	public String toJSONObject(){
+			
+			JSONObject JSONposition = position.toJSONObject();
+			
+			JSONObject obj = new JSONObject();
+		    obj.put("id", id);
+		    obj.put("shape", shape);
+			obj.put("position", JSONposition.toJSONString());
   
 			return obj.toJSONString();	
 	}
