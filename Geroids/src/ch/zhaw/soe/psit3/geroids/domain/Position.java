@@ -1,56 +1,49 @@
+//TODO add ToJSON
+
 package ch.zhaw.soe.psit3.geroids.domain;
 
 import java.util.ArrayList;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 public class Position {
 
 	private int xCoordiante;
 	private int yCoordiante;
-	private Expansion expansion;
 	private ArrayList<Position> positionArray = new ArrayList<Position>();
+	private int xLength;
+	private int yLength;
 
 	public Position(int xCoordiante, int yCoordiante) {
 		super();
 		this.xCoordiante = xCoordiante;
 		this.yCoordiante = yCoordiante;
+		this.xLength = 1;
+		this.yLength = 1;
+		createPositionArray();
 	}
 
-	public Position(int xCoordiante, int yCoordiante, Expansion expansion) {
+	public Position(int xCoordiante, int yCoordiante, int xLength, int yLength) {
 		super();
 		this.xCoordiante = xCoordiante;
 		this.yCoordiante = yCoordiante;
-		this.expansion = expansion;
+		this.xLength = xLength;
+		this.yLength = yLength;
+		createPositionArray();
 	}
 
-	/**
-	 * Returns an Array of Positions, containing every Position of the body, including Expansion;
-	 * @return ArrayList with every Position including expansion
-	 */
-	public ArrayList<Position> getPositionArray() {
-		try {
-			System.out.println(expansion.getxExpansion());
-			for (int x = 0; x < expansion.getxExpansion(); x++) {
-				for (int y = 0; y < expansion.getyExpansion(); y++) {
-					positionArray.add(new Position(xCoordiante + x, yCoordiante + y));
-				}
+	private void createPositionArray() {
+		for (int x = 1; x <= xLength; x++) {
+			for (int y = 1; y < yLength; y++) {
+				positionArray.add(new Position(xCoordiante + x, yCoordiante + y));
 			}
-			return positionArray;
-
-		} catch (NullPointerException npe) {
-			return positionArray;
 		}
 	}
 
-	public void setExpansion(Expansion expansion){
-		
-		this.expansion = expansion;
-		
+	public ArrayList<Position> getPositionArray() {
+		return positionArray;
 	}
-	
-	public void setExpansion(int length, int width){
-		this.expansion = new Expansion(length, width);
-	}
-	
+
 	public int getxCoordiante() {
 		return xCoordiante;
 	}
@@ -66,5 +59,25 @@ public class Position {
 	public void setyCoordiante(int yCoordiante) {
 		this.yCoordiante = yCoordiante;
 	}
+	
+	
+	/**
+	 * Converts the Position into a JSON String. String contains the start Coordinates for x any y as well as the x and y Length relative to the start point
+	 * @return JSON representation of the Position.
+	 */
+	@SuppressWarnings("unchecked")
+	public String toJSON(){
+		
+		JSONObject myPosition = new JSONObject();
+		myPosition.put("xStart", xCoordiante);
+		myPosition.put("yStart", yCoordiante);
+		myPosition.put("xLength", xLength);
+		myPosition.put("yLength", yLength);
+		
+		return myPosition.toJSONString();
+		
+	}
+	
+	
 
 }

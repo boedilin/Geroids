@@ -60,9 +60,7 @@ public class Geroid {
 			return obj.toJSONString();	
 	}
 	
-	public void setShapeSize(int length, int width){
-		this.position.setExpansion(length, width);
-	}
+
 	
 	public int getId() {
 		return id;
