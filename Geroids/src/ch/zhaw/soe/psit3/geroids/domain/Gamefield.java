@@ -18,7 +18,7 @@ public class Gamefield {
 	}
 	
 	public void addGeroid(Geroid geroid) {
-		
+		geroidList.add(geroid);
 	}
 
 	public void addProjectile(Projectile projectile) {
