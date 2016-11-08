@@ -2,7 +2,7 @@
 
 package ch.zhaw.soe.psit3.geroids.domain;
 
-import java.util.ArrayList;
+import org.json.simple.JSONObject;
 
 /**
  * 
@@ -24,13 +24,11 @@ public class Projectile{
 	}
 
 	/**
-	 * Updates the position of the object for one timestep. Duration of timestep is defined by attribute MOVEMENT_PER_TIME_IN_MS. 
-	 * Amount of change in position is described in movement attribute.
+	 * Updates the position of the object. Amount of change in position is described in movement object.
 	 */
 	
-	private void updatePosition(){
-		this.position.setyCoordiante(this.position.getyCoordiante() + this.movement.getySpeed());
-		this.position.setxCoordiante(this.position.getxCoordiante() + this.movement.getxSpeed());
+	private void move(){
+		position.update(movement);
 	}
 
 	/**
@@ -41,6 +39,29 @@ public class Projectile{
 	public void hit() {
 		game.getGamefield().getProjectileList().remove(this);
 	}
+	
+	
+	/**
+	 * Returns a JSON String representation of the projectile. 
+	 * @return String Object in JSON Format representing current Projectile.
+	 */
+	public String toJSON(){
+			
+			JSONObject JSONposition = position.toJSONObject();
+			return JSONposition.toJSONString();	
+	}
+	
+	/**
+	 * Returns a JSON  representation of the projectile for further usage. 
+	 * @return JSONObject representing current Projectile.
+	 */
+	public JSONObject toJSONObject(){
+			
+			JSONObject JSONposition = position.toJSONObject();
+			return JSONposition;
+	}
+	
+	
 	public Position getPosition() {
 		return position;
 	}
