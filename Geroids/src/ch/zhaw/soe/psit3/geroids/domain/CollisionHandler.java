@@ -19,12 +19,12 @@ public class CollisionHandler {
 	}
 
 	public void checkCollision(){
-		for(int i = 0; i < gamefield.getGeroidList().size();i++){
+		for(int i = 0; i < geroids.size();i++){
 			if(checkIfGeroidIsCollidingWithFigure(i)){
 				collisionWithFigure = true;
 				//hier kommt noch die Methode f�r den GameOverBanner
 			}
-			for(int j = 0; j< gamefield.getProjectileList().size();j++){
+			for(int j = 0; j< projectiles.size();j++){
 				if(checkIfGeroidIsCollidingWithProjectile(i, j))
 				{
 					geroids.get(i).die(gamefield);
