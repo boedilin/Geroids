@@ -2,6 +2,9 @@
 
 package ch.zhaw.soe.psit3.geroids.domain;
 
+import java.util.ArrayList;
+
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 
@@ -12,7 +15,7 @@ public class Geroid {
 	private String shape;
 	private Position position;
 	private Movement movement;
-
+	private final String  delimeterForJSONPositions = ":";
 	
 	
 	public Geroid(String name, int id, String shape, Position position, Movement movement) {
@@ -31,6 +34,33 @@ public class Geroid {
 
 	public void die(Gamefield gamefield) {
 		gamefield.getGeroidList().remove(this);
+	}
+	
+	/**
+	 * Returns a JSON representation of the Geroid. Included attributes: id, shape, positions
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public String toJSON(){
+			
+			ArrayList<Position> positionArray= position.getPositionArray();
+			JSONArray JSONPositionArray = new JSONArray();
+			for(Position x : positionArray){
+				JSONPositionArray.add(x.getxCoordiante() + delimeterForJSONPositions + x.getyCoordiante() );
+			}
+			
+			JSONObject obj = new JSONObject();
+		    obj.put("id", id);
+		    obj.put("shape", shape);
+			obj.put("position", JSONPositionArray);
+  
+			//System.out.println(obj.toJSONString());
+			return obj.toJSONString();	
+	}
+	
+	public void setShapeSize(int length, int width){
+		
+		this.position.setExpansion(length, width);
 	}
 	
 	public String getName() {
@@ -73,30 +103,6 @@ public class Geroid {
 		this.movement = movement;
 	}
 
-	/**
-	 * Returns a JSON representation of the Geroid. Included attributes: name, id, shape, position
-	 * @return
-	 */
-	public String toJSON(){
-		
-		//Beispiel:
-		
-		
-		
-		
-		
-			JSONObject obj = new JSONObject();
-								
-		    obj.put("name", name);
-		    obj.put("id", id);
-		    obj.put("shape", shape);
-			obj.put("position", position.getPositionArray());
 
-			    System.out.print(obj);
-			      
-			   //System.out.print(); calls the toString method.
-			  // obj.toJSONString(); machts explizit. 
-			return obj.toJSONString();
-				
-	}
+
 }
