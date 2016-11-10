@@ -8,8 +8,8 @@ public class Position {
 	private int xCoordiante;
 	private int yCoordiante;
 	private ArrayList<Position> positionArray = new ArrayList<Position>();
-	private int xLength;
-	private int yLength;
+	private int xLength = 100;
+	private int yLength = 100;
 
 	public Position(int xCoordiante, int yCoordiante) {
 		this.xCoordiante = xCoordiante;
