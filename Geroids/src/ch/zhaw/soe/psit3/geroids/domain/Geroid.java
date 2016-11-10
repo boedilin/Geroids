@@ -17,7 +17,6 @@ public class Geroid {
 	private String shape;
 	private Position position;
 	private Movement movement;
-	private final String  delimeterForJSONPositions = ":";
 	
 	
 	public Geroid(int id, String shape, Position position, Movement movement) {
@@ -58,7 +57,7 @@ public class Geroid {
 	 * @return JSONObject representing current Geroid.
 	 */
 	@SuppressWarnings("unchecked")
-	public String toJSONObject(){
+	public JSONObject toJSONObject(){
 			
 			JSONObject JSONposition = position.toJSONObject();
 			
@@ -67,7 +66,7 @@ public class Geroid {
 		    obj.put("shape", shape);
 			obj.put("position", JSONposition.toJSONString());
   
-			return obj.toJSONString();	
+			return obj;
 	}
 	
 
