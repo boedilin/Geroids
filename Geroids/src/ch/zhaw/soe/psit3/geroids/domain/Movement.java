@@ -1,4 +1,3 @@
-// TODO Change increase Speed to multiplication
 
 package ch.zhaw.soe.psit3.geroids.domain;
 
@@ -36,16 +35,16 @@ public class Movement {
 	}
 
 	/**
-	 * Increases the X Speed by the given amount
-	 * @param x The amount of Speed to increase the current ySpeed
+	 * Increases the X Speed by the provided factor
+	 * @param x The factor the X Speed should be increased
 	 */
 	public void increaseXSpeed(int x) {
 		this.xSpeed = xSpeed + x;
 	}
 
 	/**
-	 * Increases the XY Speed by the given amount
-	 * @param y The amount of Speed to increase the current ySpeed
+	 * Increases the Y Speed by the given amount
+	 * @param y The factor the Y Speed should be increased
 	 */
 	public void increaseYSpeed(int y) {
 		this.ySpeed = ySpeed + y;
