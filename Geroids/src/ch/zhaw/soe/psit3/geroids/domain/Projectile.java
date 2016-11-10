@@ -27,7 +27,7 @@ public class Projectile{
 	 * Updates the position of the object. Amount of change in position is described in movement object.
 	 */
 	
-	private void move(){
+	public void move(){
 		position.update(movement);
 	}
 
