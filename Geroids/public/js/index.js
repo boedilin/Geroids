@@ -85,6 +85,10 @@ ws.onopen = function() {
     ws.send("Hello Serverr");
 };
 
+
+/**
+ * Upon Receiving a message from the server, this method tries to extract name attribute from string and send the message to the corresponding drawing method.
+ */
 ws.onmessage = function(evt) {
 	//console.log("unparsed data: " + evt.data);
     var receivedJSON = JSON.parse(evt.data);
