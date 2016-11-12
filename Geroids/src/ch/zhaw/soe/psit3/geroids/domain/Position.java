@@ -8,6 +8,7 @@ public class Position {
 	private int xCoordiante;
 	private int yCoordiante;
 	private ArrayList<Position> positionArray = new ArrayList<Position>();
+
 	private int xLength = 100;
 	private int yLength = 100;
 
@@ -49,8 +50,8 @@ public class Position {
 	public String toJSON(){
 		
 		JSONObject myPosition = new JSONObject();
-		myPosition.put("xStart", xCoordiante);
-		myPosition.put("yStart", yCoordiante);
+		myPosition.put("xCoordinate", xCoordiante);
+		myPosition.put("yCoordinate", yCoordiante);
 		myPosition.put("xLength", xLength);
 		myPosition.put("yLength", yLength);
 		
@@ -92,6 +93,10 @@ public class Position {
 
 	public void setyCoordiante(int yCoordiante) {
 		this.yCoordiante = yCoordiante;
+	}
+	
+	public int getxLength() {
+		return xLength;
 	}
 	
 	

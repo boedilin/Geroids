@@ -1,6 +1,8 @@
 package ch.zhaw.soe.psit3.geroids.domain;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Gamefield {
 
@@ -8,6 +10,7 @@ public class Gamefield {
 	private ArrayList<Geroid> geroidList;
 	private ArrayList<Projectile> projectileList;
 	private int gamefield[][];
+	private Queue<String> commandQueue = new LinkedList<String>();
 
 	public Gamefield(int xRange, int yRange){
 		this.gamefield = new int[xRange][yRange];
@@ -15,6 +18,16 @@ public class Gamefield {
 		this.geroidList = new ArrayList<Geroid>();
 	}
 	
+	
+	
+	
+	
+	
+	public LinkedList<String> getCommandQueue() {
+		return (LinkedList<String>) commandQueue;
+	}
+
+
 	public void addGeroid(Geroid geroid) {
 
 	}

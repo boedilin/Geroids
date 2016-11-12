@@ -25,6 +25,11 @@ public class Geroid {
 		this.position = position;
 		this.movement = movement;
 	}
+	
+	public Geroid(Position position, Movement movement) {
+		this.position = position;
+		this.movement = movement;
+	}
 
 	public void move() {
 		position.update(movement);
@@ -45,8 +50,7 @@ public class Geroid {
 			JSONObject JSONposition = position.toJSONObject();
 			
 			JSONObject obj = new JSONObject();
-		    obj.put("id", id);
-		    obj.put("shape", shape);
+			obj.put("name", "Geroid");
 			obj.put("position", JSONposition.toJSONString());
   
 			return obj.toJSONString();	
@@ -59,13 +63,12 @@ public class Geroid {
 	@SuppressWarnings("unchecked")
 	public JSONObject toJSONObject(){
 			
-			JSONObject JSONposition = position.toJSONObject();
-			
+	
 			JSONObject obj = new JSONObject();
-		    obj.put("id", id);
-		    obj.put("shape", shape);
-			obj.put("position", JSONposition.toJSONString());
+			obj.put("name", "Geroid");
+			obj.put("position", this.position.toJSONObject());
   
+		
 			return obj;
 	}
 	

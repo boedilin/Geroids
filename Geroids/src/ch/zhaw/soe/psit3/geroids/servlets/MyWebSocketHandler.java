@@ -35,6 +35,7 @@ public class MyWebSocketHandler {
 		//Wenn eine neue Verbindung aufgebaut wird, soll ein neues Game instanziert werden.
 		//Dem Game wird der Websockethandler übergeben, der die Verbidung zum Client handelt.
 		game = new Game(this);
+		game.startGame();
 		/*
 		System.out.println("Connect: " + session.getRemoteAddress().getAddress());
 		try {

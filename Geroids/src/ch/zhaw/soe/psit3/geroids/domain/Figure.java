@@ -1,121 +1,64 @@
+// TODO implement shoot method
+
+
 package ch.zhaw.soe.psit3.geroids.domain;
 
 import java.util.concurrent.locks.Lock;
 
-public class Figure extends Thread{
+import org.json.simple.JSONObject;
 
-	private Game game;
-	private Lock lock;
+public class Figure {
+
+
 	private Position position;
 	private Skin skin;
 	private Type type;
-	private static int SHOOTING_DELAY_IN_MS = 300;
-	private static int MOVING_DELAY_IN_MS = 500;
-	private boolean movingLeft = false;
-	private boolean movingRight = false;
-	private boolean shooting = false;
-	
-	public Figure(Game game, Type type, Skin skin, int x, int y){
-		this.game = game;
+
+
+	public Figure(Type type, Skin skin, int x, int y){
 		this.skin = skin;
 		this.type = type;
 		this.position = new Position(x, y);
-		start();
 	}
 	
-	public void run(){
-		while(game.isRunning()){
-			if(shooting){
-				try {
-					lock.lock();
-					shoot();
-					sleep(SHOOTING_DELAY_IN_MS);
-					lock.unlock();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			if(movingLeft || movingRight){
-				try {
-					lock.lock();
-					if(movingLeft){
-						moveLeft();
-					}
-					else if (movingRight){
-						moveRight();
-					}
-					sleep(MOVING_DELAY_IN_MS);
-					lock.unlock();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
+	public Figure(Position position){
+		this.position = position;
 	}
 	
-	public boolean isMovingLeft() {
-		return movingLeft;
-	}
-
-	public void setMovingLeft(boolean movingLeft) {
-		this.movingLeft = movingLeft;
-	}
-
-	public boolean isMovingRight() {
-		return movingRight;
-	}
-
-	public void setMovingRight(boolean movingRight) {
-		this.movingRight = movingRight;
-	}
-
-	public boolean isShooting() {
-		return shooting;
-	}
-
-	public void setShooting(boolean shooting) {
-		this.shooting = shooting;
-	}
-
-	public void moveLeft(){
-		this.position.setxCoordiante(this.position.getxCoordiante()-1);
-		movingLeft = false;
+	public void moveLeft(int amount){
+		this.position.setxCoordiante(this.position.getxCoordiante()-amount);
 	}
 	
-	public void moveRight(){
-		this.position.setxCoordiante(this.position.getxCoordiante()+1);
-		movingRight = false;
+	public void moveRight(int amount){
+		this.position.setxCoordiante(this.position.getxCoordiante()+amount);
 	}
 	
-	public void shoot(){
-		game.getProjectiles().add(new Projectile(game, new Position(game.getFigure().getPosition().getxCoordiante(), game.getFigure().getPosition().getyCoordiante()), game.getAccount().getActiveType().getMovement()));
-		shooting = false;
+	public void shoot(Game game){
+		
+		Movement mov = new Movement(0, -10);
+		int xPosInMiddleOfFigure = this.position.getxCoordiante() + this.position.getxLength()/2;
+		
+		Position pos = new Position(xPosInMiddleOfFigure, this.position.getyCoordiante()-10,20,20);
+		Projectile projectile = new Projectile(pos, mov);
+		game.getProjectiles().add(projectile);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public String toJSON(){
+		JSONObject obj = new JSONObject();
+		
+		obj.put("name", "figure");
+		obj.put("position", this.position.toJSONObject());
+		//System.out.println(obj.toJSONString());
+		return obj.toJSONString();
+		
 	}
 
 	public Position getPosition() {
-		return position;
+
+		return this.position;
 	}
 
-	public void setPosition(Position position) {
-		this.position = position;
-	}
-
-	public Skin getSkin() {
-		return skin;
-	}
-
-	public void setSkin(Skin skin) {
-		this.skin = skin;
-	}
-
-	public Type getType() {
-		return type;
-	}
-
-	public void setType(Type type) {
-		this.type = type;
-	}
+	
 
 }
