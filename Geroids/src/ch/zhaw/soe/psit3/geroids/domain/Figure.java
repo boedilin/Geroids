@@ -7,12 +7,15 @@ import java.util.concurrent.locks.Lock;
 
 import org.json.simple.JSONObject;
 
+import ch.zhaw.soe.psit3.geroids.servlets.MyWebSocketHandler;
+
 public class Figure {
 
 
 	private Position position;
 	private Skin skin;
 	private Type type;
+	private MyWebSocketHandler websocketHandler;
 
 
 	public Figure(Type type, Skin skin, int x, int y){
@@ -47,7 +50,6 @@ public class Figure {
 	public String toJSON(){
 		JSONObject obj = new JSONObject();
 		
-		obj.put("name", "figure");
 		obj.put("position", this.position.toJSONObject());
 		//System.out.println(obj.toJSONString());
 		return obj.toJSONString();

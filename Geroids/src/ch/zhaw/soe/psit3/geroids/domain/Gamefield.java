@@ -10,23 +10,12 @@ public class Gamefield {
 	private ArrayList<Geroid> geroidList;
 	private ArrayList<Projectile> projectileList;
 	private int gamefield[][];
-	private Queue<String> commandQueue = new LinkedList<String>();
 
 	public Gamefield(int xRange, int yRange){
 		this.gamefield = new int[xRange][yRange];
 		this.projectileList = new ArrayList<Projectile>();
 		this.geroidList = new ArrayList<Geroid>();
 	}
-	
-	
-	
-	
-	
-	
-	public LinkedList<String> getCommandQueue() {
-		return (LinkedList<String>) commandQueue;
-	}
-
 
 	public void addGeroid(Geroid geroid) {
 

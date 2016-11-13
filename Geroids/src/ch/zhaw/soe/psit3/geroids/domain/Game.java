@@ -97,7 +97,7 @@ public class Game {
 	 */
 	
 	private void updateGamefield() {
-		updateFigure();
+		//updateFigure();
 		updateGeroids();
 		updateProjectiles();
 	}
@@ -108,11 +108,9 @@ public class Game {
  * Space => shoot.
  */
 
-	private void updateFigure() {
-		String command = getCommandFromGamefield();
+	private void updateFigure(String command) {
 		System.out.println("COMMAND: " + command);
 		if (command != null) {
-			gamefield.getCommandQueue().clear();
 			switch (command) {
 			case "a":
 				System.out.println("Moving figure to the Left");
@@ -154,10 +152,13 @@ public class Game {
 	/*
 	 * Sennds the new Values of Figure, all Geroids and all Projectiles via webSocketHandler to the Client.
 	 */
+	@SuppressWarnings("unchecked")
 	private void sendNewValues() {
-		webSocketHandler.sendMessage(figure.toJSON());
-		webSocketHandler.sendMessage(this.toJSONStringGeroids());
-		webSocketHandler.sendMessage(this.toJSONStringProjectiles());
+		JSONObject obj = new JSONObject();
+		obj.put("Figure", figure.toJSON());
+		obj.put("Geroids", this.toJSONStringGeroids());
+		obj.put("Projectiles", this.toJSONStringProjectiles());
+		webSocketHandler.sendMessage(obj.toJSONString());
 
 	}
 
@@ -236,7 +237,7 @@ public class Game {
 	// valentin how to manage messages with identifiers
 	public void receiveMessage(String message) {
 		System.out.println("Server received message: " + message);
-		gamefield.getCommandQueue().addFirst(message);
+		updateFigure(message);
 	}
 
 	private boolean checkIfGeroidIsCollidingWithProjectile(int geroidsIndex, int projectilesIndex) {
