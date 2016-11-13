@@ -15,8 +15,6 @@ public class Figure {
 	private Position position;
 	private Skin skin;
 	private Type type;
-	private MyWebSocketHandler websocketHandler;
-
 
 	public Figure(Type type, Skin skin, int x, int y){
 		this.skin = skin;
