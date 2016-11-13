@@ -12,6 +12,8 @@ public class Account {
 	private ArrayList<Microtransaction> mytransactions;
 	private Skin activeSkin = new Defaultskin();
 	private Type activeType = new Defaulttype();
+	private ArrayList<Skin> skinList;
+	private ArrayList<Type> typeList;
 
 	public String getNickname() {
 		return nickname;
