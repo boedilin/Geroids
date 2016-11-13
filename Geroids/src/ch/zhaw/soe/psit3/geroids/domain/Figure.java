@@ -1,16 +1,11 @@
 package ch.zhaw.soe.psit3.geroids.domain;
 
-import java.util.concurrent.locks.Lock;
-
-public class Figure extends Thread{
+public class Figure {
 
 	private Game game;
-	private Lock lock;
 	private Position position;
 	private Skin skin;
 	private Type type;
-	private static int SHOOTING_DELAY_IN_MS = 300;
-	private static int MOVING_DELAY_IN_MS = 500;
 	private boolean movingLeft = false;
 	private boolean movingRight = false;
 	private boolean shooting = false;
@@ -20,39 +15,6 @@ public class Figure extends Thread{
 		this.skin = skin;
 		this.type = type;
 		this.position = new Position(x, y);
-		start();
-	}
-	
-	public void run(){
-		while(game.isRunning()){
-			if(shooting){
-				try {
-					lock.lock();
-					shoot();
-					sleep(SHOOTING_DELAY_IN_MS);
-					lock.unlock();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			if(movingLeft || movingRight){
-				try {
-					lock.lock();
-					if(movingLeft){
-						moveLeft();
-					}
-					else if (movingRight){
-						moveRight();
-					}
-					sleep(MOVING_DELAY_IN_MS);
-					lock.unlock();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
 	}
 	
 	public boolean isMovingLeft() {
