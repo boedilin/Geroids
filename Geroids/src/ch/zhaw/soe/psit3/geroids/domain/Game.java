@@ -22,7 +22,7 @@ public class Game {
 	private Playscore score;
 	private Figure figure;
 	private ArrayList<Projectile> projectiles;
-	
+
 	private boolean isRunning = false;
 	private boolean collisionWithFigure = false;
 	private int xRange = 1000;
@@ -34,22 +34,21 @@ public class Game {
 
 	public Game(MyWebSocketHandler websocketHandler) {
 		this.webSocketHandler = websocketHandler;
-		//uncommented cause of parse error. send this as json format
-		//websocketHandler.sendMessage("Connected to Server");
+		// uncommented cause of parse error. send this as json format
+		// websocketHandler.sendMessage("Connected to Server");
 		this.gamefield = new Gamefield(xRange, yRange);
 		this.geroids = new ArrayList<Geroid>();
 		this.projectiles = new ArrayList<Projectile>();
 		this.figure = new Figure(new Position(100, 900, 100, 100));
 	}
 
-	
 	/**
 	 * Starts the game. Will update the gamefield
 	 * 
 	 */
 	public void startGame() {
-		//uncommented cause of parse error. send this as json format
-		//webSocketHandler.sendMessage("Server: Starting Game");
+		// uncommented cause of parse error. send this as json format
+		// webSocketHandler.sendMessage("Server: Starting Game");
 		isRunning = true;
 		gameThread = new Thread(new Runnable() {
 			@Override
@@ -61,79 +60,83 @@ public class Game {
 						// gernerate a geroid every 10 ticks
 						generateGeroid();
 					}
-					//update all values of figure, geroids and projectiles
+					// update all values of figure, geroids and projectiles
 					updateGamefield();
-					//sends all new values
+					// sends all new values
 					sendNewValues();
-					//System.out.println(counter2++);
+					// System.out.println(counter2++);
 					counter++;
 					trySleep(LENGTH_OF_TICK_IN_MS);
 				}
 			}
 		}, "gameThread");
 		gameThread.start();
-		//webSocketHandler.sendMessage("Server: Gamethread Started");
+		// webSocketHandler.sendMessage("Server: Gamethread Started");
 	}
 
 	/*
 	 * Main update class. Propagates to the different update Methods.
 	 */
-	
+
 	private void updateGamefield() {
-		//updateFigure();
+		// updateFigure();
 		updateGeroids();
 		updateProjectiles();
 	}
-/*
- * Updates the figure corresponding the the command in the commandQueue.
- * a => move Left
- * d = > move Right
- * Space => shoot.
- */
+	/*
+	 * Updates the figure corresponding the the command in the commandQueue. a
+	 * => move Left d = > move Right Space => shoot.
+	 */
 
 	private void updateFigure(String command) {
-			switch (command) {
-			case "65":
-				figure.moveLeft(10);
-				break;
-			case "68":
-				figure.moveRight(10);
-				break;
-			case "32":
-				if(System.currentTimeMillis() >= timestampPreviousShot + MAXIMUM_SHOOT_SPEED){
-					timestampPreviousShot = System.currentTimeMillis();
+		switch (command) {
+		case "65":
+			figure.moveLeft(10);
+			break;
+		case "68":
+			figure.moveRight(10);
+			break;
+		case "32":
+			if (System.currentTimeMillis() >= timestampPreviousShot + MAXIMUM_SHOOT_SPEED) {
+				timestampPreviousShot = System.currentTimeMillis();	
 					figure.shoot(this);
-				}
-				break;
 			}
+			break;
+		}
 	}
 
 	/*
 	 * updates all geroids in geroids attribute (ArrayList)
 	 */
 	private void updateGeroids() {
-		for(int i = 0; i< geroids.size();i++){
-			checkIfGeroidIsOutOfGamefield(i);
+		for (int i = 0; i < geroids.size(); i++) {
+			RemoveIfGeroidIsOutOfGamefield(i);
 		}
-		
-		
+
 		for (Geroid myGeroid : geroids) {
 			myGeroid.move();
 		}
 	}
 
-	
 	/*
 	 * Updates all Projectiles in projectiles attribute(ArrayList)
 	 */
 	private void updateProjectiles() {
+		
+		
+		for (int i = 0; i < projectiles.size(); i++) {
+			RemoveIfProjectileIsOutOfGamefield(i);
+		}
+		
+		
 		for (Projectile myProjectile : projectiles) {
 			myProjectile.move();
 		}
 	}
 
 	/*
-	 * Sennds the new Values of Figure, all Geroids and all Projectiles via webSocketHandler to the Client.
+	 * Sennds the new Values of Figure, all Geroids and all Projectiles via
+	 * webSocketHandler to the Client.
 	 */
 	@SuppressWarnings("unchecked")
 	private void sendNewValues() {
@@ -167,17 +170,17 @@ public class Game {
 
 	@SuppressWarnings("unchecked")
 	private JSONArray geroidsToJSONArray() {
-		
+
 		JSONArray array = new JSONArray();
 
 		for (Geroid myGeroid : geroids) {
 			array.add(myGeroid.toJSONObject());
 		}
-		
+
 		return array;
 
 	}
-	
+
 	@SuppressWarnings({ "unused", "unchecked" })
 	private JSONArray projectilesToJSONArray() {
 
@@ -189,8 +192,7 @@ public class Game {
 
 		return array;
 	}
-	
-	
+
 	private void checkCollision() {
 		for (int i = 0; i < gamefield.getGeroidList().size(); i++) {
 			if (checkIfGeroidIsCollidingWithFigure(i)) {
@@ -231,13 +233,20 @@ public class Game {
 		}
 		return false;
 	}
-	
-	private boolean checkIfGeroidIsOutOfGamefield(int geroidIndex){
-		
-		if(this.geroids.get(geroidIndex).getPosition().getyCoordiante() > this.yRange){
+
+	private void RemoveIfGeroidIsOutOfGamefield(int geroidIndex) {
+
+		if (this.geroids.get(geroidIndex).getPosition().getyCoordiante() > this.yRange) {
 			geroids.remove(geroidIndex);
 		}
-		return false;
+		
+	}
+	
+	private void RemoveIfProjectileIsOutOfGamefield(int projectileIndex){
+	
+		if (this.projectiles.get(projectileIndex).getPosition().getyCoordiante() < 0) {
+			projectiles.remove(projectileIndex);
+		}
 	}
 
 	public ArrayList<Projectile> getProjectiles() {
@@ -247,6 +256,5 @@ public class Game {
 	public Gamefield getGamefield() {
 		return gamefield;
 	}
-
 
 }
