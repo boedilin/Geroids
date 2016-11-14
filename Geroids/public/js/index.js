@@ -1,3 +1,4 @@
+var ws = new WebSocket("ws://" + location.host);
 //load: This is the named event for which we are adding a listener. Events for existing objects like window are already defined.
 //eventWindowLoaded: Call this function when the event occurs. In our code, we will then call the canvasApp() function, which will start our main application execution.
 //false: This sets the function to capture this type of event before it propagates lower in the DOM tree of objects. We will always set this to false.
@@ -25,6 +26,8 @@ function canvasSupport() {
     return Modernizr.canvas;
 }
 
+const keyA = 65;
+
 function canvasApp() {
     if (!canvasSupport) {
         return;
@@ -34,15 +37,41 @@ function canvasApp() {
 
     var map = {}; // You could also use an array
     onkeydown = onkeyup = function(e) {
-        e = e || event; // to deal with IE
-        map[e.keyCode] = e.type == 'keydown';
-        console.log(e.type);
-        console.log(map);
+        //e = e || event; // to deal with IE
+        if (e.keyCode == 32 || e.keyCode == keyA || e.keyCode == 68) {
+            map[e.keyCode] = e.type == 'keydown';
+            //console.log(e.type);
+            //console.log(map);
+        }
     }
 
+    setInterval(function() {
+        for (key in map) {
+            if (map[key]) {
+                ws.send(key);
+                console.log(key);
+            }
+        }
+    }, 50);
 
 
 
+    var timeNow;
+    var timeAfter;
+    var previousTime;
+
+    /**
+     * how fast the pressed key can be sent: (85ms)
+     *      console.log(new Date().getTime() - previousTime);
+            previousTime = new Date().getTime();
+     */
+
+    /*onkeydown = function(e) {
+        console.log(new Date().getTime() - previousTime);
+        previousTime = new Date().getTime();
+        //console.log("e.type", e.type);
+        //console.log("e.keyCode", e.keyCode);
+    }*/
 
     // resize the canvas to fill browser window dynamically
     window.addEventListener('resize', resizeCanvas, false);
@@ -63,10 +92,11 @@ function canvasApp() {
     }
     resizeCanvas();
 
-    function eventKeyPressed(event) {
-        console.log(event.key);
-        //ws.send(event.key);
-    }
+    /*
+        function eventKeyPressed(event) {
+            console.log(event.key);
+            //ws.send(event.key);
+        }*/
 
     function drawStuff() {
         // do your drawing stuff here
@@ -96,14 +126,14 @@ function canvasApp() {
 
 // kann generisch gemacht werden, da der Websocketserver der selbe ist, wie der
 // Server, der das HTML liefert:"ws://" + location.host
-var ws = new WebSocket("ws://" + location.host);
+
 
 
 ws.onopen = function() {
     console.log("Websocket opened!");
     ws.send("Hello Serverr");
 };
-
+var counter = 0;
 
 /**
  * Upon Receiving a message from the server, this method tries to extract name attribute from string and send the message to the corresponding drawing method.
@@ -111,9 +141,8 @@ ws.onopen = function() {
 ws.onmessage = function(evt) {
     //console.log("unparsed data: ", evt.data);
     //console.log(JSON.parse(evt.data));
-
+    console.log(counter++);
     let gamefield = JSON.parse(evt.data);
-
     drawFigure(gamefield.Figure);
     drawGeroids(gamefield.Geroids);
     drawProjectiles(gamefield.Projectiles);
@@ -122,19 +151,19 @@ ws.onmessage = function(evt) {
 
 
     /*
-        var receivedJSON = JSON.parse(evt.data);
+            var receivedJSON = JSON.parse(evt.data);
     
-        if(receivedJSON.name == "figure"){
-        	drawFigure(receivedJSON);
-        } else if(receivedJSON.name == 'geroidList'){
-        	drawGeroids(receivedJSON);
-        	
-        } else if(receivedJSON.name == 'projectileList'){
-        	drawProjectiles(receivedJSON);
-        	
-        } else {
-        	console.log("received name: " + receivedJSON.name);
-        }*/
+            if(receivedJSON.name == "figure"){
+            	drawFigure(receivedJSON);
+            } else if(receivedJSON.name == 'geroidList'){
+            	drawGeroids(receivedJSON);
+            	
+            } else if(receivedJSON.name == 'projectileList'){
+            	drawProjectiles(receivedJSON);
+            	
+            } else {
+            	console.log("received name: " + receivedJSON.name);
+            }*/
 
 
 };

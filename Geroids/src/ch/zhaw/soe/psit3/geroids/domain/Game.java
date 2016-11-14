@@ -14,6 +14,8 @@ import ch.zhaw.soe.psit3.geroids.servlets.MyWebSocketHandler;
 
 public class Game {
 
+	private static final int MAXIMUM_SHOOT_SPEED = 300;
+	private long timestampPreviousShot;
 	private Account account;
 	private Gamefield gamefield;
 	private ArrayList<Geroid> geroids;
@@ -28,7 +30,7 @@ public class Game {
 	private MyWebSocketHandler webSocketHandler;
 	Thread gameThread;
 	private final int MAX_COUNT_GEROIDS = 10;
-	private final int LENGTH_OF_TICK_IN_MS = 10;
+	private final int LENGTH_OF_TICK_IN_MS = 50;
 
 	/*
 	public Game(Account account, Gamefield gamefield, MyWebSocketHandler websocketHandler) {
@@ -105,17 +107,20 @@ public class Game {
 		System.out.println("COMMAND: " + command);
 		if (command != null) {
 			switch (command) {
-			case "a":
+			case "65":
 				System.out.println("Moving figure to the Left");
 				figure.moveLeft(10);
 				break;
-			case "d":
+			case "68":
 				System.out.println("Moving figure to the right");
 				figure.moveRight(10);
 				break;
-			case " ":
-				System.out.println("Shooting");
-				figure.shoot(this);
+			case "32":
+				if(System.currentTimeMillis() > timestampPreviousShot+MAXIMUM_SHOOT_SPEED){
+					timestampPreviousShot = System.currentTimeMillis();
+					System.out.println("Shooting");
+					figure.shoot(this);
+				}
 				break;
 			}
 		} else {
