@@ -30,6 +30,7 @@ public class Game {
 	private final int MAX_COUNT_GEROIDS = 10;
 	private final int LENGTH_OF_TICK_IN_MS = 10;
 
+	/*
 	public Game(Account account, Gamefield gamefield, MyWebSocketHandler websocketHandler) {
 		this.account = account;
 		this.gamefield = new Gamefield(xRange, yRange);
@@ -39,11 +40,12 @@ public class Game {
 		this.geroids = this.gamefield.getGeroidList();
 		this.webSocketHandler = websocketHandler;
 		websocketHandler.sendMessage("Connected to Server");
-	}
+	}*/
 
 	public Game(MyWebSocketHandler websocketHandler) {
 		this.webSocketHandler = websocketHandler;
-		websocketHandler.sendMessage("Connected to Server");
+		//uncommented cause of parse error. send this as json format
+		//websocketHandler.sendMessage("Connected to Server");
 		this.gamefield = new Gamefield(xRange, yRange);
 		this.geroids = new ArrayList<Geroid>();
 		this.projectiles = new ArrayList<Projectile>();
@@ -56,7 +58,8 @@ public class Game {
 	 * 
 	 */
 	public void startGame() {
-		webSocketHandler.sendMessage("Server: Starting Game");
+		//uncommented cause of parse error. send this as json format
+		//webSocketHandler.sendMessage("Server: Starting Game");
 		isRunning = true;
 		gameThread = new Thread(new Runnable() {
 			@Override
@@ -79,17 +82,7 @@ public class Game {
 			}
 		}, "gameThread");
 		gameThread.start();
-		webSocketHandler.sendMessage("Server: Gamethread Started");
-	}
-
-	private String getCommandFromGamefield() {
-		try {
-			String first = gamefield.getCommandQueue().getFirst();
-			return first;
-		} catch (NoSuchElementException e) {
-			// empty list
-		}
-		return null;
+		//webSocketHandler.sendMessage("Server: Gamethread Started");
 	}
 
 	/*
@@ -155,9 +148,9 @@ public class Game {
 	@SuppressWarnings("unchecked")
 	private void sendNewValues() {
 		JSONObject obj = new JSONObject();
-		obj.put("Figure", figure.toJSON());
-		obj.put("Geroids", this.toJSONStringGeroids());
-		obj.put("Projectiles", this.toJSONStringProjectiles());
+		obj.put("Figure", figure.toJSONObject());
+		obj.put("Geroids", this.geroidsToJSONArray());
+		obj.put("Projectiles", this.projectilesToJSONArray());
 		webSocketHandler.sendMessage(obj.toJSONString());
 
 	}
@@ -182,37 +175,29 @@ public class Game {
 		}
 	}
 
-	
-	@SuppressWarnings({ "unused", "unchecked" })
-	private String toJSONStringGeroids() {
-
-		JSONObject obj = new JSONObject();
-		JSONArray arr = new JSONArray();
+	@SuppressWarnings("unchecked")
+	private JSONArray geroidsToJSONArray() {
+		
+		JSONArray array = new JSONArray();
 
 		for (Geroid myGeroid : geroids) {
-			arr.add(myGeroid.toJSONObject());
+			array.add(myGeroid.toJSONObject());
 		}
-
-		obj.put("name", "geroidList");
-		obj.put("geroids", arr);
-		return obj.toJSONString();
+		
+		return array;
 
 	}
 	
 	@SuppressWarnings({ "unused", "unchecked" })
-	private String toJSONStringProjectiles() {
+	private JSONArray projectilesToJSONArray() {
 
-		JSONObject obj = new JSONObject();
-		JSONArray arr = new JSONArray();
+		JSONArray array = new JSONArray();
 
 		for (Projectile projectile : projectiles) {
-			arr.add(projectile.toJSONObject());
+			array.add(projectile.toJSONObject());
 		}
 
-		obj.put("name", "projectileList");
-		obj.put("projectiles", arr);
-		return obj.toJSONString();
-
+		return array;
 	}
 	
 	

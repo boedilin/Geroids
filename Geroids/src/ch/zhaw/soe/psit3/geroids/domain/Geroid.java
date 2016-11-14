@@ -18,7 +18,6 @@ public class Geroid {
 	private Position position;
 	private Movement movement;
 	
-	
 	public Geroid(int id, String shape, Position position, Movement movement) {
 		this.id = id;
 		this.shape = shape;
@@ -41,38 +40,18 @@ public class Geroid {
 	}
 	
 	/**
-	 * Returns a JSON String representation of the Geroid. Included attributes: id, shape, position
-	 * @return String Object in JSON Format representing current Geroid.
-	 */
-	@SuppressWarnings("unchecked")
-	public String toJSON(){
-			
-			JSONObject JSONposition = position.toJSONObject();
-			
-			JSONObject obj = new JSONObject();
-			obj.put("name", "Geroid");
-			obj.put("position", JSONposition.toJSONString());
-  
-			return obj.toJSONString();	
-	}
-	
-	/**
 	 * Returns a JSONObject representation of the Geroid for further usage. Included attributes: id, shape, position
 	 * @return JSONObject representing current Geroid.
 	 */
 	@SuppressWarnings("unchecked")
 	public JSONObject toJSONObject(){
-			
 	
 			JSONObject obj = new JSONObject();
-			obj.put("name", "Geroid");
+			
 			obj.put("position", this.position.toJSONObject());
-  
 		
 			return obj;
 	}
-	
-
 	
 	public int getId() {
 		return id;
@@ -105,7 +84,4 @@ public class Geroid {
 	public void setMovement(Movement movement) {
 		this.movement = movement;
 	}
-
-
-
 }

@@ -15,7 +15,6 @@ public class Projectile{
 	private Position position;
 	private Movement movement;
 
-	
 	public Projectile(Position position, Movement movement) {
 		this.position = position;
 		this.movement = movement;
@@ -38,17 +37,6 @@ public class Projectile{
 		game.getGamefield().getProjectileList().remove(this);
 	}
 	
-	
-	/**
-	 * Returns a JSON String representation of the projectile. 
-	 * @return String Object in JSON Format representing current Projectile.
-	 */
-	public String toJSON(){
-			
-			JSONObject JSONposition = position.toJSONObject();
-			return JSONposition.toJSONString();	
-	}
-	
 	/**
 	 * Returns a JSON  representation of the projectile for further usage. 
 	 * @return JSONObject representing current Projectile.
@@ -57,11 +45,10 @@ public class Projectile{
 	public JSONObject toJSONObject(){
 			
 			JSONObject obj = new JSONObject();
-			obj.put("name", "projectile");
+
 			obj.put("position", this.position.toJSONObject());
 			return obj;
 	}
-	
 	
 	public Position getPosition() {
 		return position;
@@ -78,6 +65,4 @@ public class Projectile{
 	public void setMovement(Movement movement) {
 		this.movement = movement;
 	}
-
-	
 }

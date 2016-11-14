@@ -45,20 +45,16 @@ public class Figure {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public String toJSON(){
+	public JSONObject toJSONObject(){
 		JSONObject obj = new JSONObject();
 		
 		obj.put("position", this.position.toJSONObject());
-		//System.out.println(obj.toJSONString());
-		return obj.toJSONString();
-		
+
+		return obj;
 	}
 
 	public Position getPosition() {
 
 		return this.position;
 	}
-
-	
-
 }

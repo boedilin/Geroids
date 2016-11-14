@@ -52,6 +52,7 @@ function canvasApp() {
     resizeCanvas();
 
     function eventKeyPressed(event) {
+        console.log(event.key);
         ws.send(event.key);
     }
 
@@ -96,7 +97,8 @@ ws.onopen = function() {
  * Upon Receiving a message from the server, this method tries to extract name attribute from string and send the message to the corresponding drawing method.
  */
 ws.onmessage = function(evt) {
-    console.log("unparsed data: ", JSON.parse(evt.data));
+    //console.log("unparsed data: ", evt.data);
+    //console.log(JSON.parse(evt.data));
 
     let gamefield = JSON.parse(evt.data);
 
@@ -164,15 +166,13 @@ function drawGeroids(GeroidJSON) {
         }
     }
 
-
-
     // draw new Position of geroids
 
-    for (i in GeroidJSON.geroids) {
+    for (i in GeroidJSON) {
         myContext.fillStyle = "red";
         // console.log(GeroidJSON.geroids[i].xStart);
 
-        myContext.fillRect(GeroidJSON.geroids[i].position.xStart, GeroidJSON.geroids[i].position.yStart, GeroidJSON.geroids[i].position.xLength, GeroidJSON.geroids[i].position.yLength);
+        myContext.fillRect(GeroidJSON[i].position.xStart, GeroidJSON[i].position.yStart, GeroidJSON[i].position.xLength, GeroidJSON[i].position.yLength);
         //console.log(i);
     }
 
@@ -181,13 +181,13 @@ function drawGeroids(GeroidJSON) {
 
 
 
-    for (m in GeroidJSON.geroids) {
+    for (m in GeroidJSON) {
         //console.log("m" + m);
         //console.log(GeroidJSON.geroids[m].position.xStart);
         previousGeroidsArray[m] = [];
-        previousGeroidsArray[m][0] = GeroidJSON.geroids[m].position.xStart;
-        previousGeroidsArray[m][1] = GeroidJSON.geroids[m].position.yStart;
-        previousGeroidsArray[m][2] = GeroidJSON.geroids[m].position.yLength;
+        previousGeroidsArray[m][0] = GeroidJSON[m].position.xStart;
+        previousGeroidsArray[m][1] = GeroidJSON[m].position.yStart;
+        previousGeroidsArray[m][2] = GeroidJSON[m].position.yLength;
     }
     //console.log("finished drawing figure");
 
@@ -195,7 +195,7 @@ function drawGeroids(GeroidJSON) {
 
 
 function drawProjectiles(ProjectileJSON) {
-    console.log(ProjectileJSON);
+    //console.log(ProjectileJSON);
     //console.log("start drawing projectiles");
 
     var myCanvas = document.getElementById("canvas");
@@ -214,11 +214,11 @@ function drawProjectiles(ProjectileJSON) {
 
     // draw new Position of projectiles
 
-    for (i in ProjectileJSON.projectiles) {
+    for (i in ProjectileJSON) {
         myContext.fillStyle = "red";
         // console.log(GeroidJSON.geroids[i].xStart);
 
-        myContext.fillRect(ProjectileJSON.projectiles[i].position.xStart, ProjectileJSON.projectiles[i].position.yStart, ProjectileJSON.projectiles[i].position.xLength, ProjectileJSON.projectiles[i].position.yLength);
+        myContext.fillRect(ProjectileJSON[i].position.xStart, ProjectileJSON[i].position.yStart, ProjectileJSON[i].position.xLength, ProjectileJSON[i].position.yLength);
         //console.log(i);
     }
 
@@ -227,13 +227,13 @@ function drawProjectiles(ProjectileJSON) {
 
 
 
-    for (m in ProjectileJSON.projectiles) {
+    for (m in ProjectileJSON) {
         //console.log("m" + m);
         //console.log(ProjectileJSON.projectiles[m].position.xStart);
         previousProjectilesArray[m] = [];
-        previousProjectilesArray[m][0] = ProjectileJSON.projectiles[m].position.xStart;
-        previousProjectilesArray[m][1] = ProjectileJSON.projectiles[m].position.yStart;
-        previousProjectilesArray[m][2] = ProjectileJSON.projectiles[m].position.yLength;
+        previousProjectilesArray[m][0] = ProjectileJSON[m].position.xStart;
+        previousProjectilesArray[m][1] = ProjectileJSON[m].position.yStart;
+        previousProjectilesArray[m][2] = ProjectileJSON[m].position.yLength;
     }
     //console.log("finished drawing figure");
 
