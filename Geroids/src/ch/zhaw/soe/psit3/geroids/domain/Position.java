@@ -7,7 +7,6 @@ public class Position {
 
 	private int xCoordiante;
 	private int yCoordiante;
-	private ArrayList<Position> positionArray = new ArrayList<Position>();
 	private int xLength = 100;
 	private int yLength = 100;
 
@@ -16,7 +15,6 @@ public class Position {
 		this.yCoordiante = yCoordiante;
 		this.xLength = 1;
 		this.yLength = 1;
-		createPositionArray();
 	}
 
 	public Position(int xCoordiante, int yCoordiante, int xLength, int yLength) {
@@ -24,16 +22,9 @@ public class Position {
 		this.yCoordiante = yCoordiante;
 		this.xLength = xLength;
 		this.yLength = yLength;
-		createPositionArray();
 	}
 
-	private void createPositionArray() {
-		for (int x = 1; x <= xLength; x++) {
-			for (int y = 1; y < yLength; y++) {
-				positionArray.add(new Position(xCoordiante + x, yCoordiante + y));
-			}
-		}
-	}
+
 	
 	public void update(Movement movement){
 		this.xCoordiante += movement.getxSpeed();
@@ -74,9 +65,7 @@ public class Position {
 		return myPosition;
 		
 	}
-	public ArrayList<Position> getPositionArray() {
-		return positionArray;
-	}
+
 
 	public int getxCoordiante() {
 		return xCoordiante;
