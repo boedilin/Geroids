@@ -15,6 +15,8 @@ var previousProjectilesArray = [
     [-100, -100, 20]
 ];
 
+var keyPressList = [];
+
 function eventWindowLoaded() {
     canvasApp();
 }
@@ -30,11 +32,21 @@ function canvasApp() {
     var theCanvas = document.getElementById("canvas");
     var context = theCanvas.getContext("2d");
 
+    var map = {}; // You could also use an array
+    onkeydown = onkeyup = function(e) {
+        e = e || event; // to deal with IE
+        map[e.keyCode] = e.type == 'keydown';
+        console.log(e.type);
+        console.log(map);
+    }
+
+
+
 
 
     // resize the canvas to fill browser window dynamically
     window.addEventListener('resize', resizeCanvas, false);
-    window.addEventListener("keydown", eventKeyPressed, true);
+    //window.addEventListener("keydown", eventKeyPressed, true);
 
     function resizeCanvas() {
         canvas.width = ((window.innerWidth) / 100) * 62.5;
@@ -53,7 +65,7 @@ function canvasApp() {
 
     function eventKeyPressed(event) {
         console.log(event.key);
-        ws.send(event.key);
+        //ws.send(event.key);
     }
 
     function drawStuff() {
@@ -110,19 +122,19 @@ ws.onmessage = function(evt) {
 
 
     /*
-    var receivedJSON = JSON.parse(evt.data);
+        var receivedJSON = JSON.parse(evt.data);
     
-    if(receivedJSON.name == "figure"){
-    	drawFigure(receivedJSON);
-    } else if(receivedJSON.name == 'geroidList'){
-    	drawGeroids(receivedJSON);
-    	
-    } else if(receivedJSON.name == 'projectileList'){
-    	drawProjectiles(receivedJSON);
-    	
-    } else {
-    	console.log("received name: " + receivedJSON.name);
-    }*/
+        if(receivedJSON.name == "figure"){
+        	drawFigure(receivedJSON);
+        } else if(receivedJSON.name == 'geroidList'){
+        	drawGeroids(receivedJSON);
+        	
+        } else if(receivedJSON.name == 'projectileList'){
+        	drawProjectiles(receivedJSON);
+        	
+        } else {
+        	console.log("received name: " + receivedJSON.name);
+        }*/
 
 
 };
