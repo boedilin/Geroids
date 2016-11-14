@@ -81,6 +81,9 @@ public class Position {
 		return xLength;
 	}
 	
+	public int getyLength() {
+		return yLength;
+	}
 	
 
 	
