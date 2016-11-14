@@ -30,19 +30,8 @@ public class Game {
 	private MyWebSocketHandler webSocketHandler;
 	Thread gameThread;
 	private final int MAX_COUNT_GEROIDS = 10;
-	private final int LENGTH_OF_TICK_IN_MS = 50;
-
-	/*
-	public Game(Account account, Gamefield gamefield, MyWebSocketHandler websocketHandler) {
-		this.account = account;
-		this.gamefield = new Gamefield(xRange, yRange);
-		this.score = new Playscore(0, this);
-		this.figure = new Figure(this, account.getActiveType(), account.getActiveSkin(), xRange / 2, 0);
-		this.projectiles = this.gamefield.getProjectileList();
-		this.geroids = this.gamefield.getGeroidList();
-		this.webSocketHandler = websocketHandler;
-		websocketHandler.sendMessage("Connected to Server");
-	}*/
+	private final int LENGTH_OF_TICK_IN_MS = 25;
+	int maxRuntime = 3000;
 
 	public Game(MyWebSocketHandler websocketHandler) {
 		this.webSocketHandler = websocketHandler;
@@ -68,7 +57,10 @@ public class Game {
 			public void run() {
 				System.out.println("started run");
 				int counter = 1;
-				while (isRunning) {
+				int counter2 = 0;
+				long timePrevious = System.currentTimeMillis();
+				while (System.currentTimeMillis() - timePrevious < maxRuntime) {
+					
 					if (counter % 10 == 0) {
 						// gernerate a geroid every 10 ticks
 						generateGeroid();
@@ -77,10 +69,16 @@ public class Game {
 					updateGamefield();
 					//sends all new values
 					sendNewValues();
-
+					//System.out.println(counter2++);
 					counter++;
-					trySleep(LENGTH_OF_TICK_IN_MS);
+					try {
+						Thread.sleep(LENGTH_OF_TICK_IN_MS);
+						//System.out.println(System.currentTimeMillis()-timePrevious);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
+				System.out.println(counter);
 			}
 		}, "gameThread");
 		gameThread.start();
@@ -104,28 +102,20 @@ public class Game {
  */
 
 	private void updateFigure(String command) {
-		System.out.println("COMMAND: " + command);
-		if (command != null) {
 			switch (command) {
 			case "65":
-				System.out.println("Moving figure to the Left");
 				figure.moveLeft(10);
 				break;
 			case "68":
-				System.out.println("Moving figure to the right");
 				figure.moveRight(10);
 				break;
 			case "32":
-				if(System.currentTimeMillis() > timestampPreviousShot+MAXIMUM_SHOOT_SPEED){
+				if(System.currentTimeMillis() >= timestampPreviousShot + MAXIMUM_SHOOT_SPEED){
 					timestampPreviousShot = System.currentTimeMillis();
-					System.out.println("Shooting");
 					figure.shoot(this);
 				}
 				break;
 			}
-		} else {
-			System.out.println("command was null");
-		}
 	}
 
 	/*
