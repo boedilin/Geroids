@@ -30,8 +30,7 @@ public class Game {
 	private MyWebSocketHandler webSocketHandler;
 	Thread gameThread;
 	private final int MAX_COUNT_GEROIDS = 10;
-	private final int LENGTH_OF_TICK_IN_MS = 25;
-	int maxRuntime = 3000;
+	private final int LENGTH_OF_TICK_IN_MS = 15;
 
 	public Game(MyWebSocketHandler websocketHandler) {
 		this.webSocketHandler = websocketHandler;
@@ -57,10 +56,7 @@ public class Game {
 			public void run() {
 				System.out.println("started run");
 				int counter = 1;
-				int counter2 = 0;
-				long timePrevious = System.currentTimeMillis();
-				while (System.currentTimeMillis() - timePrevious < maxRuntime) {
-					
+				while (isRunning) {
 					if (counter % 10 == 0) {
 						// gernerate a geroid every 10 ticks
 						generateGeroid();
@@ -71,14 +67,8 @@ public class Game {
 					sendNewValues();
 					//System.out.println(counter2++);
 					counter++;
-					try {
-						Thread.sleep(LENGTH_OF_TICK_IN_MS);
-						//System.out.println(System.currentTimeMillis()-timePrevious);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
+					trySleep(LENGTH_OF_TICK_IN_MS);
 				}
-				System.out.println(counter);
 			}
 		}, "gameThread");
 		gameThread.start();
@@ -216,7 +206,6 @@ public class Game {
 	// preferable protocol is JSON //read the mail from jens fischer WEB3 <->
 	// valentin how to manage messages with identifiers
 	public void receiveMessage(String message) {
-		System.out.println("Server received message: " + message);
 		updateFigure(message);
 	}
 
