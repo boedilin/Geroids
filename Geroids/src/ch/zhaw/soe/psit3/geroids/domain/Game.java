@@ -112,6 +112,11 @@ public class Game {
 	 * updates all geroids in geroids attribute (ArrayList)
 	 */
 	private void updateGeroids() {
+		for(int i = 0; i< geroids.size();i++){
+			checkIfGeroidIsOutOfGamefield(i);
+		}
+		
+		
 		for (Geroid myGeroid : geroids) {
 			myGeroid.move();
 		}
@@ -223,6 +228,14 @@ public class Game {
 		if (geroids.get(geroidIndex).getPosition().getyCoordiante() == figure.getPosition().getyCoordiante() + 1
 				&& geroids.get(geroidIndex).getPosition().getxCoordiante() == figure.getPosition().getxCoordiante()) {
 			return true;
+		}
+		return false;
+	}
+	
+	private boolean checkIfGeroidIsOutOfGamefield(int geroidIndex){
+		
+		if(this.geroids.get(geroidIndex).getPosition().getyCoordiante() > this.yRange){
+			geroids.remove(geroidIndex);
 		}
 		return false;
 	}
