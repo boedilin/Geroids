@@ -243,8 +243,10 @@ public class Game {
 	}
 	
 	private void RemoveIfProjectileIsOutOfGamefield(int projectileIndex){
-	
-		if (this.projectiles.get(projectileIndex).getPosition().getyCoordiante() < 0) {
+		int yCoord = this.projectiles.get(projectileIndex).getPosition().getyCoordiante();
+		int yLength = this.projectiles.get(projectileIndex).getPosition().getyLength();
+		
+		if ((yCoord + yLength) < 0) {
 			projectiles.remove(projectileIndex);
 		}
 	}
