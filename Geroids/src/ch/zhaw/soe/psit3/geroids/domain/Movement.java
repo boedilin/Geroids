@@ -39,7 +39,7 @@ public class Movement {
 	 * @param x The factor the X Speed should be increased
 	 */
 	public void increaseXSpeed(int x) {
-		this.xSpeed = xSpeed + x;
+		this.xSpeed = xSpeed * x;
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class Movement {
 	 * @param y The factor the Y Speed should be increased
 	 */
 	public void increaseYSpeed(int y) {
-		this.ySpeed = ySpeed + y;
+		this.ySpeed = ySpeed * y;
 	}
 	
 
