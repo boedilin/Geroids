@@ -22,11 +22,13 @@ function canvasApp() {
     }
     var counter = 0;
     ws.onmessage = function(evt) {
-        console.log(counter++);
+       // console.log(counter++);
         drawStuff(JSON.parse(evt.data));
     };
     var theCanvas = document.getElementById("canvas");
     var context = theCanvas.getContext("2d");
+    var canvasXFactor = theCanvas.width/1000;
+    var canvasYFactor = theCanvas.height/1000;
 
     var map = {}; // You could also use an array
     onkeydown = onkeyup = function(e) {
@@ -42,7 +44,7 @@ function canvasApp() {
         for (key in map) {
             if (map[key]) {
                 ws.send(key);
-                console.log(key);
+                //console.log(key);
             }
         }
     }, 50);
@@ -60,15 +62,18 @@ function canvasApp() {
 
     function resizeCanvas() {
         canvas.width = ((window.innerWidth) / 100) * 62.5;
-        console.log(window.innerWidth);
+       // console.log(window.innerWidth);
         canvas.height = window.innerHeight;
-        console.log(window.innerHeight);
+        //console.log(window.innerHeight);
 
         /**
          * Your drawings need to be inside this function otherwise they will be
          * reset when you resize the browser window and the canvas goes will be
          * cleared.
          */
+        canvasXFactor = canvas.width/1000;
+        canvasYFactor = canvas.height/1000;
+        
         drawStuff();
     }
     resizeCanvas();
@@ -97,26 +102,25 @@ function canvasApp() {
         drawFigure(gamefield.Figure);
         drawProjectiles(gamefield.Projectiles);
     }
-
+    
     function drawFigure(figureJSON) {
-
         context.fillStyle = "green";
-        context.fillRect(figureJSON.position.xStart, figureJSON.position.yStart, figureJSON.position.xLength, figureJSON.position.xLength);
+        context.fillRect(figureJSON.position.xStart*canvasXFactor, figureJSON.position.yStart*canvasYFactor, figureJSON.position.xLength*canvasXFactor, figureJSON.position.yLength*canvasYFactor);
     }
 
     function drawGeroids(GeroidJSON) {
 
         for (i in GeroidJSON) {
             context.fillStyle = "red";
-            context.fillRect(GeroidJSON[i].position.xStart, GeroidJSON[i].position.yStart, GeroidJSON[i].position.xLength, GeroidJSON[i].position.yLength);
+            context.fillRect(GeroidJSON[i].position.xStart*canvasXFactor, GeroidJSON[i].position.yStart*canvasYFactor, GeroidJSON[i].position.xLength*canvasXFactor, GeroidJSON[i].position.yLength*canvasYFactor);
         }
     }
 
     function drawProjectiles(ProjectileJSON) {
-
+    	
         for (i in ProjectileJSON) {
             context.fillStyle = "red";
-            context.fillRect(ProjectileJSON[i].position.xStart, ProjectileJSON[i].position.yStart, ProjectileJSON[i].position.xLength, ProjectileJSON[i].position.yLength);
+            context.fillRect(ProjectileJSON[i].position.xStart*canvasXFactor, ProjectileJSON[i].position.yStart*canvasYFactor, ProjectileJSON[i].position.xLength*canvasXFactor, ProjectileJSON[i].position.yLength*canvasYFactor);
         }
     }
 }
@@ -126,7 +130,7 @@ function canvasApp() {
 
 ws.onopen = function() {
     console.log("Websocket opened!");
-    ws.send("Hello Serverr");
+    ws.send("Hello Server");
 };
 
 /**
