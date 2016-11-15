@@ -1,4 +1,6 @@
 var ws = new WebSocket("ws://" + location.host);
+var gamefield;
+var counter = 0;
 //load: This is the named event for which we are adding a listener. Events for existing objects like window are already defined.
 //eventWindowLoaded: Call this function when the event occurs. In our code, we will then call the canvasApp() function, which will start our main application execution.
 //false: This sets the function to capture this type of event before it propagates lower in the DOM tree of objects. We will always set this to false.
@@ -20,11 +22,7 @@ function canvasApp() {
     if (!canvasSupport) {
         return;
     }
-    var counter = 0;
-    ws.onmessage = function(evt) {
-        console.log(counter++);
-        drawStuff(JSON.parse(evt.data));
-    };
+
     var theCanvas = document.getElementById("canvas");
     var context = theCanvas.getContext("2d");
 
@@ -45,7 +43,8 @@ function canvasApp() {
                 console.log(key);
             }
         }
-    }, 50);
+        drawStuff();
+    }, 25);
 
     /**
      * how fast the pressed key can be sent: (85ms)
@@ -79,7 +78,7 @@ function canvasApp() {
             //ws.send(event.key);
         }*/
 
-    function drawStuff(gamefield) {
+    function drawStuff() {
         // do your drawing stuff here
         cW2 = canvas.width / 2;
         cH2 = canvas.height / 2;
@@ -120,6 +119,11 @@ function canvasApp() {
         }
     }
 }
+
+ws.onmessage = function(evt) {
+    gamefield = JSON.parse(evt.data);
+    console.log(counter++);
+};
 
 // kann generisch gemacht werden, da der Websocketserver der selbe ist, wie der
 // Server, der das HTML liefert:"ws://" + location.host
