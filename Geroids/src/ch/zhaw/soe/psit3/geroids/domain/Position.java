@@ -31,24 +31,6 @@ public class Position {
 		this.yCoordiante += movement.getySpeed();
 	}
 	
-	
-	/**
-	 * Converts the Position into a JSON String. String contains the start Coordinates for x any y as well as the x and y Length relative to the start point
-	 * @return JSON representation of the Position object.
-	 */
-	@SuppressWarnings("unchecked")
-	public String toJSON(){
-		
-		JSONObject myPosition = new JSONObject();
-		myPosition.put("xStart", xCoordiante);
-		myPosition.put("yStart", yCoordiante);
-		myPosition.put("xLength", xLength);
-		myPosition.put("yLength", yLength);
-		
-		return myPosition.toJSONString();
-		
-	}
-	
 	/**
 	 * Converts the Position into a JSONObject for further usage. Contains the start Coordinates for x any y as well as the x and y Length relative to the start point
 	 * @return JSONObject Representation of the Position object.
@@ -83,6 +65,13 @@ public class Position {
 		this.yCoordiante = yCoordiante;
 	}
 	
+	public int getxLength() {
+		return xLength;
+	}
+	
+	public int getyLength() {
+		return yLength;
+	}
 	
 
 	

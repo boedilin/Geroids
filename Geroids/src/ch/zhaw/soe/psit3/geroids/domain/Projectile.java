@@ -12,13 +12,10 @@ import org.json.simple.JSONObject;
 
 public class Projectile{
 
-	private Game game;
 	private Position position;
 	private Movement movement;
 
-	
-	public Projectile(Game game, Position position, Movement movement) {
-		this.game = game;
+	public Projectile(Position position, Movement movement) {
 		this.position = position;
 		this.movement = movement;
 	}
@@ -36,31 +33,22 @@ public class Projectile{
 	 * Occurs when it hit a geroid or is outside the borders of the gamefield.
 	 */
 	
-	public void hit() {
+	public void hit(Game game) {
 		game.getGamefield().getProjectileList().remove(this);
-	}
-	
-	
-	/**
-	 * Returns a JSON String representation of the projectile. 
-	 * @return String Object in JSON Format representing current Projectile.
-	 */
-	public String toJSON(){
-			
-			JSONObject JSONposition = position.toJSONObject();
-			return JSONposition.toJSONString();	
 	}
 	
 	/**
 	 * Returns a JSON  representation of the projectile for further usage. 
 	 * @return JSONObject representing current Projectile.
 	 */
+	@SuppressWarnings("unchecked")
 	public JSONObject toJSONObject(){
 			
-			JSONObject JSONposition = position.toJSONObject();
-			return JSONposition;
+			JSONObject obj = new JSONObject();
+
+			obj.put("position", this.position.toJSONObject());
+			return obj;
 	}
-	
 	
 	public Position getPosition() {
 		return position;
@@ -77,6 +65,4 @@ public class Projectile{
 	public void setMovement(Movement movement) {
 		this.movement = movement;
 	}
-
-	
 }

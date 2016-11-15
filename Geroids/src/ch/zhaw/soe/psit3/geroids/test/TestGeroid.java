@@ -24,8 +24,8 @@ public class TestGeroid {
 		Movement movement = new Movement(3, 4);
 		Geroid geroid = new Geroid(1234, "square", position, movement);
 		System.out.println("{\"shape\":\"square\",\"id\":1234,\"position\":[\"10:10\",\"10:11\",\"11:10\",\"11:11\"]}");
-		System.out.println(geroid.toJSON());
-		assertTrue("{\"shape\":\"square\",\"id\":1234,\"position\":[\"10:10\",\"10:11\",\"11:10\",\"11:11\"]}".equals(geroid.toJSON()));
+		System.out.println(geroid.toJSONString());
+		assertTrue("{\"shape\":\"square\",\"id\":1234,\"position\":[\"10:10\",\"10:11\",\"11:10\",\"11:11\"]}".equals(geroid.toJSONString()));
 
 	}
 
