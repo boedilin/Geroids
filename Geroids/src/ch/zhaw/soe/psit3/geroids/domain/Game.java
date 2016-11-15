@@ -40,7 +40,7 @@ public class Game {
 		this.gamefield = new Gamefield(xRange, yRange);
 		this.geroids = new ArrayList<Geroid>();
 		this.projectiles = new ArrayList<Projectile>();
-		this.figure = new Figure(new Position(100, 900, 100, 100));
+		this.figure = new Figure(new Position(100, 898, 76, 111));
 	}
 
 	/**
