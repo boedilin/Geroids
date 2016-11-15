@@ -153,7 +153,7 @@ public class Game {
 	 */
 	private void generateGeroid() {
 		if (geroids.size() < MAX_COUNT_GEROIDS) {
-			Position pos = new Position(new Random().nextInt(900), 0, 100, 100);
+			Position pos = new Position(new Random().nextInt(900), 0, 80, 100);
 			Movement mov = new Movement(0, new Random().nextInt(10) + 1);
 			Geroid geroid = new Geroid(pos, mov);
 			geroids.add(geroid);
