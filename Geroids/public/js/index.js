@@ -24,10 +24,7 @@ function canvasApp() {
     }
 
     var counter = 0;
-    ws.onmessage = function(evt) {
-        // console.log(counter++);
-        drawStuff(JSON.parse(evt.data));
-    };
+
 
     var theCanvas = document.getElementById("canvas");
     var context = theCanvas.getContext("2d");
@@ -51,6 +48,7 @@ function canvasApp() {
                 console.log(key);
             }
         }
+        drawStuff();
     }, 50);
 
     /**
