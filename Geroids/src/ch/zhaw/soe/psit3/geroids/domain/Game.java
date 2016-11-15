@@ -2,6 +2,7 @@ package ch.zhaw.soe.psit3.geroids.domain;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
@@ -82,6 +83,7 @@ public class Game {
 		// updateFigure();
 		updateGeroids();
 		updateProjectiles();
+		checkCollision();
 	}
 	/*
 	 * Updates the figure corresponding the the command in the commandQueue. a
@@ -98,8 +100,8 @@ public class Game {
 			break;
 		case "32":
 			if (System.currentTimeMillis() >= timestampPreviousShot + MAXIMUM_SHOOT_SPEED) {
-				timestampPreviousShot = System.currentTimeMillis();	
-					figure.shoot(this);
+				timestampPreviousShot = System.currentTimeMillis();
+				figure.shoot(this);
 			}
 			break;
 		}
@@ -122,13 +124,11 @@ public class Game {
 	 * Updates all Projectiles in projectiles attribute(ArrayList)
 	 */
 	private void updateProjectiles() {
-		
-		
+
 		for (int i = 0; i < projectiles.size(); i++) {
 			RemoveIfProjectileIsOutOfGamefield(i);
 		}
-		
-		
+
 		for (Projectile myProjectile : projectiles) {
 			myProjectile.move();
 		}
@@ -194,18 +194,25 @@ public class Game {
 	}
 
 	private void checkCollision() {
-		for (int i = 0; i < gamefield.getGeroidList().size(); i++) {
-			if (checkIfGeroidIsCollidingWithFigure(i)) {
+		Iterator<Geroid> geroidIterator = geroids.iterator();
+		while (geroidIterator.hasNext()) {
+			Geroid myGeroid = geroidIterator.next();
+			if (checkIfGeroidIsCollidingWithFigure(myGeroid)) {
 				isRunning = false;
 				// hier kommt noch die Methode f�r den GameOverBanner
 			}
-			for (int j = 0; j < gamefield.getProjectileList().size(); j++) {
-				if (checkIfGeroidIsCollidingWithProjectile(i, j)) {
-					geroids.get(i).die(gamefield);
-					projectiles.get(j).hit(this);
+
+			Iterator<Projectile> projectileIterator = projectiles.iterator();
+			while (projectileIterator.hasNext()) {
+				Projectile myProjectile = projectileIterator.next();
+				if (checkIfGeroidIsCollidingWithProjectile(myGeroid, myProjectile)) {
+					geroidIterator.remove();
+					projectileIterator.remove();
+
 				}
 			}
 		}
+
 	}
 
 	// Message from websocket respectively from client
@@ -216,22 +223,59 @@ public class Game {
 		updateFigure(message);
 	}
 
-	private boolean checkIfGeroidIsCollidingWithProjectile(int geroidsIndex, int projectilesIndex) {
-		if (geroids.get(geroidsIndex).getPosition().getyCoordiante() - 1 == projectiles.get(projectilesIndex)
-				.getPosition().getyCoordiante()
-				|| geroids.get(geroidsIndex).getPosition().getyCoordiante() + 1 == projectiles.get(projectilesIndex)
-						.getPosition().getyCoordiante()) {
-			return true;
+	private boolean checkIfGeroidIsCollidingWithProjectile(Geroid geroid, Projectile projectile) {
+		int projectileLeftMostPosition = projectile.getPosition().getxCoordiante();
+		int projectileRightMostPosition = projectileLeftMostPosition + projectile.getPosition().getxLength();
+		int geroidLeftMostPoint = geroid.getPosition().getxCoordiante();
+		int geroidRightMostPoint = geroidLeftMostPoint + geroid.getPosition().getxLength();
+
+		int projectileHighestPoint = projectile.getPosition().getyCoordiante();
+		int geroidLowestPoint = geroid.getPosition().getyCoordiante() + geroid.getPosition().getyLength();
+
+		if (isInBetween(projectileLeftMostPosition, projectileRightMostPosition, geroidRightMostPoint)
+				| isInBetween(projectileLeftMostPosition, projectileRightMostPosition, geroidLeftMostPoint)
+				| isInBetween(geroidLeftMostPoint, geroidRightMostPoint, projectileLeftMostPosition)) { // xcoords
+
+			if (projectileHighestPoint < geroidLowestPoint) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
 		}
-		return false;
+
 	}
 
-	private boolean checkIfGeroidIsCollidingWithFigure(int geroidIndex) {
-		if (geroids.get(geroidIndex).getPosition().getyCoordiante() == figure.getPosition().getyCoordiante() + 1
-				&& geroids.get(geroidIndex).getPosition().getxCoordiante() == figure.getPosition().getxCoordiante()) {
-			return true;
+	private boolean checkIfGeroidIsCollidingWithFigure(Geroid geroid) {
+		int figureLeftMostPoint = this.figure.getPosition().getxCoordiante();
+		int figureRightMostPoint = figureLeftMostPoint + this.figure.getPosition().getxLength();
+		int geroidLeftMostPoint = geroid.getPosition().getxCoordiante();
+		int geroidRightMostPoint = geroidLeftMostPoint + geroid.getPosition().getxLength();
+
+		int figureHighestPoint = this.figure.getPosition().getyCoordiante();
+		int geroidLowestPoint = geroid.getPosition().getyCoordiante() + geroid.getPosition().getyLength();
+
+		if (isInBetween(figureLeftMostPoint, figureRightMostPoint, geroidRightMostPoint)
+				| isInBetween(figureLeftMostPoint, figureRightMostPoint, geroidLeftMostPoint)
+				| isInBetween(geroidLeftMostPoint, geroidRightMostPoint, figureLeftMostPoint)) { // xcoords
+
+			if (figureHighestPoint < geroidLowestPoint) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
 		}
-		return false;
+	}
+
+	private boolean isInBetween(int leftBorder, int rightBorder, int searchedNumber) {
+		if (searchedNumber > leftBorder & searchedNumber < rightBorder) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	private void RemoveIfGeroidIsOutOfGamefield(int geroidIndex) {
@@ -239,13 +283,13 @@ public class Game {
 		if (this.geroids.get(geroidIndex).getPosition().getyCoordiante() > this.yRange) {
 			geroids.remove(geroidIndex);
 		}
-		
+
 	}
-	
-	private void RemoveIfProjectileIsOutOfGamefield(int projectileIndex){
+
+	private void RemoveIfProjectileIsOutOfGamefield(int projectileIndex) {
 		int yCoord = this.projectiles.get(projectileIndex).getPosition().getyCoordiante();
 		int yLength = this.projectiles.get(projectileIndex).getPosition().getyLength();
-		
+
 		if ((yCoord + yLength) < 0) {
 			projectiles.remove(projectileIndex);
 		}

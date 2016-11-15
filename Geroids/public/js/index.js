@@ -119,7 +119,7 @@ function canvasApp() {
     function drawProjectiles(ProjectileJSON) {
     	
         for (i in ProjectileJSON) {
-            context.fillStyle = "red";
+            context.fillStyle = "yellow";
             context.fillRect(ProjectileJSON[i].position.xStart*canvasXFactor, ProjectileJSON[i].position.yStart*canvasYFactor, ProjectileJSON[i].position.xLength*canvasXFactor, ProjectileJSON[i].position.yLength*canvasYFactor);
         }
     }
