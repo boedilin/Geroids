@@ -1,6 +1,18 @@
 var ws = new WebSocket("ws://" + location.host);
 var gamefield;
 var counter = 0;
+var spaceShip = new Image();
+var geroid1 = new Image();
+var geroid2 = new Image();
+var geroid3 = new Image();
+var geroid4 = new Image();
+var geroid5 = new Image();
+spaceShip.src = "../images/ship.png";
+geroid1.src = "../images/element1.png";
+geroid2.src = "../images/element2.png";
+geroid3.src = "../images/element3.png";
+geroid4.src = "../images/element4.png";
+geroid5.src = "../images/element5.png";
 //load: This is the named event for which we are adding a listener. Events for existing objects like window are already defined.
 //eventWindowLoaded: Call this function when the event occurs. In our code, we will then call the canvasApp() function, which will start our main application execution.
 //false: This sets the function to capture this type of event before it propagates lower in the DOM tree of objects. We will always set this to false.
@@ -49,7 +61,7 @@ function canvasApp() {
             }
         }
         drawStuff();
-    }, 50);
+    }, 20);
 
     /**
      * how fast the pressed key can be sent: (85ms)
@@ -106,22 +118,34 @@ function canvasApp() {
     }
 
     function drawFigure(figureJSON) {
-        context.fillStyle = "green";
-        context.fillRect(figureJSON.position.xStart * canvasXFactor, figureJSON.position.yStart * canvasYFactor, figureJSON.position.xLength * canvasXFactor, figureJSON.position.yLength * canvasYFactor);
+        context.drawImage(spaceShip, figureJSON.position.xStart * canvasXFactor, figureJSON.position.yStart * canvasYFactor, figureJSON.position.xLength * canvasXFactor, figureJSON.position.yLength * canvasYFactor);
     }
 
     function drawGeroids(GeroidJSON) {
 
         for (i in GeroidJSON) {
-            context.fillStyle = "red";
-            context.fillRect(GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, GeroidJSON[i].position.xLength * canvasXFactor, GeroidJSON[i].position.yLength * canvasYFactor);
+            if (GeroidJSON[i].position.xStart % 5 == 0) {
+                context.drawImage(geroid1, GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, GeroidJSON[i].position.xLength * canvasXFactor, GeroidJSON[i].position.yLength * canvasYFactor);
+            }
+            if (GeroidJSON[i].position.xStart % 5 == 1) {
+                context.drawImage(geroid2, GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, GeroidJSON[i].position.xLength * canvasXFactor, GeroidJSON[i].position.yLength * canvasYFactor);
+            }
+            if (GeroidJSON[i].position.xStart % 5 == 2) {
+                context.drawImage(geroid3, GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, GeroidJSON[i].position.xLength * canvasXFactor, GeroidJSON[i].position.yLength * canvasYFactor);
+            }
+            if (GeroidJSON[i].position.xStart % 5 == 3) {
+                context.drawImage(geroid4, GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, GeroidJSON[i].position.xLength * canvasXFactor, GeroidJSON[i].position.yLength * canvasYFactor);
+            }
+            if (GeroidJSON[i].position.xStart % 5 == 4) {
+                context.drawImage(geroid5, GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, GeroidJSON[i].position.xLength * canvasXFactor, GeroidJSON[i].position.yLength * canvasYFactor);
+            }
         }
     }
 
     function drawProjectiles(ProjectileJSON) {
 
         for (i in ProjectileJSON) {
-            context.fillStyle = "yellow";
+            context.fillStyle = "white";
             context.fillRect(ProjectileJSON[i].position.xStart * canvasXFactor, ProjectileJSON[i].position.yStart * canvasYFactor, ProjectileJSON[i].position.xLength * canvasXFactor, ProjectileJSON[i].position.yLength * canvasYFactor);
         }
     }
@@ -129,7 +153,6 @@ function canvasApp() {
 
 ws.onmessage = function(evt) {
     gamefield = JSON.parse(evt.data);
-    console.log(counter++);
 };
 
 // kann generisch gemacht werden, da der Websocketserver der selbe ist, wie der
