@@ -28,13 +28,14 @@ public class Figure {
 		this.position.setxCoordiante(this.position.getxCoordiante()+amount);
 	}
 	
-	public void shoot(Game game){
+	public Projectile shoot(){
 		
 		int xPosInMiddleOfFigure = this.position.getxCoordiante() + this.position.getxLength()/2;
 		
 		Position pos = new Position(xPosInMiddleOfFigure, this.position.getyCoordiante()-10,20,20);
 		Projectile projectile = new Projectile(pos, MOVEMENT_FOR_PROJECTILE);
-		game.getProjectiles().add(projectile);
+		return projectile;
+		
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -101,7 +101,7 @@ public class Game {
 		case "32":
 			if (System.currentTimeMillis() >= timestampPreviousShot + MAXIMUM_SHOOT_SPEED) {
 				timestampPreviousShot = System.currentTimeMillis();
-				figure.shoot(this);
+				projectiles.add(figure.shoot());
 			}
 			break;
 		}
