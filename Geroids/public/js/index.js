@@ -131,7 +131,6 @@ function canvasApp() {
                 context.drawImage(geroid3, GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, GeroidJSON[i].position.xLength * canvasXFactor, GeroidJSON[i].position.yLength * canvasYFactor);
             }
             if (GeroidJSON[i].position.xStart % 5 == 3) {
-                console.log("geroid4")
                 context.drawImage(geroid4, GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, GeroidJSON[i].position.xLength * canvasXFactor, GeroidJSON[i].position.yLength * canvasYFactor);
             }
             if (GeroidJSON[i].position.xStart % 5 == 4) {
