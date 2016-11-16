@@ -28,15 +28,7 @@ public class Projectile{
 		position.update(movement);
 	}
 
-	/**
-	 * Removes this Object from the projectileList the projectile was in. 
-	 * Occurs when it hit a geroid or is outside the borders of the gamefield.
-	 */
-	
-	public void hit(Game game) {
-		game.getGamefield().getProjectileList().remove(this);
-	}
-	
+
 	/**
 	 * Returns a JSON  representation of the projectile for further usage. 
 	 * @return JSONObject representing current Projectile.
