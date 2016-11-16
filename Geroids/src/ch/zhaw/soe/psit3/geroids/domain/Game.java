@@ -18,7 +18,6 @@ public class Game {
 	private static final int MAXIMUM_SHOOT_SPEED = 300;
 	private long timestampPreviousShot;
 	private Account account;
-	private Gamefield gamefield;
 	private ArrayList<Geroid> geroids;
 	private Playscore score;
 	private Figure figure;
@@ -37,7 +36,6 @@ public class Game {
 		this.webSocketHandler = websocketHandler;
 		// uncommented cause of parse error. send this as json format
 		// websocketHandler.sendMessage("Connected to Server");
-		this.gamefield = new Gamefield(xRange, yRange);
 		this.geroids = new ArrayList<Geroid>();
 		this.projectiles = new ArrayList<Projectile>();
 		this.figure = new Figure(new Position(100, 898, 61, 90));
@@ -300,8 +298,5 @@ public class Game {
 		return projectiles;
 	}
 
-	public Gamefield getGamefield() {
-		return gamefield;
-	}
 
 }

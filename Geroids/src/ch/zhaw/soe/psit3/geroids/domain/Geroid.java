@@ -35,9 +35,7 @@ public class Geroid {
 		
 	}
 
-	public void die(Gamefield gamefield) {
-		gamefield.getGeroidList().remove(this);
-	}
+
 	
 	/**
 	 * Returns a JSONObject representation of the Geroid for further usage. Included attributes: id, shape, position
