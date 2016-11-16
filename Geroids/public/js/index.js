@@ -1,5 +1,6 @@
 var ws = new WebSocket("ws://" + location.host);
 var gamefield;
+var gameover = true;
 var counter = 0;
 var spaceShip = new Image();
 var geroid1 = new Image();
@@ -53,13 +54,15 @@ function canvasApp() {
         }
     }
 
-    setInterval(function() {
-        for (key in map) {
-            if (map[key]) {
-                ws.send(key);
+    var drawInterval = setInterval(function() {
+        if (!gamefield.Gameover) {
+            for (key in map) {
+                if (map[key]) {
+                    ws.send(key);
+                }
             }
+            drawStuff();
         }
-        drawStuff();
     }, 20);
 
     /**
@@ -107,6 +110,7 @@ function canvasApp() {
         drawProjectiles(gamefield.Projectiles);
         if (gamefield.Gameover) {
             drawGameover();
+            clearInterval(drawInterval);
         }
     }
 
@@ -127,6 +131,7 @@ function canvasApp() {
                 context.drawImage(geroid3, GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, GeroidJSON[i].position.xLength * canvasXFactor, GeroidJSON[i].position.yLength * canvasYFactor);
             }
             if (GeroidJSON[i].position.xStart % 5 == 3) {
+                console.log("geroid4")
                 context.drawImage(geroid4, GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, GeroidJSON[i].position.xLength * canvasXFactor, GeroidJSON[i].position.yLength * canvasYFactor);
             }
             if (GeroidJSON[i].position.xStart % 5 == 4) {
