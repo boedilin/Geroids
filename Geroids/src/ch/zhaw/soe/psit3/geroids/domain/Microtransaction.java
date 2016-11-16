@@ -5,7 +5,4 @@ public class Microtransaction {
 	private Account buyer;
 	private Microtransaction type;
 
-	public enum Type {
-		TYPE1, TYPE2
-	}
 }
