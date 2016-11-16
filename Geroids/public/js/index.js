@@ -1,6 +1,5 @@
 var ws = new WebSocket("ws://" + location.host);
 var gamefield;
-var gameover = true;
 var counter = 0;
 var spaceShip = new Image();
 var geroid1 = new Image();
