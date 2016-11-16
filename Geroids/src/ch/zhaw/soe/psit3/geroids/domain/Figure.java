@@ -1,13 +1,6 @@
-// TODO implement shoot method
-
-
 package ch.zhaw.soe.psit3.geroids.domain;
 
-import java.util.concurrent.locks.Lock;
-
 import org.json.simple.JSONObject;
-
-import ch.zhaw.soe.psit3.geroids.servlets.MyWebSocketHandler;
 
 public class Figure {
 
@@ -15,6 +8,7 @@ public class Figure {
 	private Position position;
 	private Skin skin;
 	private Type type;
+	private final Movement MOVEMENT_FOR_PROJECTILE = new Movement(0,-10);
 
 	public Figure(Type type, Skin skin, int x, int y){
 		this.skin = skin;
@@ -36,11 +30,10 @@ public class Figure {
 	
 	public void shoot(Game game){
 		
-		Movement mov = new Movement(0, -10);
 		int xPosInMiddleOfFigure = this.position.getxCoordiante() + this.position.getxLength()/2;
 		
 		Position pos = new Position(xPosInMiddleOfFigure, this.position.getyCoordiante()-10,20,20);
-		Projectile projectile = new Projectile(pos, mov);
+		Projectile projectile = new Projectile(pos, MOVEMENT_FOR_PROJECTILE);
 		game.getProjectiles().add(projectile);
 	}
 	
