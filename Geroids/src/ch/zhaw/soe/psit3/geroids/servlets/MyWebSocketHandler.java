@@ -8,7 +8,6 @@ import org.eclipse.jetty.websocket.api.annotations.OnWebSocketError;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 
-import ch.zhaw.soe.psit3.geroids.domain.ConsoleInput;
 import ch.zhaw.soe.psit3.geroids.domain.Game;
 
 @WebSocket
@@ -36,18 +35,6 @@ public class MyWebSocketHandler {
 		//Dem Game wird der Websockethandler übergeben, der die Verbidung zum Client handelt.
 		game = new Game(this);
 		game.startGame();
-		/*
-		System.out.println("Connect: " + session.getRemoteAddress().getAddress());
-		try {
-			//getRemote() Return a reference to the RemoteEndpoint object representing the other end of this conversation.
-			//sendString() Send a text message, blocking until all bytes of the message has been transmitted.
-			session.getRemote().sendString("Hallo Client(from Server)!");
-			new ConsoleInput("consoleInput", session).start();
-			System.out.println(this);
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/
 	}
 
 	@OnWebSocketMessage

@@ -7,12 +7,14 @@ var geroid2 = new Image();
 var geroid3 = new Image();
 var geroid4 = new Image();
 var geroid5 = new Image();
+var gameover = new Image();
 spaceShip.src = "../images/ship.png";
 geroid1.src = "../images/element1.png";
 geroid2.src = "../images/element2.png";
 geroid3.src = "../images/element3.png";
 geroid4.src = "../images/element4.png";
 geroid5.src = "../images/element5.png";
+gameover.src = "../images/gameover.png";
 //load: This is the named event for which we are adding a listener. Events for existing objects like window are already defined.
 //eventWindowLoaded: Call this function when the event occurs. In our code, we will then call the canvasApp() function, which will start our main application execution.
 //false: This sets the function to capture this type of event before it propagates lower in the DOM tree of objects. We will always set this to false.
@@ -48,8 +50,6 @@ function canvasApp() {
         //e = e || event; // to deal with IE
         if (e.keyCode == keySpace || e.keyCode == keyA || e.keyCode == keyD) {
             map[e.keyCode] = e.type == 'keydown';
-            //console.log(e.type);
-            //console.log(map);
         }
     }
 
@@ -57,7 +57,6 @@ function canvasApp() {
         for (key in map) {
             if (map[key]) {
                 ws.send(key);
-                console.log(key);
             }
         }
         drawStuff();
@@ -100,21 +99,15 @@ function canvasApp() {
 
     function drawStuff() {
         // do your drawing stuff here
-        cW2 = canvas.width / 2;
-        cH2 = canvas.height / 2;
         context.fillStyle = "black";
-        context.fillRect(0, 0, cW2, cH2);
-        context.fillStyle = "black";
-        context.fillRect(cW2, 0, cW2, cH2);
-        context.fillStyle = "black";
-        context.fillRect(0, cH2, cW2, cH2);
-        context.fillStyle = "black";
-        context.fillRect(cW2, cH2, cW2, cH2);
-        context.fillStyle = "black";
+        context.fillRect(0, 0, canvas.width, canvas.height);
 
         drawGeroids(gamefield.Geroids);
         drawFigure(gamefield.Figure);
         drawProjectiles(gamefield.Projectiles);
+        if (gamefield.Gameover) {
+            drawGameover();
+        }
     }
 
     function drawFigure(figureJSON) {
@@ -148,6 +141,10 @@ function canvasApp() {
             context.fillStyle = "white";
             context.fillRect(ProjectileJSON[i].position.xStart * canvasXFactor, ProjectileJSON[i].position.yStart * canvasYFactor, ProjectileJSON[i].position.xLength * canvasXFactor, ProjectileJSON[i].position.yLength * canvasYFactor);
         }
+    }
+
+    function drawGameover() {
+        context.drawImage(gameover, 0, canvas.height / 3, canvas.width, canvas.height / 4);
     }
 }
 

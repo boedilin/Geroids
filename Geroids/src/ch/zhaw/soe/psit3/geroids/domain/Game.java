@@ -40,7 +40,7 @@ public class Game {
 		this.gamefield = new Gamefield(xRange, yRange);
 		this.geroids = new ArrayList<Geroid>();
 		this.projectiles = new ArrayList<Projectile>();
-		this.figure = new Figure(new Position(100, 898, 76, 111));
+		this.figure = new Figure(new Position(100, 898, 61, 90));
 	}
 
 	/**
@@ -144,6 +144,7 @@ public class Game {
 		obj.put("Figure", figure.toJSONObject());
 		obj.put("Geroids", this.geroidsToJSONArray());
 		obj.put("Projectiles", this.projectilesToJSONArray());
+		obj.put("Gameover", !isRunning);
 		webSocketHandler.sendMessage(obj.toJSONString());
 
 	}
