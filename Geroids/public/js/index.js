@@ -159,7 +159,9 @@ ws.onmessage = function(evt) {
 
 ws.onopen = function() {
     console.log("Websocket opened!");
-    ws.send(localStorage.getItem('name'));
+    if(localStorage.getItem('name') != null){
+    ws.send(localStorage.getItem('name'));	
+    }
 };
 
 /**

@@ -41,6 +41,7 @@ public class Game {
 		this.projectiles = new ArrayList<Projectile>();
 		this.figure = new Figure(new Position(100, 898, 61, 90));
 		this.account = new Account();
+		this.account.setNickname("MyName" + System.currentTimeMillis());
 	}
 
 	/**
@@ -91,9 +92,9 @@ public class Game {
 	 */
 
 	private void updateFigure(String command) {
-		if(isName){
+		if(command.length()>2){
 			account.setNickname(command);
-			isName = false;
+			//isName = false;
 		}
 		switch (command) {
 		case "65":
