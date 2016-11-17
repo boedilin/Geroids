@@ -180,7 +180,8 @@ public class Game {
 
 	}
 
-	@SuppressWarnings({ "unused", "unchecked" })
+
+	@SuppressWarnings("unchecked")
 	private JSONArray projectilesToJSONArray() {
 
 		JSONArray array = new JSONArray();
