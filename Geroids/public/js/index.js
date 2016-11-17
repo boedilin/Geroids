@@ -54,14 +54,12 @@ function canvasApp() {
     }
 
     var drawInterval = setInterval(function() {
-        if (!gamefield.Gameover) {
-            for (key in map) {
-                if (map[key]) {
-                    ws.send(key);
-                }
+        for (key in map) {
+            if (map[key]) {
+                ws.send(key);
             }
-            drawStuff();
         }
+        drawStuff();
     }, 20);
 
     /**
