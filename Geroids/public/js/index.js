@@ -151,6 +151,7 @@ function canvasApp() {
 
 ws.onmessage = function(evt) {
     gamefield = JSON.parse(evt.data);
+    console.log(gamefield);
 };
 
 // kann generisch gemacht werden, da der Websocketserver der selbe ist, wie der
@@ -158,7 +159,7 @@ ws.onmessage = function(evt) {
 
 ws.onopen = function() {
     console.log("Websocket opened!");
-    ws.send("Hello Server");
+    ws.send(localStorage.getItem('name'));
 };
 
 /**

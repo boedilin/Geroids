@@ -23,6 +23,7 @@ public class Game {
 	private Figure figure;
 	private ArrayList<Projectile> projectiles;
 
+	private boolean isName = true;
 	private boolean isRunning = false;
 	private boolean collisionWithFigure = false;
 	private int xRange = 1000;
@@ -39,6 +40,7 @@ public class Game {
 		this.geroids = new ArrayList<Geroid>();
 		this.projectiles = new ArrayList<Projectile>();
 		this.figure = new Figure(new Position(100, 898, 61, 90));
+		this.account = new Account();
 	}
 
 	/**
@@ -89,6 +91,10 @@ public class Game {
 	 */
 
 	private void updateFigure(String command) {
+		if(isName){
+			account.setNickname(command);
+			isName = false;
+		}
 		switch (command) {
 		case "65":
 			figure.moveLeft(10);
@@ -143,6 +149,7 @@ public class Game {
 		obj.put("Geroids", this.geroidsToJSONArray());
 		obj.put("Projectiles", this.projectilesToJSONArray());
 		obj.put("Gameover", !isRunning);
+		obj.put("Name", this.account.getNickname());
 		webSocketHandler.sendMessage(obj.toJSONString());
 
 	}
