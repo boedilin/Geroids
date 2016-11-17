@@ -40,8 +40,7 @@ public class Game {
 		this.geroids = new ArrayList<Geroid>();
 		this.projectiles = new ArrayList<Projectile>();
 		this.figure = new Figure(new Position(100, 898, 61, 90));
-		this.account = new Account();
-		this.account.setNickname("MyName" + System.currentTimeMillis());
+		this.account = new Account("MyName" + System.currentTimeMillis());
 	}
 
 	/**

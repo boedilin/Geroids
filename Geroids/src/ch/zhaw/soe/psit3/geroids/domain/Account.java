@@ -10,10 +10,14 @@ public class Account {
 	private String prename;
 	private String surname;
 	private ArrayList<Microtransaction> mytransactions;
-	private Skin activeSkin = new Defaultskin();
-	private Type activeType = new Defaulttype();
+	//private Skin activeSkin = new Defaultskin();
+	//private Type activeType = new Defaulttype();
 	private ArrayList<Skin> skinList;
 	private ArrayList<Type> typeList;
+	
+	public Account(String nickname){
+		this.nickname = nickname;
+	}
 
 	public String getNickname() {
 		return nickname;
