@@ -222,10 +222,18 @@ public class Game {
 		return projectiles;
 	}
 	
+	/**
+	 * removes a specific projectile
+	 * @param index of the projectile
+	 */
 	private void removeProjectile(int projectileIndex){
 		projectiles.remove(projectileIndex);
 	}
 
+	/**
+	 * removes a specific geroid
+	 * @param index of the geroid
+	 */
 	private void removeGeroid(int geroidIndex){
 		geroids.remove(geroidIndex);
 	}

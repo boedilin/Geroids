@@ -18,6 +18,10 @@ public class CollisionHandler {
 			
 		}
 
+		/**
+		 * Checks if there are any collisions of geroids and figure
+		 * @return true if there is a geroid, which collided with figure
+		 */
 		public boolean checkAllGeroidsCollisionWithFigure() {
 			Iterator<Geroid> geroidIterator = geroids.iterator();
 			while (geroidIterator.hasNext()) {
@@ -29,6 +33,10 @@ public class CollisionHandler {
 			return false;
 		}
 
+		/**
+		 * Checks if there are any collisions of geroids and projectiles
+		 * @return Object-array, where array[0] = updated list of geroids and array[1] = updated list of projectiles
+		 */
 		public Object[] checkAllGeroidsCollisionWithProjectiles() {
 			Iterator<Geroid> geroidIterator = geroids.iterator();
 			while (geroidIterator.hasNext()) {
@@ -104,6 +112,11 @@ public class CollisionHandler {
 			}
 		}
 		
+		/**
+		 * Checks if geroid is out of gamefield
+		 * @param index of geroid
+		 * @return true if geroid is out of gamefield
+		 */
 		public boolean checkIfGeroidIsOutOfGamefield(int geroidIndex) {
 
 			if (geroids.get(geroidIndex).getPosition().getyCoordiante() > this.yRange) {
@@ -113,6 +126,11 @@ public class CollisionHandler {
 
 		}
 		
+		/**
+		 * Checks if a projectile is out of gamefield
+		 * @param index of projectile
+		 * @return true if projectile is out of gamefield
+		 */
 		public boolean checkIfProjectileIsOutOfGamefield(int projectileIndex) {
 			int yCoord = projectiles.get(projectileIndex).getPosition().getyCoordiante();
 			int yLength = projectiles.get(projectileIndex).getPosition().getyLength();
@@ -123,6 +141,10 @@ public class CollisionHandler {
 			return false;
 		}
 		
+		/**
+		 * Updates figure, geroids and projectiles
+		 * @param List of geroids, figure and list of projectiles
+		 */
 		public void updateFigures(ArrayList<Geroid> geroids, Figure figure, ArrayList<Projectile> projectiles){
 			this.geroids = geroids;
 			this.figure = figure;
