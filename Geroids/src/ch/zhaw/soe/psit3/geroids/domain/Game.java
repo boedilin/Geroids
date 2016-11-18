@@ -1,9 +1,6 @@
 package ch.zhaw.soe.psit3.geroids.domain;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
 import java.util.Random;
 
 import javax.sound.midi.Synthesizer;

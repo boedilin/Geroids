@@ -8,7 +8,7 @@ public class CollisionHandler {
 		private ArrayList<Geroid> geroids;
 		private Figure figure;
 		private ArrayList<Projectile> projectiles;
-		private int xRange = 1000;
+		//private int xRange = 1000;
 		private int yRange = 1000;
 		
 		public CollisionHandler(Figure figure, ArrayList<Geroid> geroids, ArrayList<Projectile> projectiles){
