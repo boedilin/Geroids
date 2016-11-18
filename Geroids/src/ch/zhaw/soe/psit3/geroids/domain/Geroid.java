@@ -34,8 +34,6 @@ public class Geroid {
 		position.update(movement);
 		
 	}
-
-
 	
 	/**
 	 * Returns a JSONObject representation of the Geroid for further usage. Included attributes: id, shape, position

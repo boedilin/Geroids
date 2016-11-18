@@ -22,12 +22,10 @@ public class Game {
 	private Playscore score;
 	private Figure figure;
 	private ArrayList<Projectile> projectiles;
+	private CollisionHandler collisionHandler;
 
 	private boolean isName = true;
 	private boolean isRunning = false;
-	private boolean collisionWithFigure = false;
-	private int xRange = 1000;
-	private int yRange = 1000;
 	private MyWebSocketHandler webSocketHandler;
 	Thread gameThread;
 	private final int MAX_COUNT_GEROIDS = 10;
@@ -41,6 +39,7 @@ public class Game {
 		this.projectiles = new ArrayList<Projectile>();
 		this.figure = new Figure(new Position(100, 898, 61, 90));
 		this.account = new Account("MyName" + System.currentTimeMillis());
+		this.collisionHandler = new CollisionHandler(figure, geroids, projectiles);
 	}
 
 	/**
@@ -80,16 +79,28 @@ public class Game {
 	 */
 
 	private void updateGamefield() {
+		collisionHandler.updateFigures(geroids, figure, projectiles);
 		// updateFigure();
 		updateGeroids();
 		updateProjectiles();
-		checkCollision();
+		handleCollisions();
 	}
 	/*
 	 * Updates the figure corresponding the the command in the commandQueue. a
 	 * => move Left d = > move Right Space => shoot.
 	 */
 
+	@SuppressWarnings("unchecked")
+	private void handleCollisions(){
+		if(collisionHandler.checkAllGeroidsCollisionWithFigure()){
+			isRunning = false;
+		}
+		Object[] figures = collisionHandler.checkAllGeroidsCollisionWithProjectiles();
+		geroids = (ArrayList<Geroid>) figures[0];
+		projectiles = (ArrayList<Projectile>) figures[1];
+		
+	}
+	
 	private void updateFigure(String command) {
 		if(command.length()>2){
 			account.setNickname(command);
@@ -116,7 +127,8 @@ public class Game {
 	 */
 	private void updateGeroids() {
 		for (int i = 0; i < geroids.size(); i++) {
-			RemoveIfGeroidIsOutOfGamefield(i);
+			if(collisionHandler.checkIfGeroidIsOutOfGamefield(i))
+				removeGeroid(i);
 		}
 
 		for (Geroid myGeroid : geroids) {
@@ -130,7 +142,8 @@ public class Game {
 	private void updateProjectiles() {
 
 		for (int i = 0; i < projectiles.size(); i++) {
-			RemoveIfProjectileIsOutOfGamefield(i);
+			if(collisionHandler.checkIfProjectileIsOutOfGamefield(i))
+				removeProjectile(i);
 		}
 
 		for (Projectile myProjectile : projectiles) {
@@ -200,28 +213,6 @@ public class Game {
 		return array;
 	}
 
-	private void checkCollision() {
-		Iterator<Geroid> geroidIterator = geroids.iterator();
-		while (geroidIterator.hasNext()) {
-			Geroid myGeroid = geroidIterator.next();
-			if (checkIfGeroidIsCollidingWithFigure(myGeroid)) {
-				isRunning = false;
-				// hier kommt noch die Methode f�r den GameOverBanner
-			}
-
-			Iterator<Projectile> projectileIterator = projectiles.iterator();
-			while (projectileIterator.hasNext()) {
-				Projectile myProjectile = projectileIterator.next();
-				if (checkIfGeroidIsCollidingWithProjectile(myGeroid, myProjectile)) {
-					geroidIterator.remove();
-					projectileIterator.remove();
-
-				}
-			}
-		}
-
-	}
-
 	// Message from websocket respectively from client
 	// do something with the input from the user
 	// preferable protocol is JSON //read the mail from jens fischer WEB3 <->
@@ -230,81 +221,16 @@ public class Game {
 		updateFigure(message);
 	}
 
-	private boolean checkIfGeroidIsCollidingWithProjectile(Geroid geroid, Projectile projectile) {
-		int projectileLeftMostPosition = projectile.getPosition().getxCoordiante();
-		int projectileRightMostPosition = projectileLeftMostPosition + projectile.getPosition().getxLength();
-		int geroidLeftMostPoint = geroid.getPosition().getxCoordiante();
-		int geroidRightMostPoint = geroidLeftMostPoint + geroid.getPosition().getxLength();
-
-		int projectileHighestPoint = projectile.getPosition().getyCoordiante();
-		int geroidLowestPoint = geroid.getPosition().getyCoordiante() + geroid.getPosition().getyLength();
-
-		if (isInBetween(projectileLeftMostPosition, projectileRightMostPosition, geroidRightMostPoint)
-				| isInBetween(projectileLeftMostPosition, projectileRightMostPosition, geroidLeftMostPoint)
-				| isInBetween(geroidLeftMostPoint, geroidRightMostPoint, projectileLeftMostPosition)) { // xcoords
-
-			if (projectileHighestPoint < geroidLowestPoint) {
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
-
-	}
-
-	private boolean checkIfGeroidIsCollidingWithFigure(Geroid geroid) {
-		int figureLeftMostPoint = this.figure.getPosition().getxCoordiante();
-		int figureRightMostPoint = figureLeftMostPoint + this.figure.getPosition().getxLength();
-		int geroidLeftMostPoint = geroid.getPosition().getxCoordiante();
-		int geroidRightMostPoint = geroidLeftMostPoint + geroid.getPosition().getxLength();
-
-		int figureHighestPoint = this.figure.getPosition().getyCoordiante();
-		int geroidLowestPoint = geroid.getPosition().getyCoordiante() + geroid.getPosition().getyLength();
-
-		if (isInBetween(figureLeftMostPoint, figureRightMostPoint, geroidRightMostPoint)
-				| isInBetween(figureLeftMostPoint, figureRightMostPoint, geroidLeftMostPoint)
-				| isInBetween(geroidLeftMostPoint, geroidRightMostPoint, figureLeftMostPoint)) { // xcoords
-
-			if (figureHighestPoint < geroidLowestPoint) {
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
-	}
-
-	private boolean isInBetween(int leftBorder, int rightBorder, int searchedNumber) {
-		if (searchedNumber > leftBorder & searchedNumber < rightBorder) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	private void RemoveIfGeroidIsOutOfGamefield(int geroidIndex) {
-
-		if (this.geroids.get(geroidIndex).getPosition().getyCoordiante() > this.yRange) {
-			geroids.remove(geroidIndex);
-		}
-
-	}
-
-	private void RemoveIfProjectileIsOutOfGamefield(int projectileIndex) {
-		int yCoord = this.projectiles.get(projectileIndex).getPosition().getyCoordiante();
-		int yLength = this.projectiles.get(projectileIndex).getPosition().getyLength();
-
-		if ((yCoord + yLength) < 0) {
-			projectiles.remove(projectileIndex);
-		}
-	}
-
 	public ArrayList<Projectile> getProjectiles() {
 		return projectiles;
 	}
+	
+	private void removeProjectile(int projectileIndex){
+		projectiles.remove(projectileIndex);
+	}
 
+	private void removeGeroid(int geroidIndex){
+		geroids.remove(geroidIndex);
+	}
 
 }
