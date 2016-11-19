@@ -2,21 +2,13 @@ package ch.zhaw.soe.psit3.geroids.domain;
 
 public class Playscore {
 	
-	private Game game;
 	private int score;
 	private int killBonus = 100;
 	private int timeBonusPerSecond = 10;
 	private boolean geroidKilled = false;
 	
-	public Playscore(int score, Game game){
+	public Playscore(int score){
 		this.score = score;
-		this.game = game;
-		new Thread();
-		{
-			while(this.game.isRunning())
-				addingScoreIfGeroidKilled();
-				addingScoreForTimeBonus();
-		}
 	}
 
 	public int getScore() {
