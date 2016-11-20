@@ -24,8 +24,10 @@ public class Position {
 		this.yLength = yLength;
 	}
 
-
-	
+	/**
+	 * Update x and y coordinate with movement speed.
+	 * @param Movement
+	 */
 	public void update(Movement movement){
 		this.xCoordiante += movement.getxSpeed();
 		this.yCoordiante += movement.getySpeed();
@@ -45,30 +47,52 @@ public class Position {
 		myPosition.put("yLength", yLength);
 		
 		return myPosition;
-		
 	}
 
-
+	/**
+	 * Return the x-coordinate.
+	 * @return int x-coordinate.
+	 */
 	public int getxCoordiante() {
 		return xCoordiante;
 	}
 
+	/**
+	 * Set the x-coordinate.
+	 * @param xCoordinate
+	 */
 	public void setxCoordiante(int xCoordiante) {
 		this.xCoordiante = xCoordiante;
 	}
 
+	/**
+	 * Return the y-coordinate.
+	 * @return int y-coordinate.
+	 */
 	public int getyCoordiante() {
 		return yCoordiante;
 	}
 
+	/**
+	 * Set the y-coordinate.
+	 * @param yCoordinate
+	 */
 	public void setyCoordiante(int yCoordiante) {
 		this.yCoordiante = yCoordiante;
 	}
 	
+	/**
+	 * Return the x-length.
+	 * @return int x-length.
+	 */
 	public int getxLength() {
 		return xLength;
 	}
 	
+	/**
+	 * Return the y-length.
+	 * @return int y-length.
+	 */
 	public int getyLength() {
 		return yLength;
 	}

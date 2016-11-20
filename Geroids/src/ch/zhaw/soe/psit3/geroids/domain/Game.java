@@ -12,6 +12,9 @@ import ch.zhaw.soe.psit3.geroids.servlets.MyWebSocketHandler;
 
 public class Game {
 
+	private static final int GEROID_WIDTH = 80;
+	private static final int GEROID_HEIGHT = 100;
+	private static final int TOP_OF_SCREEN = 0;
 	private static final int MAXIMUM_SHOOT_SPEED = 300;
 	private long timestampPreviousShot;
 	private Account account;
@@ -169,7 +172,7 @@ public class Game {
 	 */
 	private void generateGeroid() {
 		if (geroids.size() < MAX_COUNT_GEROIDS) {
-			Position pos = new Position(new Random().nextInt(900), 0, 80, 100);
+			Position pos = new Position(new Random().nextInt(900), TOP_OF_SCREEN, GEROID_WIDTH, GEROID_HEIGHT);
 			Movement mov = new Movement(0, new Random().nextInt(10) + 1);
 			Geroid geroid = new Geroid(pos, mov);
 			geroids.add(geroid);
@@ -210,10 +213,6 @@ public class Game {
 		return array;
 	}
 
-	// Message from websocket respectively from client
-	// do something with the input from the user
-	// preferable protocol is JSON //read the mail from jens fischer WEB3 <->
-	// valentin how to manage messages with identifiers
 	public void receiveMessage(String message) {
 		updateFigure(message);
 	}

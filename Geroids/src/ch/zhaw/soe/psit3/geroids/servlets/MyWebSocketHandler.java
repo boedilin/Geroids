@@ -15,17 +15,26 @@ public class MyWebSocketHandler {
 	
 	private Session session;
 	private Game game;
-
+	
+	/**
+	 * Print status Code and reason to console
+	 */
 	@OnWebSocketClose
 	public void onClose(int statusCode, String reason) {
 		System.out.println("Close: statusCode=" + statusCode + ", reason=" + reason);
 	}
 
+	/**
+	 * Print error to console
+	 */
 	@OnWebSocketError
 	public void onError(Throwable t) {
 		System.out.println("Error: " + t.getMessage());
 	}
 
+	/**
+	 * create a new game on connection and set connection timeout to 200 seconds
+	 */
 	@OnWebSocketConnect
 	public void onConnect(Session session) {
 		this.session = session;
@@ -36,13 +45,18 @@ public class MyWebSocketHandler {
 		game = new Game(this);
 		game.startGame();
 	}
-
+	
+	/**
+	 * send message from client to the game
+	 */
 	@OnWebSocketMessage
 	public void onMessage(String message) {
-		//System.out.println("Message: " + message);
 		game.receiveMessage(message);
 	}
 	
+	/**
+	 * send message from game to client
+	 */
 	//think about blocking and non-blocking sending
 	public void sendMessage(String message){
 		try {
