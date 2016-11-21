@@ -39,7 +39,6 @@ public class GameServer
         context.addServlet(DumpServlet.class, "/dump/*");
         // Add default servlet to serve static content from ./public
         context.addServlet(DefaultServlet.class, "/");
-
         server.start();
         server.join();
     }

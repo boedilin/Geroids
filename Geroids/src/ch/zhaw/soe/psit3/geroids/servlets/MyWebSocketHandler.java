@@ -1,6 +1,8 @@
 package ch.zhaw.soe.psit3.geroids.servlets;
 
 import java.io.IOException;
+import java.nio.ByteBuffer;
+
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketConnect;
@@ -58,9 +60,10 @@ public class MyWebSocketHandler {
 	 * send message from game to client
 	 */
 	//think about blocking and non-blocking sending
-	public void sendMessage(String message){
+	public void sendMessage(ByteBuffer packedData){
+		
 		try {
-			session.getRemote().sendString(message);
+			session.getRemote().sendBytes(packedData);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

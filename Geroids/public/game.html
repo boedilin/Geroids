@@ -15,6 +15,53 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/modernizr.js"></script>
     <script src="js/index.js"></script>
+    <!--[if lte IE 9]>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.10/es5-shim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>
+<![endif]-->
+    <script src="js/msgpack.js"></script>
+    <script>
+        // encode from JS Object to MessagePack (Uint8Array)
+
+        var ws = new WebSocket("ws://" + location.host);
+        ws.binaryType = 'arraybuffer';
+
+
+        ws.onmessage = function(event) {
+            console.log(event.data);
+            var raw_binary_data = new Uint8Array(event.data);
+            buffer2 = new Uint8Array(event.data);
+            console.log(raw_binary_data);
+            var array = Array.from(buffer2)
+            var message = msgpack.unpack(array);
+            var message2 = msgpack.unpack(new Uint8Array(event.data));
+            console.log(message);
+            console.log(message2);
+        };
+
+        // kann generisch gemacht werden, da der Websocketserver der selbe ist, wie der
+        // Server, der das HTML liefert:"ws://" + location.host
+
+        ws.onopen = function() {
+            console.log("Websocket opened!");
+            if (localStorage.getItem('name') != null) {
+                ws.send(localStorage.getItem('name'));
+            }
+        };
+
+        /**
+         * Upon Receiving a message from the server, this method tries to extract name attribute from string and send the message to the corresponding drawing method.
+         */
+
+
+        ws.onclose = function() {
+            console.log("Closed!");
+        };
+
+        ws.onerror = function(err) {
+            console.log("Error: " + err);
+        };
+    </script>
 
 </head>
 

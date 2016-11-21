@@ -1,5 +1,7 @@
 package ch.zhaw.soe.psit3.geroids.domain;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -157,14 +159,23 @@ public class Game {
 	 */
 	@SuppressWarnings("unchecked")
 	private void sendNewValues() {
+		/*
 		JSONObject obj = new JSONObject();
 		obj.put("Figure", figure.toJSONObject());
 		obj.put("Geroids", this.geroidsToJSONArray());
 		obj.put("Projectiles", this.projectilesToJSONArray());
 		obj.put("Gameover", !isRunning);
 		obj.put("Name", this.account.getNickname());
-		webSocketHandler.sendMessage(obj.toJSONString());
-
+		webSocketHandler.sendMessage(obj.toJSONString());*/
+		MsgPacktest test = new MsgPacktest();
+		ByteBuffer packedData = null;
+		try {
+			packedData = test.basicUsage();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		webSocketHandler.sendMessage(packedData);
 	}
 
 	/*
