@@ -41,6 +41,13 @@ function canvasApp() {
 
     var counter = 0;
 
+    ws.onmessage = function(evt) {
+        //var previousTime = new Date().getTime();
+        console.log(new Date().getTime());
+        gamefield = JSON.parse(evt.data);
+        drawStuff();
+    };
+
 
     var theCanvas = document.getElementById("canvas");
     var context = theCanvas.getContext("2d");
@@ -61,8 +68,7 @@ function canvasApp() {
                 ws.send(key);
             }
         }
-        drawStuff();
-    }, 20);
+    }, 30);
 
     /**
      * how fast the pressed key can be sent: (85ms)
@@ -151,9 +157,7 @@ function canvasApp() {
     }
 }
 
-ws.onmessage = function(evt) {
-    gamefield = JSON.parse(evt.data);
-};
+
 
 ws.onopen = function() {
     console.log("Websocket opened!");
