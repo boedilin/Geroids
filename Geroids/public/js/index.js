@@ -1,3 +1,5 @@
+// kann generisch gemacht werden, da der Websocketserver der selbe ist, wie der
+// Server, der das HTML liefert:"ws://" + location.host
 var ws = new WebSocket("ws://" + location.host);
 var gamefield;
 var counter = 0;
@@ -152,9 +154,6 @@ function canvasApp() {
 ws.onmessage = function(evt) {
     gamefield = JSON.parse(evt.data);
 };
-
-// kann generisch gemacht werden, da der Websocketserver der selbe ist, wie der
-// Server, der das HTML liefert:"ws://" + location.host
 
 ws.onopen = function() {
     console.log("Websocket opened!");
