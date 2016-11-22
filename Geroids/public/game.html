@@ -19,15 +19,30 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.10/es5-shim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>
 <![endif]-->
-    <script src="js/msgpack.js"></script>
+    <script src="js/msgpack.min.js"></script>
     <script>
         // encode from JS Object to MessagePack (Uint8Array)
 
         var ws = new WebSocket("ws://" + location.host);
         ws.binaryType = 'arraybuffer';
 
+        var decoder = msgpack.Decoder();
+
+        decoder.on("data", function(data) {
+            //console.log("in data event handler");
+            // you'll receive 1, "leo", 2, "xxx-xxxx" and "yyy-yyyy" in order
+            console.log(data);
+        });
+        decoder.on("end", function() {
+            //console.log("end");
+        });
+
+
 
         ws.onmessage = function(event) {
+            console.log(new Uint8Array(event.data));
+            decoder.decode(new Uint8Array(event.data));
+            /*
             console.log(event.data);
             var raw_binary_data = new Uint8Array(event.data);
             buffer2 = new Uint8Array(event.data);
@@ -36,7 +51,7 @@
             var message = msgpack.unpack(array);
             var message2 = msgpack.unpack(new Uint8Array(event.data));
             console.log(message);
-            console.log(message2);
+            console.log(message2);*/
         };
 
         // kann generisch gemacht werden, da der Websocketserver der selbe ist, wie der

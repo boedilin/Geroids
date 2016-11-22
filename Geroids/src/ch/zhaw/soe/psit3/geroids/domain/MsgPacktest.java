@@ -19,11 +19,18 @@ public class MsgPacktest {
         // MessageBufferPacker is an optimized version of MessagePacker for packing data into a byte array
         packer = MessagePack.newDefaultBufferPacker();
         packer
-                .packInt(2222)
-                .packString("leo")
-                .packArrayHeader(2)
-                .packString("xxx-xxxx")
-                .packString("y-yyyy-yyyy");
+        		.packBoolean(false)
+                .packBoolean(true)
+                .packString("leonardoplusplus")
+                .packArrayHeader(8)
+                .packInt(999)
+                .packInt(999)
+                .packInt(999)
+                .packInt(999)
+                .packInt(999)
+                .packInt(999)
+                .packInt(555)
+        		.packInt(555);
         packer.close(); // Never forget to close (or flush) the buffer
         
 		return ByteBuffer.wrap(packer.toByteArray());
