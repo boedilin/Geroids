@@ -40,6 +40,7 @@ public class Game {
 		this.figure = new Figure(new Position(100, 898, 61, 90));
 		this.account = new Account("MyName" + System.currentTimeMillis());
 		this.collisionHandler = new CollisionHandler(figure, geroids, projectiles);
+		this.score = new Playscore(0);
 	}
 
 	/**
