@@ -127,8 +127,10 @@ public class Game {
 	 */
 	private void updateGeroids() {
 		for (int i = 0; i < geroids.size(); i++) {
-			if(collisionHandler.checkIfGeroidIsOutOfGamefield(i))
+			if(collisionHandler.checkIfGeroidIsOutOfGamefield(i)){
 				removeGeroid(i);
+				score.decreaseScoreForPassingGeroid();
+			}
 		}
 
 		for (Geroid myGeroid : geroids) {
@@ -152,7 +154,7 @@ public class Game {
 	}
 
 	/*
-	 * Sennds the new Values of Figure, all Geroids and all Projectiles via
+	 * Sends the new Values of Figure, all Geroids and all Projectiles via
 	 * webSocketHandler to the Client.
 	 */
 	@SuppressWarnings("unchecked")

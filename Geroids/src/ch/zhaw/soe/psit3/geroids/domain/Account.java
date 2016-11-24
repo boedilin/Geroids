@@ -27,11 +27,11 @@ public class Account {
 		return password;
 	}
 	
-	private void setActiveType(Type type){
-		if(mytransactions.contains(type)){
-			activeType = type;
-		}
-	}
+//	private void setActiveType(Type type){
+//		if(mytransactions.contains(type)){
+//			activeType = type;
+//		}
+//	}
 	
 	public String geteMail() {
 		return eMail;
@@ -65,13 +65,13 @@ public class Account {
 		this.mytransactions = mytransactions;
 	}
 
-	public Skin getActiveSkin() {
-		return activeSkin;
-	}
-
-	public Type getActiveType() {
-		return activeType;
-	}
+//	public Skin getActiveSkin() {
+//		return activeSkin;
+//	}
+//
+//	public Type getActiveType() {
+//		return activeType;
+//	}
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
@@ -81,10 +81,10 @@ public class Account {
 		this.password = password;
 	}
 
-	private void setActiveSkin(Skin skin){
-		if(mytransactions.contains(skin)){
-			activeSkin = skin;
-		}
-	}
+//	private void setActiveSkin(Skin skin){
+//		if(mytransactions.contains(skin)){
+//			activeSkin = skin;
+//		}
+//	}
 
 }
