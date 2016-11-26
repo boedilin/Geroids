@@ -30,24 +30,21 @@ public class TestGame {
 	public void testUpdateFigureValidLeft() {
 		game.receiveMessage("65");
 		verify(mockFigure).moveLeft(10);
-		verify(mockFigure, times(0)).shoot();	
-		verify(mockFigure, times(0)).moveRight(10);
+
 	}
 	
 	@Test
 	public void testUpdateFigureValidRight() {
 		game.receiveMessage("68");
 		verify(mockFigure).moveRight(10);	
-		verify(mockFigure, times(0)).shoot();
-		verify(mockFigure, times(0)).moveLeft(10);
+
 	}
 	
 	@Test
 	public void testUpdateFigureValidShoot() {
 		game.receiveMessage("32");
 		verify(mockFigure).shoot();	
-		verify(mockFigure, times(0)).moveRight(10);
-		verify(mockFigure, times(0)).moveLeft(10);
+
 
 	}
 	
