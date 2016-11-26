@@ -110,6 +110,7 @@ function canvasApp() {
         context.fillStyle = "black";
         context.fillRect(0, 0, canvas.width, canvas.height);
 
+        drawScore(gamefield.Score)
         drawGeroids(gamefield.Geroids);
         drawFigure(gamefield.Figure);
         drawProjectiles(gamefield.Projectiles);
@@ -152,6 +153,12 @@ function canvasApp() {
         }
     }
 
+    function drawScore(Score) {
+        context.font = "300px MineCrafter 3 Regular";
+        context.fillStyle = "white";
+        context.fillText("Score: " + Score.toString() , 850*canvasXFactor, 30*canvasYFactor);
+    }
+    
     function drawGameover() {
         context.drawImage(gameover, 0, canvas.height / 3, canvas.width, canvas.height / 4);
     }

@@ -31,7 +31,7 @@ public class Playscore {
 	}
 	
 	public void addingScoreIfGeroidKilled(int geroidSpeed){
-		if(checkMaxValue(score))
+		if(checkMaxValue(score + killBonus*geroidSpeed))
 			this.score = SCORE_MAX_VALUE;
 		else {
 			score += killBonus*geroidSpeed;
@@ -39,7 +39,7 @@ public class Playscore {
 	}
 	
 	public void decreaseScoreForPassingGeroid(int geroidSpeed){
-		if(checkMinValue(score))
+		if(checkMinValue(score - passingGeroidDecrease*geroidSpeed))
 			this.score = SCORE_MIN_VALUE;
 		else {
 			score -= passingGeroidDecrease*geroidSpeed;
