@@ -1,4 +1,4 @@
-package ch.zhaw.soe.psit3.geroids.test;
+package ch.zhaw.soe.psit3.geroids.test.unit;
 
 import static org.junit.Assert.*;
 

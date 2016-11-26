@@ -22,6 +22,8 @@ public class Game {
 	private ArrayList<Geroid> geroids;
 	private Playscore score;
 	private Figure figure;
+
+
 	private ArrayList<Projectile> projectiles;
 	private CollisionHandler collisionHandler;
 
@@ -239,7 +241,12 @@ public class Game {
 	}
 
 	public void receiveMessage(String message) {
+		if(message != null){
 		updateFigure(message);
+		} else {
+			System.err.println("Class game received null message. Message will be ignored.");
+		}
+		
 	}
 
 	public ArrayList<Projectile> getProjectiles() {
@@ -260,6 +267,10 @@ public class Game {
 	 */
 	private void removeGeroid(int geroidIndex){
 		geroids.remove(geroidIndex);
+	}
+	
+	public void setFigure(Figure figure) {
+		this.figure = figure;
 	}
 
 }
