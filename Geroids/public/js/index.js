@@ -110,10 +110,10 @@ function canvasApp() {
         context.fillStyle = "black";
         context.fillRect(0, 0, canvas.width, canvas.height);
 
-        drawScore(gamefield.Score)
         drawGeroids(gamefield.Geroids);
         drawFigure(gamefield.Figure);
         drawProjectiles(gamefield.Projectiles);
+        drawScore(gamefield.Score);
         if (gamefield.Gameover) {
             drawGameover();
             clearInterval(drawInterval);
@@ -154,9 +154,9 @@ function canvasApp() {
     }
 
     function drawScore(Score) {
-        context.font = "300px MineCrafter 3 Regular";
+        context.font = "15px MineCrafter_3_Regular";
         context.fillStyle = "white";
-        context.fillText("Score: " + Score.toString() , 850*canvasXFactor, 30*canvasYFactor);
+        context.fillText("Score: " + Score.toString() , (canvas.width - 100), 25);
     }
     
     function drawGameover() {
