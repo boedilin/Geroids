@@ -14,7 +14,7 @@ public class TestPlayscore {
 
 	@Before
 	public void setUp() throws Exception {
-		score = new Playscore(0);
+		score = new Playscore();
 		score.setKillBonus(10);
 		score.setPassingGeroidDecrease(5);
 		score.setTimeBonusPerSecond(100);

@@ -1,6 +1,7 @@
 package ch.zhaw.soe.psit3.geroids.domain;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 import javax.sound.midi.Synthesizer;
@@ -40,7 +41,7 @@ public class Game {
 		this.figure = new Figure(new Position(100, 898, 61, 90));
 		this.account = new Account("MyName" + System.currentTimeMillis());
 		this.collisionHandler = new CollisionHandler(figure, geroids, projectiles);
-		this.score = new Playscore(0);
+		this.score = new Playscore();
 	}
 
 	/**
@@ -81,7 +82,6 @@ public class Game {
 
 	private void updateGamefield() {
 		collisionHandler.updateFigures(geroids, figure, projectiles);
-		// updateFigure();
 		updateGeroids();
 		updateProjectiles();
 		handleCollisions();
@@ -96,10 +96,31 @@ public class Game {
 		if(collisionHandler.checkAllGeroidsCollisionWithFigure()){
 			isRunning = false;
 		}
-		Object[] figures = collisionHandler.checkAllGeroidsCollisionWithProjectiles();
-		geroids = (ArrayList<Geroid>) figures[0];
-		projectiles = (ArrayList<Projectile>) figures[1];
+		checkAllGeroidsCollisionWithProjectiles();
+	}
+	
+	/**
+	 * Checks if there are any collisions of geroids and projectiles
+	 * @return Object-array, where array[0] = updated list of geroids and array[1] = updated list of projectiles
+	 */
+	private void checkAllGeroidsCollisionWithProjectiles() {
+		Iterator<Geroid> geroidIterator = geroids.iterator();
 		
+		while (geroidIterator.hasNext()) {
+			Geroid myGeroid = geroidIterator.next();
+			Iterator<Projectile> projectileIterator = projectiles.iterator();
+			
+			while (projectileIterator.hasNext()) {
+				Projectile myProjectile = projectileIterator.next();
+				
+				if (collisionHandler.checkIfGeroidIsCollidingWithProjectile(myGeroid, myProjectile)) {
+					score.addingScoreIfGeroidKilled(myGeroid.getMovement().getySpeed());
+					geroidIterator.remove();
+					projectileIterator.remove();
+
+				}
+			}
+		}
 	}
 	
 	private void updateFigure(String command) {
@@ -130,7 +151,7 @@ public class Game {
 		for (int i = 0; i < geroids.size(); i++) {
 			if(collisionHandler.checkIfGeroidIsOutOfGamefield(i)){
 				removeGeroid(i);
-				score.decreaseScoreForPassingGeroid();
+				score.decreaseScoreForPassingGeroid(geroids.get(i).getMovement().getySpeed());
 			}
 		}
 
@@ -166,6 +187,7 @@ public class Game {
 		obj.put("Projectiles", this.projectilesToJSONArray());
 		obj.put("Gameover", !isRunning);
 		obj.put("Name", this.account.getNickname());
+		obj.put("Score", score.getScore());
 		webSocketHandler.sendMessage(obj.toJSONString());
 
 	}

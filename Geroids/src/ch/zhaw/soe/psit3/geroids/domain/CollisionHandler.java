@@ -34,30 +34,10 @@ public class CollisionHandler {
 		}
 
 		/**
-		 * Checks if there are any collisions of geroids and projectiles
-		 * @return Object-array, where array[0] = updated list of geroids and array[1] = updated list of projectiles
+		 * Checks if there is a collisions of a geroid and a projectile
+		 * @return true, if there was a collision; false, else
 		 */
-		public Object[] checkAllGeroidsCollisionWithProjectiles() {
-			Iterator<Geroid> geroidIterator = geroids.iterator();
-			while (geroidIterator.hasNext()) {
-				Geroid myGeroid = geroidIterator.next();
-				Iterator<Projectile> projectileIterator = projectiles.iterator();
-				while (projectileIterator.hasNext()) {
-					Projectile myProjectile = projectileIterator.next();
-					if (checkIfGeroidIsCollidingWithProjectile(myGeroid, myProjectile)) {
-						geroidIterator.remove();
-						projectileIterator.remove();
-
-					}
-				}
-			}
-			 Object[] figures = new Object[2]; 
-			 figures[0] = geroids;
-			 figures[1] = projectiles;
-			 return figures;
-		}
-		
-		private boolean checkIfGeroidIsCollidingWithProjectile(Geroid geroid, Projectile projectile) {
+		public boolean checkIfGeroidIsCollidingWithProjectile(Geroid geroid, Projectile projectile) {
 			int projectileLeftMostPosition = projectile.getPosition().getxCoordiante();
 			int projectileRightMostPosition = projectileLeftMostPosition + projectile.getPosition().getxLength();
 			int geroidLeftMostPoint = geroid.getPosition().getxCoordiante();
