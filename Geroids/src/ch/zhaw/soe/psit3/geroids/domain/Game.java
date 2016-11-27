@@ -266,4 +266,14 @@ public class Game {
 		this.figure = figure;
 	}
 
+	public ArrayList<Geroid> getGeroids() {
+		return geroids;
+	}
+
+	public boolean isRunning() {
+		return isRunning;
+	}
+	
+	
+
 }
