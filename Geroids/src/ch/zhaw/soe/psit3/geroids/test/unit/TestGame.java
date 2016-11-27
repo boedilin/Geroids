@@ -1,10 +1,8 @@
 package ch.zhaw.soe.psit3.geroids.test.unit;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ch.zhaw.soe.psit3.geroids.domain.Figure;
