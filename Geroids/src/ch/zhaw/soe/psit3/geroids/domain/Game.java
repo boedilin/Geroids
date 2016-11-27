@@ -47,12 +47,10 @@ public class Game {
 	}
 
 	/**
-	 * Starts the game. Will update the gamefield
+	 * Starts the gamethread. New Thread will run until isRunning is false(got hit by a Geroid). Updates Gamefield.
 	 * 
 	 */
 	public void startGame() {
-		// uncommented cause of parse error. send this as json format
-		// webSocketHandler.sendMessage("Server: Starting Game");
 		isRunning = true;
 		gameThread = new Thread(new Runnable() {
 			@Override
@@ -61,21 +59,16 @@ public class Game {
 				int counter = 1;
 				while (isRunning) {
 					if (counter % 10 == 0) {
-						// gernerate a geroid every 10 ticks
 						generateGeroid();
 					}
-					// update all values of figure, geroids and projectiles
 					updateGamefield();
-					// sends all new values
 					sendNewValues();
-					// System.out.println(counter2++);
 					counter++;
 					trySleep(LENGTH_OF_TICK_IN_MS);
 				}
 			}
 		}, "gameThread");
 		gameThread.start();
-		// webSocketHandler.sendMessage("Server: Gamethread Started");
 	}
 
 	/*
