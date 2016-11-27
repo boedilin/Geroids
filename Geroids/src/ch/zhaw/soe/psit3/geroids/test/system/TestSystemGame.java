@@ -34,6 +34,10 @@ public class TestSystemGame {
 		game.setFigure(figure);
 	}
 
+	
+	/**
+	 * Starts a game, moves to the X Coordiante of the nearest geroid and waits for the collision and checks if game is over.
+	 */
 	@Test
 	public void testGameOver() {
 		ArrayList<Geroid> geroids = game.getGeroids();
