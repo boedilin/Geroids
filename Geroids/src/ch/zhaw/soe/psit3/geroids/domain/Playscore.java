@@ -16,6 +16,16 @@ public class Playscore {
 		return score;
 	}
 	
+	protected void setScore(int score) {
+		if(checkMaxValue(score))
+			this.score = SCORE_MAX_VALUE;
+		if(checkMinValue(score))
+			this.score = SCORE_MIN_VALUE;
+		else{
+		this.score = score;
+		}
+	}
+	
 	private boolean checkMaxValue(int score){
 		if(score > SCORE_MAX_VALUE){
 			return true;
@@ -31,19 +41,11 @@ public class Playscore {
 	}
 	
 	public void addingScoreIfGeroidKilled(int geroidSpeed){
-		if(checkMaxValue(score + killBonus*geroidSpeed))
-			this.score = SCORE_MAX_VALUE;
-		else {
-			score += killBonus*geroidSpeed;
-		}
+		setScore(score + killBonus*geroidSpeed);
 	}
 	
 	public void decreaseScoreForPassingGeroid(int geroidSpeed){
-		if(checkMinValue(score - passingGeroidDecrease))
-			this.score = SCORE_MIN_VALUE;
-		else {
-			score -= passingGeroidDecrease;
-		}
+		setScore(score - passingGeroidDecrease);
 	}
 
 	public int getKillBonus() {
