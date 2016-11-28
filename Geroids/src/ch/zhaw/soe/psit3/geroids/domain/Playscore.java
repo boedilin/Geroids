@@ -39,10 +39,10 @@ public class Playscore {
 	}
 	
 	public void decreaseScoreForPassingGeroid(int geroidSpeed){
-		if(checkMinValue(score - passingGeroidDecrease*geroidSpeed))
+		if(checkMinValue(score - passingGeroidDecrease))
 			this.score = SCORE_MIN_VALUE;
 		else {
-			score -= passingGeroidDecrease*geroidSpeed;
+			score -= passingGeroidDecrease;
 		}
 	}
 
