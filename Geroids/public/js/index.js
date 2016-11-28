@@ -156,7 +156,7 @@ function canvasApp() {
     function drawScore(Score) {
         context.font = "15px MineCrafter_3_Regular";
         context.fillStyle = "white";
-        context.fillText("Score: " + Score.toString() , (canvas.width - 100), 25);
+        context.fillText("Score " + Score.toString() , 10, 25);
     }
     
     function drawGameover() {
