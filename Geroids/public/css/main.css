@@ -117,13 +117,7 @@ a:hover {
     text-decoration: none;
 }
 
-.btn {
-    background-color:black;
-    color:white;
-    border: 2px solid white;
-}
-
-.btn-default:hover, .btn-default:active {
+.btn, .btn.active, .btn:active, .btn-default:hover, .btn-default:active {
     background-color:black;
     color:white;
     border: 2px solid white;
@@ -156,4 +150,7 @@ a:hover {
 .details {
     font-size: 8px;
     margin:0px;
+}
+.back{
+    padding-top:15px;
 }
