@@ -17,13 +17,10 @@ geroid3.src = "../images/element3.png";
 geroid4.src = "../images/element4.png";
 geroid5.src = "../images/element5.png";
 gameover.src = "../images/gameover.png";
-//load: This is the named event for which we are adding a listener. Events for existing objects like window are already defined.
-//eventWindowLoaded: Call this function when the event occurs. In our code, we will then call the canvasApp() function, which will start our main application execution.
-//false: This sets the function to capture this type of event before it propagates lower in the DOM tree of objects. We will always set this to false.
-window.addEventListener("load", eventWindowLoaded, false);
 var leftButton = document.getElementById("leftButton");
 var shootButton = document.getElementById("shootButton");
 var rightButton = document.getElementById("rightButton");
+var firstTime = true;
 
 function goLeft() {
 
@@ -35,10 +32,6 @@ function shoot() {
 
 function goRight() {
 
-}
-
-function eventWindowLoaded() {
-    canvasApp();
 }
 
 function canvasSupport() {
@@ -53,14 +46,6 @@ function canvasApp() {
     if (!canvasSupport) {
         return;
     }
-
-    var counter = 0;
-
-    ws.onmessage = function(evt) {
-        gamefield = JSON.parse(evt.data);
-        drawStuff();
-    };
-
 
     var theCanvas = document.getElementById("canvas");
     var context = theCanvas.getContext("2d");
@@ -81,7 +66,8 @@ function canvasApp() {
                 ws.send(key);
             }
         }
-    }, 30);
+        drawStuff();
+    }, 25);
 
     /**
      * how fast the pressed key can be sent: (85ms)
@@ -194,6 +180,13 @@ ws.onopen = function() {
  * Upon Receiving a message from the server, this method tries to extract name attribute from string and send the message to the corresponding drawing method.
  */
 
+ws.onmessage = function(evt) {
+    gamefield = JSON.parse(evt.data);
+    if (firstTime) {
+        firstTime = false;
+        canvasApp();
+    }
+};
 
 ws.onclose = function() {
     console.log("Closed!");
