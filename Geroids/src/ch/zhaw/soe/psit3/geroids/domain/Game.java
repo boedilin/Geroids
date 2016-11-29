@@ -3,8 +3,10 @@ package ch.zhaw.soe.psit3.geroids.domain;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
-
-import javax.sound.midi.Synthesizer;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -33,6 +35,7 @@ public class Game {
 	Thread gameThread;
 	private final int MAX_COUNT_GEROIDS = 10;
 	private final int LENGTH_OF_TICK_IN_MS = 15;
+	private Connection conn3 = null;
 
 	public Game(MyWebSocketHandler websocketHandler) {
 		this.webSocketHandler = websocketHandler;
@@ -44,6 +47,30 @@ public class Game {
 		this.account = new Account("MyName" + System.currentTimeMillis());
 		this.collisionHandler = new CollisionHandler(figure, geroids, projectiles);
 		this.score = new Playscore();
+
+        try {
+            // Connect method #3
+            String dbURL3 = "jdbc:postgresql://ec2-54-235-89-113.compute-1.amazonaws.com:5432/dcr3lknftj4n6j?sslmode=require";
+            Properties parameters = new Properties();
+            parameters.put("user", "emadnzteospxpj");
+            parameters.put("password", "lBeoj_V8XMdzrS5fxa_-fbKhh8");
+ 
+            conn3 = DriverManager.getConnection(dbURL3, parameters);
+            if (conn3 != null) {
+                System.out.println("Connected to database #3");
+            }
+ 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (conn3 != null && !conn3.isClosed()) {
+                    conn3.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
 	}
 
 	/**
