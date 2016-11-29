@@ -40,6 +40,7 @@ canvas {
 
 p {
     font-family: 'MineCrafter_3_Regular';
+    color:white;
 }
 
 .login {
@@ -94,6 +95,7 @@ ul {
 li {
     margin: 50px;
     text-align: center;
+    background-color: black;
 }
 
 a {
@@ -101,8 +103,57 @@ a {
     text-decoration: none;
 }
 
+.item {
+    color: white;
+    border: 2px solid white;
+    box-sizing: border-box;
+    padding: 10px 10px 10px 10px;
+    margin: 2px 100px 1px;
+}
+
 a:focus,
 a:hover {
     color: white;
     text-decoration: none;
+}
+
+.btn {
+    background-color:black;
+    color:white;
+    border: 2px solid white;
+}
+
+.btn-default:hover, .btn-default:active {
+    background-color:black;
+    color:white;
+    border: 2px solid white;
+}
+
+.extensions {
+    margin: 0px 0px 50px;
+}
+
+.extension {
+    margin: 5px 0px 5px;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.col-md-1, .col-xs-1 {
+    padding-right:5px;
+    padding-left:5px;
+}
+
+.description {
+    padding-top:15px;
+}
+
+.price {
+    font-size: 10px;
+    padding-top:15px;
+}
+
+.details {
+    font-size: 8px;
+    margin:0px;
 }
