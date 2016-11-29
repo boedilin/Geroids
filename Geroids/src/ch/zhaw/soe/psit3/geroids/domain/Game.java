@@ -12,7 +12,8 @@ import org.json.simple.JSONObject;
 import ch.zhaw.soe.psit3.geroids.servlets.MyWebSocketHandler;
 
 public class Game {
-
+	
+	private static final int X_LENGTH = 1000;
 	private static final int GEROID_WIDTH = 80;
 	private static final int GEROID_HEIGHT = 100;
 	private static final int TOP_OF_SCREEN = 0;
@@ -22,7 +23,6 @@ public class Game {
 	private ArrayList<Geroid> geroids;
 	private Playscore score;
 	private Figure figure;
-
 
 	private ArrayList<Projectile> projectiles;
 	private CollisionHandler collisionHandler;
@@ -47,7 +47,8 @@ public class Game {
 	}
 
 	/**
-	 * Starts the gamethread. New Thread will run until isRunning is false(got hit by a Geroid). Updates Gamefield.
+	 * Starts the gamethread. New Thread will run until isRunning is false(got
+	 * hit by a Geroid). Updates Gamefield.
 	 * 
 	 */
 	public void startGame() {
@@ -87,27 +88,29 @@ public class Game {
 	 */
 
 	@SuppressWarnings("unchecked")
-	private void handleCollisions(){
-		if(collisionHandler.checkAllGeroidsCollisionWithFigure()){
+	private void handleCollisions() {
+		if (collisionHandler.checkAllGeroidsCollisionWithFigure()) {
 			isRunning = false;
 		}
 		checkAllGeroidsCollisionWithProjectiles();
 	}
-	
+
 	/**
 	 * Checks if there are any collisions of geroids and projectiles
-	 * @return Object-array, where array[0] = updated list of geroids and array[1] = updated list of projectiles
+	 * 
+	 * @return Object-array, where array[0] = updated list of geroids and
+	 *         array[1] = updated list of projectiles
 	 */
 	private void checkAllGeroidsCollisionWithProjectiles() {
 		Iterator<Geroid> geroidIterator = geroids.iterator();
-		
+
 		while (geroidIterator.hasNext()) {
 			Geroid myGeroid = geroidIterator.next();
 			Iterator<Projectile> projectileIterator = projectiles.iterator();
-			
+
 			while (projectileIterator.hasNext()) {
 				Projectile myProjectile = projectileIterator.next();
-				
+
 				if (collisionHandler.checkIfGeroidIsCollidingWithProjectile(myGeroid, myProjectile)) {
 					score.addingScoreIfGeroidKilled(myGeroid.getMovement().getySpeed());
 					geroidIterator.remove();
@@ -117,18 +120,22 @@ public class Game {
 			}
 		}
 	}
-	
+
 	private void updateFigure(String command) {
-		if(command.length()>2){
+		if (command.length() > 2) {
 			account.setNickname(command);
-			//isName = false;
+			// isName = false;
 		}
+
+		int figureXPos = figure.getPosition().getxCoordiante();
+		int figureXLength = figure.getPosition().getxLength();
+
 		switch (command) {
 		case "65":
-			figure.moveLeft(10);
+			moveLeftIfPossible(figureXPos);
 			break;
 		case "68":
-			figure.moveRight(10);
+			moveRightIfPossible(figureXPos, figureXLength);
 			break;
 		case "32":
 			if (System.currentTimeMillis() >= timestampPreviousShot + MAXIMUM_SHOOT_SPEED) {
@@ -139,12 +146,28 @@ public class Game {
 		}
 	}
 
+	private void moveLeftIfPossible(int figureXPos) {
+		if (figureXPos - 10 >= 0) {
+			figure.moveLeft(10);
+		} else {
+			figure.moveLeft(figureXPos);
+		}
+	}
+
+	private void moveRightIfPossible(int figureXPos, int figureXLength) {
+		if (figureXPos + figureXLength + 10 <= X_LENGTH) {
+			figure.moveRight(10);
+		} else {
+			figure.moveRight(X_LENGTH - figureXPos - figureXLength);
+		}
+	}
+
 	/*
 	 * updates all geroids in geroids attribute (ArrayList)
 	 */
 	private void updateGeroids() {
 		for (int i = 0; i < geroids.size(); i++) {
-			if(collisionHandler.checkIfGeroidIsOutOfGamefield(i)){
+			if (collisionHandler.checkIfGeroidIsOutOfGamefield(i)) {
 				removeGeroid(i);
 				score.decreaseScoreForPassingGeroid(geroids.get(i).getMovement().getySpeed());
 			}
@@ -161,7 +184,7 @@ public class Game {
 	private void updateProjectiles() {
 
 		for (int i = 0; i < projectiles.size(); i++) {
-			if(collisionHandler.checkIfProjectileIsOutOfGamefield(i))
+			if (collisionHandler.checkIfProjectileIsOutOfGamefield(i))
 				removeProjectile(i);
 		}
 
@@ -220,7 +243,6 @@ public class Game {
 
 	}
 
-
 	@SuppressWarnings("unchecked")
 	private JSONArray projectilesToJSONArray() {
 
@@ -234,34 +256,38 @@ public class Game {
 	}
 
 	public void receiveMessage(String message) {
-		if(message != null){
-		updateFigure(message);
+		if (message != null) {
+			updateFigure(message);
 		} else {
 			System.err.println("Class game received null message. Message will be ignored.");
 		}
-		
+
 	}
 
 	public ArrayList<Projectile> getProjectiles() {
 		return projectiles;
 	}
-	
+
 	/**
 	 * removes a specific projectile
-	 * @param index of the projectile
+	 * 
+	 * @param index
+	 *            of the projectile
 	 */
-	private void removeProjectile(int projectileIndex){
+	private void removeProjectile(int projectileIndex) {
 		projectiles.remove(projectileIndex);
 	}
 
 	/**
 	 * removes a specific geroid
-	 * @param index of the geroid
+	 * 
+	 * @param index
+	 *            of the geroid
 	 */
-	private void removeGeroid(int geroidIndex){
+	private void removeGeroid(int geroidIndex) {
 		geroids.remove(geroidIndex);
 	}
-	
+
 	public void setFigure(Figure figure) {
 		this.figure = figure;
 	}
@@ -273,7 +299,5 @@ public class Game {
 	public boolean isRunning() {
 		return isRunning;
 	}
-	
-	
 
 }
