@@ -83,12 +83,11 @@ function canvasApp() {
     function resizeCanvas() {
         if (window.innerWidth <= 800) {
             canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight*0.9;
         } else {
             canvas.width = ((window.innerWidth) / 100) * 62.5;
+            canvas.height = window.innerHeight;
         }
-        // console.log(window.innerWidth);
-        canvas.height = window.innerHeight;
-        //console.log(window.innerHeight);
 
         /**
          * Your drawings need to be inside this function otherwise they will be
