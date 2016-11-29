@@ -195,10 +195,6 @@ a:hover {
 }
 
 .introduction {
-<<<<<<< Updated upstream
-    padding-left: 50px;
-    padding-right: 50px;
-=======
     padding-left:50px;
     padding-right:50px;
 }
@@ -219,5 +215,4 @@ a:hover {
 
 .construction {
     padding: 70px 50px 0px 50px;
->>>>>>> Stashed changes
 }
