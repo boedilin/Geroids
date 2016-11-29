@@ -42,8 +42,6 @@ function canvasApp() {
     var counter = 0;
 
     ws.onmessage = function(evt) {
-        //var previousTime = new Date().getTime();
-        console.log(new Date().getTime());
         gamefield = JSON.parse(evt.data);
         drawStuff();
     };
@@ -82,7 +80,11 @@ function canvasApp() {
     //window.addEventListener("keydown", eventKeyPressed, true);
 
     function resizeCanvas() {
-        canvas.width = ((window.innerWidth) / 100) * 62.5;
+        if (window.innerWidth <= 800) {
+            canvas.width = window.innerWidth;
+        } else {
+            canvas.width = ((window.innerWidth) / 100) * 62.5;
+        }
         // console.log(window.innerWidth);
         canvas.height = window.innerHeight;
         //console.log(window.innerHeight);
@@ -156,9 +158,9 @@ function canvasApp() {
     function drawScore(Score) {
         context.font = "15px MineCrafter_3_Regular";
         context.fillStyle = "white";
-        context.fillText("Score " + Score.toString() , 10, 25);
+        context.fillText("Score " + Score.toString(), 10, 25);
     }
-    
+
     function drawGameover() {
         context.drawImage(gameover, 0, canvas.height / 3, canvas.width, canvas.height / 4);
     }

@@ -40,7 +40,7 @@ canvas {
 
 p {
     font-family: 'MineCrafter_3_Regular';
-    color:white;
+    color: white;
 }
 
 .login {
@@ -51,15 +51,27 @@ p {
     margin-left: 13%;
 }
 
+@media (max-width: 800px) {
+    #appPanel {
+        width: 100% !important;
+        min-height: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        /*bei einer kleinen Höhe des Fensters kann so vermieden werden, dass der Inhalt des Formulars
+    nicht über das div gamePanel hinausläuft*/
+    }
+}
+
 #appPanel {
     font-family: 'MineCrafter_3_Regular';
     background-color: black;
-    color:white;
+    color: white;
     width: 62.5%;
     min-height: 100%;
     /*bei einer kleinen Höhe des Fensters kann so vermieden werden, dass der Inhalt des Formulars
     nicht über das div gamePanel hinausläuft*/
-    margin-left: 17.5%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 input[type=text] {
@@ -118,9 +130,13 @@ a:hover {
     text-decoration: none;
 }
 
-.btn, .btn.active, .btn:active, .btn-default:hover, .btn-default:active {
-    background-color:black;
-    color:white;
+.btn,
+.btn.active,
+.btn:active,
+.btn-default:hover,
+.btn-default:active {
+    background-color: black;
+    color: white;
     border: 2px solid white;
 }
 
@@ -134,26 +150,28 @@ a:hover {
     max-height: 100%;
 }
 
-.col-md-1, .col-xs-1 {
-    padding-right:5px;
-    padding-left:5px;
+.col-md-1,
+.col-xs-1 {
+    padding-right: 5px;
+    padding-left: 5px;
 }
 
-.description, .back {
-    padding-top:15px;
+.description,
+.back {
+    padding-top: 15px;
 }
 
 .price {
     font-size: 10px;
-    padding-top:15px;
+    padding-top: 15px;
 }
 
 .details {
     font-size: 8px;
-    margin:0px;
+    margin: 0px;
 }
 
 .introduction {
-    padding-left:50px;
-    padding-right:50px;
+    padding-left: 50px;
+    padding-right: 50px;
 }
