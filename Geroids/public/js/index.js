@@ -21,6 +21,21 @@ gameover.src = "../images/gameover.png";
 //eventWindowLoaded: Call this function when the event occurs. In our code, we will then call the canvasApp() function, which will start our main application execution.
 //false: This sets the function to capture this type of event before it propagates lower in the DOM tree of objects. We will always set this to false.
 window.addEventListener("load", eventWindowLoaded, false);
+var leftButton = document.getElementById("leftButton");
+var shootButton = document.getElementById("shootButton");
+var rightButton = document.getElementById("rightButton");
+
+function goLeft() {
+
+}
+
+function shoot() {
+
+}
+
+function goRight() {
+
+}
 
 function eventWindowLoaded() {
     canvasApp();
