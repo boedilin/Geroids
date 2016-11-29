@@ -40,7 +40,7 @@ public class Game {
 		// websocketHandler.sendMessage("Connected to Server");
 		this.geroids = new ArrayList<Geroid>();
 		this.projectiles = new ArrayList<Projectile>();
-		this.figure = new Figure(new Position(100, 898, 61, 90));
+		this.figure = new Figure(new Position(470, 898, 61, 90));
 		this.account = new Account("MyName" + System.currentTimeMillis());
 		this.collisionHandler = new CollisionHandler(figure, geroids, projectiles);
 		this.score = new Playscore();
