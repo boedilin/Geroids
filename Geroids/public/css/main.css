@@ -35,6 +35,7 @@ canvas {
     display: block;
 }
 
+
 /* To remove the scrollbars */
 
 p {
@@ -79,6 +80,20 @@ p {
         width: 33.33%;
         background-color: red;
     }
+    #appPanelIndex,
+    #appPanelStart,
+    #appPanelStore,
+    #appPanelUnderConstruction {
+        font-family: 'MineCrafter_3_Regular';
+        background-color: black;
+        color: white;
+        width: 100% !important;
+        min-height: 100%;
+        /*bei einer kleinen Höhe des Fensters kann so vermieden werden, dass der Inhalt des Formulars
+    nicht über das div gamePanel hinausläuft*/
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 #appPanel {
@@ -87,6 +102,21 @@ p {
     color: white;
     width: 62.5%;
     height: 100%;
+    /*bei einer kleinen Höhe des Fensters kann so vermieden werden, dass der Inhalt des Formulars
+    nicht über das div gamePanel hinausläuft*/
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#appPanelIndex,
+#appPanelStart,
+#appPanelStore,
+#appPanelUnderConstruction {
+    font-family: 'MineCrafter_3_Regular';
+    background-color: black;
+    color: white;
+    width: 62.5%;
+    min-height: 100%;
     /*bei einer kleinen Höhe des Fensters kann so vermieden werden, dass der Inhalt des Formulars
     nicht über das div gamePanel hinausläuft*/
     margin-left: auto;
@@ -195,13 +225,13 @@ a:hover {
 }
 
 .introduction {
-    padding-left:50px;
-    padding-right:50px;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
 .astronauts {
     padding: 20px 0px 20px 50px;
-    width:100%;
+    width: 100%;
 }
 
 .names {
