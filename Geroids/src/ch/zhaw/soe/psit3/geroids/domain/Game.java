@@ -12,7 +12,7 @@ import org.json.simple.JSONObject;
 import ch.zhaw.soe.psit3.geroids.servlets.MyWebSocketHandler;
 
 public class Game {
-	
+
 	private static final int X_LENGTH = 1000;
 	private static final int GEROID_WIDTH = 80;
 	private static final int GEROID_HEIGHT = 100;
@@ -166,10 +166,13 @@ public class Game {
 	 * updates all geroids in geroids attribute (ArrayList)
 	 */
 	private void updateGeroids() {
-		for (int i = 0; i < geroids.size(); i++) {
-			if (collisionHandler.checkIfGeroidIsOutOfGamefield(i)) {
-				removeGeroid(i);
-				score.decreaseScoreForPassingGeroid(geroids.get(i).getMovement().getySpeed());
+
+		Iterator<Geroid> geroidIterator = geroids.iterator();
+		while (geroidIterator.hasNext()) {
+			Geroid currentGeroid = geroidIterator.next();
+			if (collisionHandler.checkIfGeroidIsOutOfGamefield(currentGeroid)) {
+				score.decreaseScoreForPassingGeroid(currentGeroid.getMovement().getySpeed());
+				geroidIterator.remove();
 			}
 		}
 
