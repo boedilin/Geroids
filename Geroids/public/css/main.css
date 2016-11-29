@@ -35,7 +35,6 @@ canvas {
     display: block;
 }
 
-
 /* To remove the scrollbars */
 
 p {
@@ -196,6 +195,29 @@ a:hover {
 }
 
 .introduction {
+<<<<<<< Updated upstream
     padding-left: 50px;
     padding-right: 50px;
+=======
+    padding-left:50px;
+    padding-right:50px;
+}
+
+.astronauts {
+    padding: 20px 0px 20px 50px;
+    width:100%;
+}
+
+.names {
+    padding: 10px 25px 70px 50px;
+}
+
+.footer {
+    padding: 70px 50px 0px 50px;
+    font-size: 7px;
+}
+
+.construction {
+    padding: 70px 50px 0px 50px;
+>>>>>>> Stashed changes
 }
