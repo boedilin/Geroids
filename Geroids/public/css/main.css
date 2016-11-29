@@ -54,6 +54,7 @@ p {
 #appPanel {
     font-family: 'MineCrafter_3_Regular';
     background-color: black;
+    color:white;
     width: 62.5%;
     min-height: 100%;
     /*bei einer kleinen Höhe des Fensters kann so vermieden werden, dass der Inhalt des Formulars
@@ -138,7 +139,7 @@ a:hover {
     padding-left:5px;
 }
 
-.description {
+.description, .back {
     padding-top:15px;
 }
 
@@ -151,6 +152,8 @@ a:hover {
     font-size: 8px;
     margin:0px;
 }
-.back{
-    padding-top:15px;
+
+.introduction {
+    padding-left:50px;
+    padding-right:50px;
 }
