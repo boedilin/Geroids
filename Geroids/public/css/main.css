@@ -54,11 +54,31 @@ p {
 @media (max-width: 800px) {
     #appPanel {
         width: 100% !important;
-        min-height: 100% !important;
+        min-height: 90% !important;
         margin-left: auto !important;
         margin-right: auto !important;
         /*bei einer kleinen Höhe des Fensters kann so vermieden werden, dass der Inhalt des Formulars
     nicht über das div gamePanel hinausläuft*/
+    }
+    #actionButtons {
+        text-align: center;
+        width: 100%;
+        min-height: 10% !important;
+        display: flex !important;
+    }
+    #leftButton {
+        width: 33.33%;
+        background-color: green;
+    }
+    #shootButton {
+        width: 33.33%;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        background-color: blue;
+    }
+    #rightButton {
+        width: 33.33%;
+        background-color: red;
     }
 }
 
@@ -72,6 +92,10 @@ p {
     nicht über das div gamePanel hinausläuft*/
     margin-left: auto;
     margin-right: auto;
+}
+
+#actionButtons {
+    display: none;
 }
 
 input[type=text] {
