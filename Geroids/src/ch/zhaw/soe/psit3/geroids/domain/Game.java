@@ -186,9 +186,12 @@ public class Game {
 	 */
 	private void updateProjectiles() {
 
-		for (int i = 0; i < projectiles.size(); i++) {
-			if (collisionHandler.checkIfProjectileIsOutOfGamefield(i))
-				removeProjectile(i);
+		Iterator<Projectile> projectileIterator = projectiles.iterator();
+		while(projectileIterator.hasNext()){
+			Projectile currentProjectile = projectileIterator.next();
+			if (collisionHandler.checkIfProjectileIsOutOfGamefield(currentProjectile))
+				projectileIterator.remove();
+			
 		}
 
 		for (Projectile myProjectile : projectiles) {
@@ -271,25 +274,6 @@ public class Game {
 		return projectiles;
 	}
 
-	/**
-	 * removes a specific projectile
-	 * 
-	 * @param index
-	 *            of the projectile
-	 */
-	private void removeProjectile(int projectileIndex) {
-		projectiles.remove(projectileIndex);
-	}
-
-	/**
-	 * removes a specific geroid
-	 * 
-	 * @param index
-	 *            of the geroid
-	 */
-	private void removeGeroid(int geroidIndex) {
-		geroids.remove(geroidIndex);
-	}
 
 	public void setFigure(Figure figure) {
 		this.figure = figure;

@@ -97,8 +97,7 @@ public class CollisionHandler {
 	/**
 	 * Checks if geroid is out of gamefield
 	 * 
-	 * @param geroid
-	 *            to test
+	 * @param Geroid to test
 	 * @return true if geroid is out of gamefield
 	 */
 	public boolean checkIfGeroidIsOutOfGamefield(Geroid geroid) {
@@ -113,13 +112,12 @@ public class CollisionHandler {
 	/**
 	 * Checks if a projectile is out of gamefield
 	 * 
-	 * @param index
-	 *            of projectile
+	 * @param Projectile to test
 	 * @return true if projectile is out of gamefield
 	 */
-	public boolean checkIfProjectileIsOutOfGamefield(int projectileIndex) {
-		int yCoord = projectiles.get(projectileIndex).getPosition().getyCoordiante();
-		int yLength = projectiles.get(projectileIndex).getPosition().getyLength();
+	public boolean checkIfProjectileIsOutOfGamefield(Projectile projectile) {
+		int yCoord = projectile.getPosition().getyCoordiante();
+		int yLength = projectile.getPosition().getyLength();
 
 		if ((yCoord + yLength) < 0) {
 			return true;
@@ -127,11 +125,11 @@ public class CollisionHandler {
 		return false;
 	}
 
+
 	/**
 	 * Updates figure, geroids and projectiles
 	 * 
-	 * @param List
-	 *            of geroids, figure and list of projectiles
+	 * @param List of geroids, figure and list of projectiles
 	 */
 	public void updateFigures(ArrayList<Geroid> geroids, Figure figure, ArrayList<Projectile> projectiles) {
 		this.geroids = geroids;
