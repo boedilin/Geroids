@@ -9,6 +9,7 @@ public class Figure {
 	private Skin skin;
 	private Type type;
 	private static final Movement MOVEMENT_FOR_PROJECTILE = new Movement(0,-10);
+	private final int PROJECTILE_SIZE = 10;
 
 	public Figure(Type type, Skin skin, int x, int y){
 		this.skin = skin;
@@ -43,8 +44,9 @@ public class Figure {
 	public Projectile shoot(){
 		
 		int xPosInMiddleOfFigure = this.position.getxCoordiante() + this.position.getxLength()/2;
+		int xPosMiddleWithProjectileWidth = xPosInMiddleOfFigure - PROJECTILE_SIZE/2;
 		
-		Position pos = new Position(xPosInMiddleOfFigure, this.position.getyCoordiante()-10,20,20);
+		Position pos = new Position(xPosMiddleWithProjectileWidth, this.position.getyCoordiante()-10,PROJECTILE_SIZE,PROJECTILE_SIZE);
 		Projectile projectile = new Projectile(pos, MOVEMENT_FOR_PROJECTILE);
 		return projectile;
 		
