@@ -246,3 +246,9 @@ a:hover {
 .construction {
     padding: 70px 50px 0px 50px;
 }
+
+.constructionImage {
+    padding-bottom: 30px;
+    padding-left:30px;
+    width:70%;
+}
