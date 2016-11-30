@@ -33,7 +33,9 @@
                     <img src="images/logo_black_2.png" class="startlogo" alt="Geroids" />
                     <form action="/start.html" method="get">
                         <label for="fname">Please enter your Nickname</label>
-                        <input type="text" id="name" placeholder="Name" name="name" required>
+                        <input type="text" id="name" placeholder="Name" name="name" required   
+                        oninvalid="this.setCustomValidity('Please enter a name')"
+    					oninput="setCustomValidity('')">
                         <button onclick="myFunction()" class="btn btn-default">Submit</button>
                     </form>
                 </div>
