@@ -21,6 +21,7 @@ var leftButton = document.getElementById("leftButton");
 var shootButton = document.getElementById("shootButton");
 var rightButton = document.getElementById("rightButton");
 var firstTime = true;
+var requestId;
 
 function goLeft() {
 
@@ -60,15 +61,6 @@ function canvasApp() {
         }
     }
 
-    var drawInterval = setInterval(function() {
-        for (key in map) {
-            if (map[key]) {
-                ws.send(key);
-            }
-        }
-        drawStuff();
-    }, 25);
-
     /**
      * how fast the pressed key can be sent: (85ms)
      *      var previousTime;
@@ -78,22 +70,16 @@ function canvasApp() {
 
     // resize the canvas to fill browser window dynamically
     window.addEventListener('resize', resizeCanvas, false);
-    //window.addEventListener("keydown", eventKeyPressed, true);
 
     function resizeCanvas() {
         if (window.innerWidth <= 800) {
             canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight*0.9;
+            canvas.height = window.innerHeight * 0.9;
         } else {
             canvas.width = ((window.innerWidth) / 100) * 62.5;
             canvas.height = window.innerHeight;
         }
 
-        /**
-         * Your drawings need to be inside this function otherwise they will be
-         * reset when you resize the browser window and the canvas goes will be
-         * cleared.
-         */
         canvasXFactor = canvas.width / 1000;
         canvasYFactor = canvas.height / 1000;
 
@@ -101,13 +87,13 @@ function canvasApp() {
     }
     resizeCanvas();
 
-    /*
-        function eventKeyPressed(event) {
-            console.log(event.key);
-            //ws.send(event.key);
-        }*/
-
     function drawStuff() {
+        requestId = requestAnimationFrame(drawStuff);
+        for (key in map) {
+            if (map[key]) {
+                ws.send(key);
+            }
+        }
         // do your drawing stuff here
         context.fillStyle = "black";
         context.fillRect(0, 0, canvas.width, canvas.height);
@@ -118,7 +104,7 @@ function canvasApp() {
         drawScore(gamefield.Score);
         if (gamefield.Gameover) {
             drawGameover();
-            clearInterval(drawInterval);
+            cancelAnimationFrame(requestId);
         }
     }
 
@@ -166,25 +152,18 @@ function canvasApp() {
     }
 }
 
-
-
 ws.onopen = function() {
     console.log("Websocket opened!");
     if (localStorage.getItem('name') != null) {
         ws.send(localStorage.getItem('name'));
     }
+    setTimeout(function() {
+        canvasApp();
+    }, 100);
 };
-
-/**
- * Upon Receiving a message from the server, this method tries to extract name attribute from string and send the message to the corresponding drawing method.
- */
 
 ws.onmessage = function(evt) {
     gamefield = JSON.parse(evt.data);
-    if (firstTime) {
-        firstTime = false;
-        canvasApp();
-    }
 };
 
 ws.onclose = function() {
