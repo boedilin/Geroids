@@ -22,6 +22,7 @@ var shootButton = document.getElementById("shootButton");
 var rightButton = document.getElementById("rightButton");
 var firstTime = true;
 var requestId;
+var sendedScore = false;
 
 function goLeft() {
 
@@ -49,6 +50,7 @@ function sendScore(score) {
                 "date": new Date().toLocaleDateString()
             }
         });
+        sendScore = true;
     }
 }
 
@@ -120,7 +122,9 @@ function canvasApp() {
         drawProjectiles(gamefield.Projectiles);
         drawScore(gamefield.Score);
         if (gamefield.Gameover) {
-            sendScore(gamefield.Score);
+            if (!sendedScore) {
+                sendScore(gamefield.Score);
+            }
             drawGameover();
             cancelAnimationFrame(requestId);
 
