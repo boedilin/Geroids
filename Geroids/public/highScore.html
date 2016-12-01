@@ -19,9 +19,21 @@
             url: "https://radiant-beyond-79689.herokuapp.com/api/highscore",
             dataType: "jsonp",
             success: function(data) {
-                console.log(data);
+                data.data.forEach(function(user, rank) {
+                    aufSpeicherListeBildHinzufuegen(user, rank + 1);
+                });
             }
         });
+        var aufSpeicherListeBildHinzufuegen = function(user, rank) {
+            console.log("asdasdasasd");
+            var html = '<div class="row highscore">' +
+                '<div style="width: 10%;">' + rank + '</div>' +
+                '<div style="width: 30%;">' + user.nickname + '</div>' +
+                '<div style="width: 30%;">' + user.score + '</div>' +
+                '<div style="width: 30%;">' + user.date + '</div>' +
+                '</div>';
+            $(".list").append(html);
+        };
     </script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -35,7 +47,17 @@
 <body>
     <div id="appPanelStore">
         <div class="container-fluid">
-            <div class="row extensions text-center">test
+            <div class="row text-center list">
+                <div class="row">
+                    <div class="col-xs-8 col-md-8 col-xs-offset-2 col-md-col-xs-2 col-md-offset-2">
+                        <img src="images/logo_black_2.png" class="startlogo" alt="Geroids" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <form class="col-xs-2 col-md-2 col-xs-offset-5 col-md-offset-5 back" action="/start.html" method="get">
+                    <button class="btn btn-default">Back</button>
+                </form>
             </div>
         </div>
 </body>

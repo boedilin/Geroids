@@ -37,10 +37,17 @@ function goRight() {
 
 function sendScore(score) {
     if (localStorage.getItem("name")) {
-        $.post("https://radiant-beyond-79689.herokuapp.com/api/score", {
-            "nickname": localStorage.getItem("name"),
-            "score": score,
-            "date": new Date().toLocaleDateString()
+        console.log("try to post score");
+        $.ajax({
+            url: "https://radiant-beyond-79689.herokuapp.com/api/score",
+            dataType: "json",
+            crossDomain: true,
+            type: "POST",
+            data: {
+                "nickname": localStorage.getItem("name"),
+                "score": score,
+                "date": new Date().toLocaleDateString()
+            }
         });
     }
 }

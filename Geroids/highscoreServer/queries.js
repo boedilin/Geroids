@@ -7,17 +7,17 @@ var options = {
 
 var pgp = require('pg-promise')(options);
 // postgres://username:password@host:port/databasename
-var connectionString = 'postgres://pyfpusooyxpymo:bV-dN-Z_hGvZ63rZDB-NkFqHb0@ec2-54-163-238-215.compute-1.amazonaws.com:5432/ddpq5suo07un0';
+var connectionString = 'postgres://eqeskeyyomthxo:mxucs6UbhfrGIp0osw1fyQ2dBW@ec2-54-221-225-242.compute-1.amazonaws.com:5432/db2n32jagimtsb';
 var db = pgp(connectionString);
 
 function getHighscore(request, response, next) {
     db.any('select * from highscore order by score desc')
         .then(function(data) {
             response.status(200)
-                .json({
+                .jsonp({
                     status: 'success',
                     data: data,
-                    message: 'Retrieved collection'
+                    message: 'Retrieved HighscoreList'
                 });
         })
         .catch(function(err) {
@@ -26,12 +26,14 @@ function getHighscore(request, response, next) {
 }
 
 function createScore(request, response, next) {
-    db.none('insert into highscore(nickanme, score, date)' +
+    response.header("Access-Control-Allow-Origin", "*");
+    response.header("Access-Control-Allow-Headers", "X-Requested-With");
+    db.none('insert into highscore(nickname, score, date)' +
             'values(${nickname}, ${score}, ${date})',
             request.body)
         .then(function() {
             response.status(200)
-                .json({
+                .jsonp({
                     status: 'success',
                     message: 'Inserted one result'
                 });
