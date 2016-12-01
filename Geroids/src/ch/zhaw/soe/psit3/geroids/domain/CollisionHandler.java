@@ -7,15 +7,11 @@ public class CollisionHandler {
 
 	private ArrayList<Geroid> geroids;
 	private Figure figure;
-	private ArrayList<Projectile> projectiles;
-	// private int xRange = 1000;
 	private int yRange = 1000;
 
 	public CollisionHandler(Figure figure, ArrayList<Geroid> geroids, ArrayList<Projectile> projectiles) {
 		this.geroids = geroids;
 		this.figure = figure;
-		this.projectiles = projectiles;
-
 	}
 
 	/**
@@ -134,6 +130,5 @@ public class CollisionHandler {
 	public void updateFigures(ArrayList<Geroid> geroids, Figure figure, ArrayList<Projectile> projectiles) {
 		this.geroids = geroids;
 		this.figure = figure;
-		this.projectiles = projectiles;
 	}
 }

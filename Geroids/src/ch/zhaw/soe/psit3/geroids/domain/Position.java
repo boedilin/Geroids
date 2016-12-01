@@ -1,6 +1,5 @@
 package ch.zhaw.soe.psit3.geroids.domain;
 
-import java.util.ArrayList;
 import org.json.simple.JSONObject;
 
 public class Position {

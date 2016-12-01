@@ -35,18 +35,18 @@ public class Movement {
 	}
 
 	/**
-	 * Increases the X Speed by the provided factor
+	 * Changes the X Speed by the provided factor
 	 * @param x The factor the X Speed should be increased
 	 */
-	public void increaseXSpeed(int x) {
+	public void changeXSpeedByGivenFactor(int x) {
 		this.xSpeed = xSpeed * x;
 	}
 
 	/**
-	 * Increases the Y Speed by the given amount
+	 * Changes the Y Speed by the given amount
 	 * @param y The factor the Y Speed should be increased
 	 */
-	public void increaseYSpeed(int y) {
+	public void changeYSpeedByGivenFactor(int y) {
 		this.ySpeed = ySpeed * y;
 	}
 	
