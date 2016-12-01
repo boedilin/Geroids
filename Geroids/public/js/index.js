@@ -35,6 +35,16 @@ function goRight() {
 
 }
 
+function sendScore(score) {
+    if (localStorage.getItem("name")) {
+        $.post("https://radiant-beyond-79689.herokuapp.com/api/score", {
+            "nickname": localStorage.getItem("name"),
+            "score": score,
+            "date": new Date().toLocaleDateString()
+        });
+    }
+}
+
 function canvasSupport() {
     return Modernizr.canvas;
 }
@@ -103,8 +113,10 @@ function canvasApp() {
         drawProjectiles(gamefield.Projectiles);
         drawScore(gamefield.Score);
         if (gamefield.Gameover) {
+            sendScore(gamefield.Score);
             drawGameover();
             cancelAnimationFrame(requestId);
+
         }
     }
 
