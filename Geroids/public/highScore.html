@@ -15,17 +15,18 @@
     <script type="text/javascript" src="js/modernizr.js"></script>
     <link rel="stylesheet" href="css/main.css">
     <script>
+        const topX = 20;
         $.ajax({
             url: "https://radiant-beyond-79689.herokuapp.com/api/highscore",
             dataType: "jsonp",
             success: function(data) {
                 data.data.forEach(function(user, rank) {
-                    aufSpeicherListeBildHinzufuegen(user, rank + 1);
+                    if (rank < topX)
+                        aufSpeicherListeBildHinzufuegen(user, rank + 1);
                 });
             }
         });
         var aufSpeicherListeBildHinzufuegen = function(user, rank) {
-            console.log("asdasdasasd");
             var html = '<div class="row highscore">' +
                 '<div style="width: 10%;">' + rank + '</div>' +
                 '<div style="width: 30%;">' + user.nickname + '</div>' +

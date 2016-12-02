@@ -127,7 +127,7 @@ function canvasApp() {
             }
             drawGameover();
             cancelAnimationFrame(requestId);
-
+            showGameoverButtons();
         }
     }
 
@@ -172,6 +172,10 @@ function canvasApp() {
 
     function drawGameover() {
         context.drawImage(gameover, 0, canvas.height / 3, canvas.width, canvas.height / 4);
+    }
+
+    function showGameoverButtons() {
+        document.getElementById("gameoverbuttons").style.display = "flex";
     }
 }
 
