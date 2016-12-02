@@ -37,21 +37,19 @@ function goRight() {
 }
 
 function sendScore(score) {
-    if (localStorage.getItem("name")) {
-        console.log("try to post score");
-        $.ajax({
-            url: "https://radiant-beyond-79689.herokuapp.com/api/score",
-            dataType: "json",
-            crossDomain: true,
-            type: "POST",
-            data: {
-                "nickname": localStorage.getItem("name"),
-                "score": score,
-                "date": new Date().toLocaleDateString()
-            }
-        });
-        sendScore = true;
-    }
+    console.log("try to post score");
+    $.ajax({
+        url: "https://radiant-beyond-79689.herokuapp.com/api/score",
+        dataType: "json",
+        crossDomain: true,
+        type: "POST",
+        data: {
+            "nickname": localStorage.getItem("name"),
+            "score": score,
+            "date": new Date().toLocaleDateString()
+        }
+    });
+    sendScore = true;
 }
 
 function canvasSupport() {
@@ -122,7 +120,7 @@ function canvasApp() {
         drawProjectiles(gamefield.Projectiles);
         drawScore(gamefield.Score);
         if (gamefield.Gameover) {
-            if (!sendedScore) {
+            if (!sendedScore && localStorage.getItem("name")) {
                 sendScore(gamefield.Score);
             }
             drawGameover();
