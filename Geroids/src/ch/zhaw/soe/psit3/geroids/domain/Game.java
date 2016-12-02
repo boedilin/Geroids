@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-import javax.sound.midi.Synthesizer;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -103,22 +102,23 @@ public class Game {
 	 */
 	private void checkAllGeroidsCollisionWithProjectiles() {
 		Iterator<Geroid> geroidIterator = geroids.iterator();
-
 		while (geroidIterator.hasNext()) {
 			Geroid myGeroid = geroidIterator.next();
-			Iterator<Projectile> projectileIterator = projectiles.iterator();
-
-			while (projectileIterator.hasNext()) {
-				Projectile myProjectile = projectileIterator.next();
-
-				if (collisionHandler.checkIfGeroidIsCollidingWithProjectile(myGeroid, myProjectile)) {
-					score.addingScoreIfGeroidKilled(myGeroid.getMovement().getySpeed());
-					geroidIterator.remove();
-					projectileIterator.remove();
+			synchronized (projectiles) {
+				Iterator<Projectile> projectileIterator = projectiles.iterator();
+				while (projectileIterator.hasNext()) {
+					Projectile myProjectile = projectileIterator.next();
+					if (collisionHandler.checkIfGeroidIsCollidingWithProjectile(myGeroid, myProjectile)) {
+						score.addingScoreIfGeroidKilled(myGeroid.getMovement().getySpeed());
+						geroidIterator.remove();
+						projectileIterator.remove();
+						break;
+					}
 
 				}
 			}
 		}
+
 	}
 
 	private void updateFigure(String command) {
@@ -140,7 +140,9 @@ public class Game {
 		case "32":
 			if (System.currentTimeMillis() >= timestampPreviousShot + MAXIMUM_SHOOT_SPEED) {
 				timestampPreviousShot = System.currentTimeMillis();
-				projectiles.add(figure.shoot());
+				synchronized (projectiles) {
+					projectiles.add(figure.shoot());
+				}
 			}
 			break;
 		}
@@ -186,16 +188,23 @@ public class Game {
 	 */
 	private void updateProjectiles() {
 
-		Iterator<Projectile> projectileIterator = projectiles.iterator();
-		while(projectileIterator.hasNext()){
-			Projectile currentProjectile = projectileIterator.next();
-			if (collisionHandler.checkIfProjectileIsOutOfGamefield(currentProjectile))
-				projectileIterator.remove();
-			
-		}
+		synchronized (projectiles) {
+			Iterator<Projectile> projectileIterator = projectiles.iterator();
 
-		for (Projectile myProjectile : projectiles) {
-			myProjectile.move();
+			while (projectileIterator.hasNext()) {
+
+				Projectile currentProjectile = projectileIterator.next();
+
+				if (collisionHandler.checkIfProjectileIsOutOfGamefield(currentProjectile)) {
+					projectileIterator.remove();
+				}
+			}
+
+		}
+		synchronized (projectiles) {
+			for (Projectile myProjectile : projectiles) {
+				myProjectile.move();
+			}
 		}
 	}
 
@@ -224,7 +233,9 @@ public class Game {
 			Position pos = new Position(new Random().nextInt(900), TOP_OF_SCREEN, GEROID_WIDTH, GEROID_HEIGHT);
 			Movement mov = new Movement(0, new Random().nextInt(10) + 1);
 			Geroid geroid = new Geroid(pos, mov);
+			// synchronized (geroids) {
 			geroids.add(geroid);
+			// }
 		}
 	}
 
@@ -254,8 +265,10 @@ public class Game {
 
 		JSONArray array = new JSONArray();
 
-		for (Projectile projectile : projectiles) {
-			array.add(projectile.toJSONObject());
+		synchronized (projectiles) {
+			for (Projectile projectile : projectiles) {
+				array.add(projectile.toJSONObject());
+			}
 		}
 
 		return array;
@@ -273,7 +286,6 @@ public class Game {
 	public ArrayList<Projectile> getProjectiles() {
 		return projectiles;
 	}
-
 
 	public void setFigure(Figure figure) {
 		this.figure = figure;
