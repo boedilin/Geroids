@@ -11,24 +11,18 @@ import ch.zhaw.soe.psit3.geroids.domain.Position;
 
 public class TestFigure {
 	private Figure figure;
+	Position positionMock = mock(Position.class);
 	
 	@Before
 	public void setUp() throws Exception {
-		Position positionMock = mock(Position.class);
 		figure = new Figure(positionMock);
 	}
 	
 	@Test
 	public void moveLeftNotOverTheGamefield(){
-		figure.moveLeft(Game.X_WIDTH+1);
-		System.out.print(figure.getXCoordinate());
-		assertEquals(0, figure.getXCoordinate());
+		positionMock.setxCoordiante(Game.LEFT_BOARDER);
+		figure.moveLeft();
+		verify(positionMock, times(0)).setxCoordiante(anyInt());		
 	}
-	
-	@Test
-	public void moveRightNotOverTheGamefield(){
-		figure.moveRight(11+1);
-		
-		assertEquals(0, figure.getXCoordinate());
-	}
+
 }

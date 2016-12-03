@@ -15,7 +15,7 @@ public class Game {
 	//this configuration could be stored in an configClass maybe?
 	public static final int X_WIDTH = 1000;
 	public static final int Y_HEIGHT = 1000;
-	public static final int X_WIDTH_FIGURE = 61;
+	public static final int X_WIDTH_FIGURE = 60;
 	public static final int Y_HEIGHT_FIGURE = 90;
 	public static final int GEROID_WIDTH = 80;
 	public static final int GEROID_HEIGHT = 100;
