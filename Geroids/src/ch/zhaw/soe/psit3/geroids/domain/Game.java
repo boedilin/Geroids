@@ -41,7 +41,7 @@ public class Game {
 		this.projectiles = new ArrayList<Projectile>();
 		this.figure = new Figure(new Position(470, 898, 61, 90));
 		this.account = new Account("MyName" + System.currentTimeMillis());
-		this.collisionHandler = new CollisionHandler(figure, geroids, projectiles);
+		this.collisionHandler = new CollisionHandler(figure, geroids);
 		this.score = new Playscore();
 	}
 
@@ -76,7 +76,7 @@ public class Game {
 	 */
 
 	private void updateGamefield() {
-		collisionHandler.updateFigures(geroids, figure, projectiles);
+		collisionHandler.updateFigures(geroids, figure);
 		updateGeroids();
 		updateProjectiles();
 		handleCollisions();

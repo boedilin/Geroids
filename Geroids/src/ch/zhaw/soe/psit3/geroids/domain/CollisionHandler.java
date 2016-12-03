@@ -8,8 +8,10 @@ public class CollisionHandler {
 	private ArrayList<Geroid> geroids;
 	private Figure figure;
 	private int yRange = 1000;
-
-	public CollisionHandler(Figure figure, ArrayList<Geroid> geroids, ArrayList<Projectile> projectiles) {
+	public CollisionHandler(Figure figure, ArrayList<Geroid> geroids) throws NullPointerException {
+		if(figure == null || geroids == null) {
+			throw new NullPointerException();
+		}
 		this.geroids = geroids;
 		this.figure = figure;
 	}
@@ -127,7 +129,7 @@ public class CollisionHandler {
 	 * 
 	 * @param List of geroids, figure and list of projectiles
 	 */
-	public void updateFigures(ArrayList<Geroid> geroids, Figure figure, ArrayList<Projectile> projectiles) {
+	public void updateFigures(ArrayList<Geroid> geroids, Figure figure) {
 		this.geroids = geroids;
 		this.figure = figure;
 	}
