@@ -93,9 +93,13 @@ public class TestSystemGame {
 	}
 
 	private void waitForEntryInGeroids() {
-		while (game.getGeroids().isEmpty()) {
+		
+		
+		while (game.getGeroids().size()< 3) {
 			System.out.print("");
 		}
+		
+		
 	}
 
 
