@@ -20,9 +20,18 @@ public class TestFigure {
 	
 	@Test
 	public void moveLeftNotOverTheGamefield(){
-		positionMock.setxCoordiante(Game.LEFT_BOARDER);
+		when(positionMock.getxCoordiante()).thenReturn(Game.LEFT_BOARDER);
 		figure.moveLeft();
 		verify(positionMock, times(0)).setxCoordiante(anyInt());		
 	}
+	
+	@Test
+	public void moveRightNotOverTheGamefield(){
+		when(positionMock.getxCoordiante()).thenReturn(Game.RIGHT_BOARDER - Game.X_WIDTH_FIGURE);
+		figure.moveRight();
+		verify(positionMock, times(0)).setxCoordiante(anyInt());		
+	}
+	
+	
 
 }
