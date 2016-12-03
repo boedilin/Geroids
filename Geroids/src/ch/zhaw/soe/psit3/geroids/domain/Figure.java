@@ -25,16 +25,24 @@ public class Figure {
 	 * Moves the figure to the Left
 	 * @param amount Amount of pixels the figure should move to the left
 	 */
-	public void moveLeft(int amount){
-		this.position.setxCoordiante(this.position.getxCoordiante()-amount);
+	public void moveLeft(){
+		if (getPosition().getxCoordiante() - Game.MOVE_WIDTH >= Game.LEFT_BOARDER) {
+			position.setxCoordiante(this.position.getxCoordiante()-Game.MOVE_WIDTH);
+		}
 	}
 	
 	/**
 	 * Moves the figure to the right
 	 * @param amount Amount of pixels the figure should move to the right
 	 */
-	public void moveRight(int amount){
-		this.position.setxCoordiante(this.position.getxCoordiante()+amount);
+	public void moveRight(){
+		if (getPosition().getxCoordiante() + getPosition().getyLength()/2 + Game.MOVE_WIDTH <= Game.X_WIDTH) {
+			System.out.println("getPosition().getyLength()"+getPosition().getyLength());
+			System.out.println("getPosition().getxCoordiante()"+getPosition().getxCoordiante());
+			System.out.println("Game.MOVE_WIDTH"+Game.MOVE_WIDTH);
+			System.out.println(getPosition().getxCoordiante() + Game.MOVE_WIDTH);
+			position.setxCoordiante(this.position.getxCoordiante()+Game.MOVE_WIDTH);
+		}
 	}
 	
 	/**
@@ -68,5 +76,13 @@ public class Figure {
 	public Position getPosition() {
 
 		return this.position;
+	}
+	//for tests only
+	public int getXCoordinate(){
+		return this.position.getxCoordiante();
+	}
+	//for tests only
+	public int getYCoordinate(){
+		return this.position.getyCoordiante();
 	}
 }
