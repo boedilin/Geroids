@@ -41,9 +41,9 @@ public class TestCollisionHandler {
 		geroidNoCollision = new Geroid(new Position(1,1,3,3), new Movement(1,1));
 		geroidCollision = new Geroid(new Position(9,1,2,2), new Movement(1,1));
 		geroidOutofGamefield = new Geroid(new Position(1,1001), new Movement(1,1));
-		projectileOutofGamefield = new Projectile(new Position(1,-2), new Movement(1,1));
-		projectileNoCollision = new Projectile(new Position(5,5), new Movement(1,1));
-		projectileCollision = new Projectile(new Position(10,1), new Movement(1,1));
+		projectileOutofGamefield = new Projectile(new Position(1,-2));
+		projectileNoCollision = new Projectile(new Position(5,5));
+		projectileCollision = new Projectile(new Position(10,1));
 		geroids.add(geroidNoCollision);
 		projectiles.add(projectileNoCollision);
 		collisionHandler = new CollisionHandler(figureNoCollision, geroids);
