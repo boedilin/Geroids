@@ -24,6 +24,18 @@
                     if (rank < topX)
                         aufSpeicherListeBildHinzufuegen(user, rank + 1);
                 });
+
+                var myUser = localStorage.getItem('name')
+
+                for(i = 0; i< data.data.length; i++){
+                    if(myUser.localeCompare(data.data[i].nickname) == 0){
+                        if(i > 19 ) {
+                            aufSpeicherListeBildHinzufuegen(data.data[i], i + 1);
+                        }
+                        break;
+                    }
+                }
+
             }
         });
         var aufSpeicherListeBildHinzufuegen = function(user, rank) {
@@ -34,6 +46,8 @@
                 '<div style="width: 30%;">' + user.date + '</div>' +
                 '</div>';
             $(".list").append(html);
+          
+            
         };
     </script>
 
