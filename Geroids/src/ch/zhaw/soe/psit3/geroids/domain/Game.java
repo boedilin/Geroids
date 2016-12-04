@@ -15,11 +15,8 @@ public class Game {
 	//this configuration could be stored in an configClass maybe?
 	public static final int X_WIDTH = 1000;
 	public static final int Y_HEIGHT = 1000;
-	public static final int X_WIDTH_FIGURE = 60;
-	public static final int Y_HEIGHT_FIGURE = 90;
 	public static final int GEROID_WIDTH = 80;
 	public static final int GEROID_HEIGHT = 100;
-	public static final int MOVE_WIDTH = 10;
 	public static final int LEFT_BOARDER = 0;
 	public static final int RIGHT_BOARDER = X_WIDTH;
 	private static final int TOP_OF_SCREEN = 0;
@@ -47,10 +44,10 @@ public class Game {
 		this.geroids = new ArrayList<Geroid>();
 		this.projectiles = new ArrayList<Projectile>();
 		this.figure = new Figure(new Position(
-				(X_WIDTH - X_WIDTH_FIGURE)/2,
-				X_WIDTH - Y_HEIGHT_FIGURE,
-				X_WIDTH_FIGURE,
-				Y_HEIGHT_FIGURE));
+				(X_WIDTH - Figure.X_WIDTH_FIGURE)/2,
+				X_WIDTH - Figure.Y_HEIGHT_FIGURE,
+				Figure.X_WIDTH_FIGURE,
+				Figure.Y_HEIGHT_FIGURE));
 		this.account = new Account("MyName" + System.currentTimeMillis());
 		this.collisionHandler = new CollisionHandler(figure, geroids);
 		this.score = new Playscore();
@@ -136,9 +133,6 @@ public class Game {
 			account.setNickname(command);
 			// isName = false;
 		}
-
-		int figureXPos = figure.getPosition().getxCoordiante();
-		int figureXLength = figure.getPosition().getxLength();
 
 		switch (command) {
 		case "65":

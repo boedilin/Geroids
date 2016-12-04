@@ -13,11 +13,12 @@ import org.json.simple.JSONObject;
 public class Projectile{
 
 	private Position position;
-	private Movement movement;
+	public final static int PROJECTILE_SIZE = 10;
+	private final int MOVEMENT_SPEED = -10;
+	private Movement movement = new Movement(0,MOVEMENT_SPEED);
 
-	public Projectile(Position position, Movement movement) {
+	public Projectile(Position position) {
 		this.position = position;
-		this.movement = movement;
 	}
 
 	/**
