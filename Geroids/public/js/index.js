@@ -10,7 +10,8 @@ var geroid3 = new Image();
 var geroid4 = new Image();
 var geroid5 = new Image();
 var gameover = new Image();
-var audio = new Audio('../music/gameMusic.mp3');
+var audioGame = new Audio('../music/gameMusic.mp3');
+var audioGameOver = new Audio('../music/gameOverMusic.mp3');
 spaceShip.src = "../images/ship.png";
 geroid1.src = "../images/element1.png";
 geroid2.src = "../images/element2.png";
@@ -127,7 +128,8 @@ function canvasApp() {
             drawGameover();
             cancelAnimationFrame(requestId);
             showGameoverButtons();
-            audio.pause();
+            audioGameOver.play();
+            audioGame.pause();
         }
     }
 
@@ -181,7 +183,8 @@ function canvasApp() {
 
 ws.onopen = function() {
     console.log("Websocket opened!");
-    audio.play();
+    audioGameOver.pause();
+    audioGame.play();
     if (localStorage.getItem('name') != null) {
         ws.send(localStorage.getItem('name'));
     }
