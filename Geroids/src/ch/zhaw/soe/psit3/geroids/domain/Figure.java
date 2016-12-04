@@ -8,8 +8,9 @@ public class Figure {
 	private Position position;
 	private Skin skin;
 	private Type type;
-	private static final Movement MOVEMENT_FOR_PROJECTILE = new Movement(0,-10);
-	private final int PROJECTILE_SIZE = 10;
+	public static final int X_WIDTH_FIGURE = 60;
+	public static final int Y_HEIGHT_FIGURE = 90;
+	public static final int MOVE_WIDTH = 10;
 
 	public Figure(Type type, Skin skin, int x, int y){
 		this.skin = skin;
@@ -25,16 +26,20 @@ public class Figure {
 	 * Moves the figure to the Left
 	 * @param amount Amount of pixels the figure should move to the left
 	 */
-	public void moveLeft(int amount){
-		this.position.setxCoordiante(this.position.getxCoordiante()-amount);
+	public void moveLeft(){
+		if (getPosition().getxCoordiante() - Figure.MOVE_WIDTH >= Game.LEFT_BOARDER) {
+			position.setxCoordiante(position.getxCoordiante()-Figure.MOVE_WIDTH);
+		}
 	}
 	
 	/**
 	 * Moves the figure to the right
 	 * @param amount Amount of pixels the figure should move to the right
 	 */
-	public void moveRight(int amount){
-		this.position.setxCoordiante(this.position.getxCoordiante()+amount);
+	public void moveRight(){
+		if (getPosition().getxCoordiante() + Figure.MOVE_WIDTH <= Game.RIGHT_BOARDER - Figure.X_WIDTH_FIGURE) {
+			position.setxCoordiante(position.getxCoordiante()+Figure.MOVE_WIDTH);
+		}
 	}
 	
 	/**
@@ -44,10 +49,13 @@ public class Figure {
 	public Projectile shoot(){
 		
 		int xPosInMiddleOfFigure = this.position.getxCoordiante() + this.position.getxLength()/2;
-		int xPosMiddleWithProjectileWidth = xPosInMiddleOfFigure - PROJECTILE_SIZE/2;
+		int xPosMiddleWithProjectileWidth = xPosInMiddleOfFigure - Projectile.PROJECTILE_SIZE/2;
 		
-		Position pos = new Position(xPosMiddleWithProjectileWidth, this.position.getyCoordiante()-10,PROJECTILE_SIZE,PROJECTILE_SIZE);
-		Projectile projectile = new Projectile(pos, MOVEMENT_FOR_PROJECTILE);
+		Position pos = new Position(xPosMiddleWithProjectileWidth,
+				this.position.getyCoordiante()-Projectile.PROJECTILE_SIZE,
+				Projectile.PROJECTILE_SIZE,
+				Projectile.PROJECTILE_SIZE);
+		Projectile projectile = new Projectile(pos);
 		return projectile;
 		
 	}
@@ -68,5 +76,13 @@ public class Figure {
 	public Position getPosition() {
 
 		return this.position;
+	}
+	//for tests only
+	public int getXCoordinate(){
+		return position.getxCoordiante();
+	}
+	//for tests only
+	public int getYCoordinate(){
+		return position.getyCoordiante();
 	}
 }

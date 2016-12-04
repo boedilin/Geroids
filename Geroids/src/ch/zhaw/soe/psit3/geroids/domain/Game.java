@@ -11,10 +11,14 @@ import org.json.simple.JSONObject;
 import ch.zhaw.soe.psit3.geroids.servlets.MyWebSocketHandler;
 
 public class Game {
-
-	private static final int X_LENGTH = 1000;
-	private static final int GEROID_WIDTH = 80;
-	private static final int GEROID_HEIGHT = 100;
+	
+	//this configuration could be stored in an configClass maybe?
+	public static final int X_WIDTH = 1000;
+	public static final int Y_HEIGHT = 1000;
+	public static final int GEROID_WIDTH = 80;
+	public static final int GEROID_HEIGHT = 100;
+	public static final int LEFT_BOARDER = 0;
+	public static final int RIGHT_BOARDER = X_WIDTH;
 	private static final int TOP_OF_SCREEN = 0;
 	private static final int MAXIMUM_SHOOT_SPEED = 300;
 	private long timestampPreviousShot;
@@ -39,7 +43,11 @@ public class Game {
 		// websocketHandler.sendMessage("Connected to Server");
 		this.geroids = new ArrayList<Geroid>();
 		this.projectiles = new ArrayList<Projectile>();
-		this.figure = new Figure(new Position(470, 898, 61, 90));
+		this.figure = new Figure(new Position(
+				(X_WIDTH - Figure.X_WIDTH_FIGURE)/2,
+				X_WIDTH - Figure.Y_HEIGHT_FIGURE,
+				Figure.X_WIDTH_FIGURE,
+				Figure.Y_HEIGHT_FIGURE));
 		this.account = new Account("MyName" + System.currentTimeMillis());
 		this.collisionHandler = new CollisionHandler(figure, geroids);
 		this.score = new Playscore();
@@ -86,7 +94,6 @@ public class Game {
 	 * => move Left d = > move Right Space => shoot.
 	 */
 
-	@SuppressWarnings("unchecked")
 	private void handleCollisions() {
 		if (collisionHandler.checkAllGeroidsCollisionWithFigure()) {
 			isRunning = false;
@@ -127,15 +134,12 @@ public class Game {
 			// isName = false;
 		}
 
-		int figureXPos = figure.getPosition().getxCoordiante();
-		int figureXLength = figure.getPosition().getxLength();
-
 		switch (command) {
 		case "65":
-			moveLeftIfPossible(figureXPos);
+			figure.moveLeft();
 			break;
 		case "68":
-			moveRightIfPossible(figureXPos, figureXLength);
+			figure.moveRight();
 			break;
 		case "32":
 			if (System.currentTimeMillis() >= timestampPreviousShot + MAXIMUM_SHOOT_SPEED) {
@@ -145,22 +149,6 @@ public class Game {
 				}
 			}
 			break;
-		}
-	}
-
-	private void moveLeftIfPossible(int figureXPos) {
-		if (figureXPos - 10 >= 0) {
-			figure.moveLeft(10);
-		} else {
-			figure.moveLeft(figureXPos);
-		}
-	}
-
-	private void moveRightIfPossible(int figureXPos, int figureXLength) {
-		if (figureXPos + figureXLength + 10 <= X_LENGTH) {
-			figure.moveRight(10);
-		} else {
-			figure.moveRight(X_LENGTH - figureXPos - figureXLength);
 		}
 	}
 
