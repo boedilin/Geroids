@@ -38,10 +38,10 @@ public class TestCollisionHandler {
 		figureNoCollision = new Figure(new Position(50,5));
 		figureCollision = new Figure(new Position(10,2));
 		projectiles = new ArrayList<Projectile>();
-		geroidNoCollision = new Geroid(new Position(1,1), new Movement(1,1));
-		geroidCollision = new Geroid(new Position(10,1), new Movement(1,1));
+		geroidNoCollision = new Geroid(new Position(1,1,3,3), new Movement(1,1));
+		geroidCollision = new Geroid(new Position(9,1,2,2), new Movement(1,1));
 		geroidOutofGamefield = new Geroid(new Position(1,1001), new Movement(1,1));
-		projectileOutofGamefield = new Projectile(new Position(1,0), new Movement(1,1));
+		projectileOutofGamefield = new Projectile(new Position(1,-2), new Movement(1,1));
 		projectileNoCollision = new Projectile(new Position(5,5), new Movement(1,1));
 		projectileCollision = new Projectile(new Position(10,1), new Movement(1,1));
 		geroids.add(geroidNoCollision);
@@ -50,8 +50,70 @@ public class TestCollisionHandler {
 	}
 	
 	@Test(expected = NullPointerException.class)  
-	public void testCollisionHandlerFigureAndGeroidsNull(){
+	public void testCollisionHandlerNull(){
 		new CollisionHandler(figureNull, geroidsNull);
 	}
+	
+	@Test(expected = NullPointerException.class)  
+	public void testCheckIfGeroidIsCollidingWithProjectileNull(){
+		collisionHandler.checkIfGeroidIsCollidingWithProjectile(geroidNull, projectileNull);
+	}
+	
+	@Test(expected = NullPointerException.class)  
+	public void testCheckIfGeroidIsOutOfGamefieldNull(){
+		collisionHandler.checkIfGeroidIsOutOfGamefield(geroidNull);
+	}
+	
+	@Test(expected = NullPointerException.class)  
+	public void testCheckIfProjectileIsOutOfGamefieldNull(){
+		collisionHandler.checkIfProjectileIsOutOfGamefield(projectileNull);
+	}
+	
+	@Test(expected = NullPointerException.class)  
+	public void testUpdateFiguresNull(){
+		collisionHandler.updateFigures(geroidsNull, figureNull);
+	}
+	
+	@Test
+	public void testCheckAllGeroidsCollisionWithFigureNoCollision(){
+		collisionHandler.updateFigures(geroids, figureNoCollision);
+		assertEquals(false, collisionHandler.checkAllGeroidsCollisionWithFigure());
+	}
+	
+	@Test  
+	public void testCheckIfGeroidIsCollidingWithProjectileNoCollision(){
+		assertEquals(false, collisionHandler.checkIfGeroidIsCollidingWithProjectile(geroidNoCollision, projectileNoCollision));
+	}
 
+	@Test
+	public void testCheckAllGeroidsCollisionWithFigureCollision(){
+		geroids.add(geroidCollision);
+		collisionHandler.updateFigures(geroids, figureCollision);
+		assertEquals(true, collisionHandler.checkAllGeroidsCollisionWithFigure());
+	}
+
+	@Test  
+	public void testCheckIfGeroidIsCollidingWithProjectileCollision(){
+		assertEquals(true, collisionHandler.checkIfGeroidIsCollidingWithProjectile(geroidCollision, projectileCollision));
+	}
+	
+	@Test  
+	public void testCheckIfGeroidIsOutOfGamefield(){
+		assertEquals(true, collisionHandler.checkIfGeroidIsOutOfGamefield(geroidOutofGamefield));
+	}
+	
+	@Test  
+	public void testCheckIfGeroidIsInGamefield(){
+		assertEquals(false, collisionHandler.checkIfGeroidIsOutOfGamefield(geroidNoCollision));
+	}
+	
+	@Test  
+	public void testCheckIfProjectileIsOutOfGamefield(){
+		assertEquals(true, collisionHandler.checkIfProjectileIsOutOfGamefield(projectileOutofGamefield));
+	}
+	
+	@Test  
+	public void testCheckIfProjectileIsInGamefield(){
+		assertEquals(false, collisionHandler.checkIfProjectileIsOutOfGamefield(projectileNoCollision));
+	}
 }
