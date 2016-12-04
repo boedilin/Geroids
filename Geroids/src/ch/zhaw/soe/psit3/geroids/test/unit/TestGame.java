@@ -35,14 +35,14 @@ public class TestGame {
 	@Test
 	public void testUpdateFigureValidLeft() {
 		game.receiveMessage("65");
-		verify(mockFigure).moveLeft(anyInt());;
+		verify(mockFigure).moveLeft();;
 
 	}
 	
 	@Test
 	public void testUpdateFigureValidRight() {
 		game.receiveMessage("68");
-		verify(mockFigure).moveRight(10);	
+		verify(mockFigure).moveRight();	
 
 	}
 	
@@ -58,8 +58,8 @@ public class TestGame {
 	public void testUpdateFigureInvalidNull() {
 		game.receiveMessage(null);
 		verify(mockFigure, times(0)).shoot();	
-		verify(mockFigure, times(0)).moveRight(10);
-		verify(mockFigure, times(0)).moveLeft(10);
+		verify(mockFigure, times(0)).moveRight();
+		verify(mockFigure, times(0)).moveLeft();
 
 	}
 	
@@ -67,7 +67,7 @@ public class TestGame {
 	public void testUpdateFigureInvalidLetter() {
 		game.receiveMessage("NaN");
 		verify(mockFigure, times(0)).shoot();	
-		verify(mockFigure, times(0)).moveRight(10);
-		verify(mockFigure, times(0)).moveLeft(10);
+		verify(mockFigure, times(0)).moveRight();
+		verify(mockFigure, times(0)).moveLeft();
 	}
 }
