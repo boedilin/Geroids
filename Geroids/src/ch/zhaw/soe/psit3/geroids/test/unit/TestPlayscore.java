@@ -15,9 +15,6 @@ public class TestPlayscore {
 	@Before
 	public void setUp() throws Exception {
 		score = new Playscore();
-		score.setKillBonus(10);
-		score.setPassingGeroidDecrease(5);
-		score.setTimeBonusPerSecond(100);
 	}
 
 	
@@ -31,17 +28,6 @@ public class TestPlayscore {
 		assertEquals(0, score.getScore());
 		score.setScore(-1);
 		assertEquals(0, score.getScore());
-	}
-	
-	
-	@Test
-	public void testAddingScoreIfGeroidKilled() {
-		score.setGeroidKilled(true);
-		score.addingScoreIfGeroidKilled();
-		assertEquals(score.getScore(),10);
-		score.setGeroidKilled(false);
-		score.addingScoreIfGeroidKilled();
-		assertEquals(score.getScore(),10);
 	}
 	
 }

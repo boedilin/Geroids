@@ -287,4 +287,8 @@ public class Game {
 		return isRunning;
 	}
 
+	public Playscore getScore() {
+		return score;
+	}
+	
 }

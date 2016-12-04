@@ -16,7 +16,7 @@ public class Playscore {
 		return score;
 	}
 	
-	protected void setScore(int score) {
+	public void setScore(int score) {
 		if(checkMaxValue(score))
 			this.score = SCORE_MAX_VALUE;
 		if(checkMinValue(score))

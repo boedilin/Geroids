@@ -52,6 +52,27 @@ public class TestSystemGame {
 		
 		assertFalse(game.isRunning());
 	}
+	
+	
+	/**
+	 * Starts a game, moves to the X Coordiante of the nearest geroid shoots it down and check immediately the playscore.
+	 */
+	@Test
+	public void testPlayscore() {
+		ArrayList<Geroid> geroids = game.getGeroids();
+		Geroid nearestXGeroid;
+		game.startGame();
+		
+		waitForEntryInGeroids();
+		nearestXGeroid = game.getGeroids().get(0);
+		nearestXGeroid = chooseNearestGeroidsOnXAxis(geroids, nearestXGeroid);
+		moveIntoCollidingXCoordinates(nearestXGeroid);
+		game.getProjectiles().add(figure.shoot());
+		while(game.getProjectiles().size() != 0){
+			System.out.println("");
+		}
+		assertNotEquals(game.getScore(), 0);
+	}
 
 	private void waitUntilCollisionWithGeroid(Geroid nearestXGeroid) {
 		while(nearestXGeroid.getPosition().getyCoordiante() + nearestXGeroid.getPosition().getyLength() <= FIGURE_Y_POS){
