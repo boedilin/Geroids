@@ -6,13 +6,13 @@ import java.util.Iterator;
 public class CollisionHandler {
 
 	private int xRange;
-	private final int DEFAULTYRANGE = 1000;
+	private final int DEFAULTXRANGE = 1000;
 	
-	public CollisionHandler(int yRange) {
-		if(yRange < 0) {
-			this.xRange = DEFAULTYRANGE;
+	public CollisionHandler(int xRange) {
+		if(xRange < 0) {
+			this.xRange = DEFAULTXRANGE;
 		} else {
-			this.xRange = yRange;
+			this.xRange = xRange;
 		}
 	}
 
