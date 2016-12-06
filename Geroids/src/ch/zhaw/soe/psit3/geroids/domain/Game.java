@@ -49,7 +49,7 @@ public class Game {
 				Figure.X_WIDTH_FIGURE,
 				Figure.Y_HEIGHT_FIGURE));
 		this.account = new Account("MyName" + System.currentTimeMillis());
-		this.collisionHandler = new CollisionHandler(figure, geroids);
+		this.collisionHandler = new CollisionHandler(1000);
 		this.score = new Playscore();
 	}
 
@@ -84,7 +84,6 @@ public class Game {
 	 */
 
 	private void updateGamefield() {
-		collisionHandler.updateFigures(geroids, figure);
 		updateGeroids();
 		updateProjectiles();
 		handleCollisions();
@@ -95,7 +94,7 @@ public class Game {
 	 */
 
 	private void handleCollisions() {
-		if (collisionHandler.checkAllGeroidsCollisionWithFigure()) {
+		if (collisionHandler.checkAllGeroidsCollisionWithFigure(geroids, figure)) {
 			isRunning = false;
 		}
 		checkAllGeroidsCollisionWithProjectiles();
