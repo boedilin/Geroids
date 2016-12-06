@@ -31,7 +31,7 @@ public class TestCollisionHandler {
 	
 	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		geroids = new ArrayList<Geroid>();
 		figureNoCollision = new Figure(new Position(50,5));
 		figureCollision = new Figure(new Position(10,2));
@@ -47,9 +47,11 @@ public class TestCollisionHandler {
 		collisionHandler = new CollisionHandler(1000);
 	}
 	
-	@Test(expected = NullPointerException.class)  
-	public void testCollisionHandler() throws Exception{
-		new CollisionHandler(-5);
+	@Test
+	public void testCollisionHandler() {
+		CollisionHandler handler = new CollisionHandler(-5);
+		assertEquals(1000, handler.getYRange());
+		
 	}
 	
 	@Test(expected = NullPointerException.class)  

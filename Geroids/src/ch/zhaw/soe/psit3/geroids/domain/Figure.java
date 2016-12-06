@@ -24,7 +24,6 @@ public class Figure {
 	
 	/**
 	 * Moves the figure to the Left
-	 * @param amount Amount of pixels the figure should move to the left
 	 */
 	public void moveLeft(){
 		if (getPosition().getxCoordiante() - Figure.MOVE_WIDTH >= Game.LEFT_BOARDER) {
@@ -34,7 +33,6 @@ public class Figure {
 	
 	/**
 	 * Moves the figure to the right
-	 * @param amount Amount of pixels the figure should move to the right
 	 */
 	public void moveRight(){
 		if (getPosition().getxCoordiante() + Figure.MOVE_WIDTH <= Game.RIGHT_BOARDER - Figure.X_WIDTH_FIGURE) {

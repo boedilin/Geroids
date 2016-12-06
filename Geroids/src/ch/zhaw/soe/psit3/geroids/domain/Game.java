@@ -49,7 +49,7 @@ public class Game {
 				Figure.X_WIDTH_FIGURE,
 				Figure.Y_HEIGHT_FIGURE));
 		this.account = new Account("MyName" + System.currentTimeMillis());
-		this.collisionHandler = new CollisionHandler(1000);
+		this.collisionHandler = new CollisionHandler(X_WIDTH);
 		this.score = new Playscore();
 	}
 

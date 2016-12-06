@@ -5,18 +5,21 @@ import java.util.Iterator;
 
 public class CollisionHandler {
 
-	private int yRange;
+	private int xRange;
+	private final int DEFAULTYRANGE = 1000;
 	
 	public CollisionHandler(int yRange) {
 		if(yRange < 0) {
-			
+			this.xRange = DEFAULTYRANGE;
+		} else {
+			this.xRange = yRange;
 		}
-		this.yRange = yRange;
 	}
 
 	/**
 	 * Checks if there are any collisions of geroids and figure
 	 * 
+	 * @param ArrayList<Geroid> with all geroids in game and Figure in game
 	 * @return true if there is a geroid, which collided with figure
 	 */
 	public boolean checkAllGeroidsCollisionWithFigure(ArrayList<Geroid> geroids, Figure figure) {
@@ -33,6 +36,7 @@ public class CollisionHandler {
 	/**
 	 * Checks if there is a collisions of a geroid and a projectile
 	 * 
+	 * @param  One specific Geroid and Projectile in game
 	 * @return true, if there was a collision; false, else
 	 * @throws NullPointerExcepiton if geroid or projectile is null
 	 */
@@ -106,7 +110,7 @@ public class CollisionHandler {
 			throw new NullPointerException();
 		}
 
-		if (geroid.getPosition().getyCoordiante() > this.yRange) {
+		if (geroid.getPosition().getyCoordiante() > this.xRange) {
 			return true;
 		}
 		return false;
@@ -131,5 +135,14 @@ public class CollisionHandler {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * Returns xRange
+	 * 
+	 * @return  xRange
+	 */
+	public int getXRange() {
+		return xRange;
 	}
 }
