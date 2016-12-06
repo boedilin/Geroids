@@ -223,6 +223,7 @@ public class Game {
 			Geroid geroid = new Geroid(new Random().nextInt(5)+1, pos, mov);
 			// synchronized (geroids) {
 			geroids.add(geroid);
+			collisionHandler.addGeroidsCollisionPoints(geroid);
 			// }
 		}
 	}
