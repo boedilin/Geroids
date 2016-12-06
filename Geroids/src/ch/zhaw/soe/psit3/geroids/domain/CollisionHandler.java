@@ -7,9 +7,9 @@ public class CollisionHandler {
 
 	private int yRange;
 	
-	public CollisionHandler(int yRange) throws Exception{
+	public CollisionHandler(int yRange) {
 		if(yRange < 0) {
-			throw new Exception();
+			
 		}
 		this.yRange = yRange;
 	}
