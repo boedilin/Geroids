@@ -16,9 +16,7 @@ import ch.zhaw.soe.psit3.geroids.domain.Projectile;
 
 public class TestCollisionHandler {
 	private CollisionHandler collisionHandler;
-	private ArrayList<Geroid> geroidsNull;
 	private ArrayList<Geroid> geroids;
-	private Figure figureNull;
 	private Figure figureNoCollision;
 	private Figure figureCollision;
 	private ArrayList<Projectile> projectiles;
@@ -46,12 +44,7 @@ public class TestCollisionHandler {
 		projectileCollision = new Projectile(new Position(10,1));
 		geroids.add(geroidNoCollision);
 		projectiles.add(projectileNoCollision);
-		collisionHandler = new CollisionHandler(figureNoCollision, geroids);
-	}
-	
-	@Test(expected = NullPointerException.class)  
-	public void testCollisionHandlerNull(){
-		new CollisionHandler(figureNull, geroidsNull);
+		collisionHandler = new CollisionHandler(1000);
 	}
 	
 	@Test(expected = NullPointerException.class)  
@@ -69,15 +62,9 @@ public class TestCollisionHandler {
 		collisionHandler.checkIfProjectileIsOutOfGamefield(projectileNull);
 	}
 	
-	@Test(expected = NullPointerException.class)  
-	public void testUpdateFiguresNull(){
-		collisionHandler.updateFigures(geroidsNull, figureNull);
-	}
-	
 	@Test
 	public void testCheckAllGeroidsCollisionWithFigureNoCollision(){
-		collisionHandler.updateFigures(geroids, figureNoCollision);
-		assertEquals(false, collisionHandler.checkAllGeroidsCollisionWithFigure());
+		assertEquals(false, collisionHandler.checkAllGeroidsCollisionWithFigure(geroids, figureNoCollision));
 	}
 	
 	@Test  
@@ -88,8 +75,7 @@ public class TestCollisionHandler {
 	@Test
 	public void testCheckAllGeroidsCollisionWithFigureCollision(){
 		geroids.add(geroidCollision);
-		collisionHandler.updateFigures(geroids, figureCollision);
-		assertEquals(true, collisionHandler.checkAllGeroidsCollisionWithFigure());
+		assertEquals(true, collisionHandler.checkAllGeroidsCollisionWithFigure(geroids, figureCollision));
 	}
 
 	@Test  

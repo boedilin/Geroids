@@ -5,16 +5,10 @@ import java.util.Iterator;
 
 public class CollisionHandler {
 
-	private ArrayList<Geroid> geroids;
-	private Figure figure;
-	private int yRange = 1000;
+	private int yRange;
 	
-	public CollisionHandler(Figure figure, ArrayList<Geroid> geroids) throws NullPointerException {
-		if(figure == null || geroids == null) {
-			throw new NullPointerException();
-		}
-		this.geroids = geroids;
-		this.figure = figure;
+	public CollisionHandler(int yRange){
+		this.yRange = yRange;
 	}
 
 	/**
@@ -22,11 +16,11 @@ public class CollisionHandler {
 	 * 
 	 * @return true if there is a geroid, which collided with figure
 	 */
-	public boolean checkAllGeroidsCollisionWithFigure() {
+	public boolean checkAllGeroidsCollisionWithFigure(ArrayList<Geroid> geroids, Figure figure) {
 		Iterator<Geroid> geroidIterator = geroids.iterator();
 		while (geroidIterator.hasNext()) {
 			Geroid myGeroid = geroidIterator.next();
-			if (checkIfGeroidIsCollidingWithFigure(myGeroid)) {
+			if (checkIfGeroidIsCollidingWithFigure(myGeroid, figure)) {
 				return true;
 			}
 		}
@@ -66,13 +60,13 @@ public class CollisionHandler {
 
 	}
 
-	private boolean checkIfGeroidIsCollidingWithFigure(Geroid geroid) {
-		int figureLeftMostPoint = this.figure.getPosition().getxCoordiante();
-		int figureRightMostPoint = figureLeftMostPoint + this.figure.getPosition().getxLength();
+	private boolean checkIfGeroidIsCollidingWithFigure(Geroid geroid, Figure figure) {
+		int figureLeftMostPoint = figure.getPosition().getxCoordiante();
+		int figureRightMostPoint = figureLeftMostPoint + figure.getPosition().getxLength();
 		int geroidLeftMostPoint = geroid.getPosition().getxCoordiante();
 		int geroidRightMostPoint = geroidLeftMostPoint + geroid.getPosition().getxLength();
 
-		int figureHighestPoint = this.figure.getPosition().getyCoordiante();
+		int figureHighestPoint = figure.getPosition().getyCoordiante();
 		int geroidLowestPoint = geroid.getPosition().getyCoordiante() + geroid.getPosition().getyLength();
 
 		if (isInBetween(figureLeftMostPoint, figureRightMostPoint, geroidRightMostPoint)
@@ -134,20 +128,5 @@ public class CollisionHandler {
 			return true;
 		}
 		return false;
-	}
-
-
-	/**
-	 * Updates figure, geroids
-	 * 
-	 * @param List of geroids, figure
-	 * @throws NullPointerExcepiton if geroid or figure is null
-	 */
-	public void updateFigures(ArrayList<Geroid> geroids, Figure figure) throws NullPointerException {
-		if(geroids == null || figure == null) {
-			throw new NullPointerException();
-		}
-		this.geroids = geroids;
-		this.figure = figure;
 	}
 }
