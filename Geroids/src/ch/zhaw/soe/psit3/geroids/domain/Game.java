@@ -220,7 +220,7 @@ public class Game {
 		if (geroids.size() < MAX_COUNT_GEROIDS) {
 			Position pos = new Position(new Random().nextInt(900), TOP_OF_SCREEN, GEROID_WIDTH, GEROID_HEIGHT);
 			Movement mov = new Movement(0, new Random().nextInt(10) + 1);
-			Geroid geroid = new Geroid(pos, mov);
+			Geroid geroid = new Geroid(new Random().nextInt(5)+1, pos, mov);
 			// synchronized (geroids) {
 			geroids.add(geroid);
 			// }

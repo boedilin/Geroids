@@ -96,7 +96,4 @@ public class Position {
 		return yLength;
 	}
 	
-
-	
-
 }

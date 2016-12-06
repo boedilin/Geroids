@@ -140,19 +140,19 @@ function canvasApp() {
     function drawGeroids(GeroidJSON) {
 
         for (i in GeroidJSON) {
-            if (GeroidJSON[i].position.xStart % 5 == 0) {
+            if (GeroidJSON[i].id == 1) {
                 context.drawImage(geroid1, GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, GeroidJSON[i].position.xLength * canvasXFactor, GeroidJSON[i].position.yLength * canvasYFactor);
             }
-            if (GeroidJSON[i].position.xStart % 5 == 1) {
+            if (GeroidJSON[i].id == 2) {
                 context.drawImage(geroid2, GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, GeroidJSON[i].position.xLength * canvasXFactor, GeroidJSON[i].position.yLength * canvasYFactor);
             }
-            if (GeroidJSON[i].position.xStart % 5 == 2) {
+            if (GeroidJSON[i].id == 3) {
                 context.drawImage(geroid3, GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, GeroidJSON[i].position.xLength * canvasXFactor, GeroidJSON[i].position.yLength * canvasYFactor);
             }
-            if (GeroidJSON[i].position.xStart % 5 == 3) {
+            if (GeroidJSON[i].id == 4) {
                 context.drawImage(geroid4, GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, GeroidJSON[i].position.xLength * canvasXFactor, GeroidJSON[i].position.yLength * canvasYFactor);
             }
-            if (GeroidJSON[i].position.xStart % 5 == 4) {
+            if (GeroidJSON[i].id == 5) {
                 context.drawImage(geroid5, GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, GeroidJSON[i].position.xLength * canvasXFactor, GeroidJSON[i].position.yLength * canvasYFactor);
             }
         }

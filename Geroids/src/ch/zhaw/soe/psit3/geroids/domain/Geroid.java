@@ -2,6 +2,8 @@
 
 package ch.zhaw.soe.psit3.geroids.domain;
 
+import java.util.ArrayList;
+
 import org.json.simple.JSONObject;
 
 /**
@@ -25,6 +27,12 @@ public class Geroid {
 		this.movement = movement;
 	}
 	
+	public Geroid(int id, Position position, Movement movement) {
+		this.id = id;
+		this.position = position;
+		this.movement = movement;
+	}
+	
 	public Geroid(Position position, Movement movement) {
 		this.position = position;
 		this.movement = movement;
@@ -32,7 +40,6 @@ public class Geroid {
 
 	public void move() {
 		position.update(movement);
-		
 	}
 	
 	/**
@@ -45,6 +52,7 @@ public class Geroid {
 			JSONObject obj = new JSONObject();
 			
 			obj.put("position", this.position.toJSONObject());
+			obj.put("id", this.id);
 		
 			return obj;
 	}
