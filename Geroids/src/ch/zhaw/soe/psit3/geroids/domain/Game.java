@@ -121,7 +121,6 @@ public class Game {
 						projectileIterator.remove();
 						break;
 					}
-
 				}
 			}
 		}
@@ -168,6 +167,7 @@ public class Game {
 
 		for (Geroid myGeroid : geroids) {
 			myGeroid.move();
+			collisionHandler.updateCollisionPoints(myGeroid);
 		}
 	}
 

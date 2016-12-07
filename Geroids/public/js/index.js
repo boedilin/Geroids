@@ -141,10 +141,10 @@ function canvasApp() {
 
         for (i in GeroidJSON) {
             if (GeroidJSON[i].id == 1) {
-                context.drawImage(geroid1, GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, GeroidJSON[i].position.xLength * canvasXFactor, GeroidJSON[i].position.yLength * canvasYFactor);
+                context.drawImage(geroid1, GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, 80 * canvasXFactor, 107 * canvasYFactor);
             }
             if (GeroidJSON[i].id == 2) {
-                context.drawImage(geroid2, GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, GeroidJSON[i].position.xLength * canvasXFactor, GeroidJSON[i].position.yLength * canvasYFactor);
+                context.drawImage(geroid2, GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, 80 * canvasXFactor, 127 * canvasYFactor);
             }
             if (GeroidJSON[i].id == 3) {
                 context.drawImage(geroid3, GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, GeroidJSON[i].position.xLength * canvasXFactor, GeroidJSON[i].position.yLength * canvasYFactor);

@@ -21,6 +21,7 @@ public class CollisionHandler {
 		}
 		this.geroids = geroids;
 		this.figure = figure;
+		geroidsCollisionPoints = new HashMap<Geroid, ArrayList<Position>>();
 	}
 
 	/**
@@ -79,9 +80,8 @@ public class CollisionHandler {
 		// } else {
 		// return false;
 		// }
-
-		if (isInRectangleRange(geroid, projectile, "y")) {
-			if (isInRectangleRange(geroid, projectile, "x")) {
+		if (isInRectangleRange(geroid, projectile, "x")) {
+			if (isInRectangleRange(geroid, projectile, "y")) {
 				if (checkOnWhichLineRectangleRange(geroid, projectile)) {
 					if (checkCollisionBetweenGeroidAndProjectile(geroid, projectile)) {
 						return true;
@@ -185,6 +185,12 @@ public class CollisionHandler {
 	public void addGeroidsCollisionPoints(Geroid geroid) {
 		geroidsCollisionPoints.put(geroid, generateCollisionpoints(geroid));
 	}
+	
+	public void updateCollisionPoints(Geroid geroid){
+		for (Position position : geroidsCollisionPoints.get(geroid)){
+			position.update(geroid.getMovement());
+		}
+	}
 
 	private boolean checkCollisionBetweenGeroidAndProjectile(Geroid geroid, Projectile projectile) {
 		int xRange = Math.abs(firstCollisionPoint.getxCoordiante() - secondCollisionPoint.getxCoordiante());
@@ -194,6 +200,7 @@ public class CollisionHandler {
 		if (isTheRightPointOfProjectile) {
 			rate = (projectile.getPosition().getxCoordiante() + Projectile.PROJECTILE_SIZE
 					- firstCollisionPoint.getxCoordiante()) / xRange;
+			isTheRightPointOfProjectile = false;
 		}
 		yCoordinateFromPointOnLine = firstCollisionPoint.getyCoordiante() + rate * yRange;
 		if (yCoordinateFromPointOnLine == projectile.getPosition().getyCoordiante()) {
@@ -275,11 +282,11 @@ public class CollisionHandler {
 		Position mostLeftOrTop = null;
 		Position mostRightOrLowest = null;
 		for (int i = 0; i < geroidsCollisionPoints.get(geroid).size(); i++) {
-			if (mostLeftOrTop.equals(null)) {
+			if (mostLeftOrTop == null) {
 				mostLeftOrTop = geroidsCollisionPoints.get(geroid).get(i);
 				mostRightOrLowest = geroidsCollisionPoints.get(geroid).get(i + 1);
 			}
-			if (xory.equals('x')) {
+			if (xory.equals("x")) {
 				if (mostLeftOrTop.getxCoordiante() > mostRightOrLowest.getxCoordiante()) {
 					Position swap = mostLeftOrTop;
 					mostLeftOrTop = mostRightOrLowest;
@@ -302,7 +309,7 @@ public class CollisionHandler {
 					return true;
 			}
 
-			else if (xory.equals('y')) {
+			else if (xory.equals("y")) {
 				if (mostLeftOrTop.getyCoordiante() > mostRightOrLowest.getyCoordiante()) {
 					Position swap = mostLeftOrTop;
 					mostLeftOrTop = mostRightOrLowest;
@@ -332,19 +339,36 @@ public class CollisionHandler {
 		ArrayList<Position> collisionPoints = new ArrayList<Position>();
 		switch (geroid.getId()) {
 		case 1:
-			// Geroid 1 definieren
+			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 0, geroid.getPosition().getyCoordiante() + 90));
+			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 17, geroid.getPosition().getyCoordiante() + 29));
+			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 77, geroid.getPosition().getyCoordiante() + 46));
+			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 61, geroid.getPosition().getyCoordiante() + 106));
+			// Geroid 1 -> Point 1 = x: 0 y: 90 / Point 2 = x: 17 y: 29 / Point 3 = x: 77 y: 46 / Point 4 = x: 61 y: 106
 			break;
 		case 2:
-			// Geroid 2 definieren
+			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 10, geroid.getPosition().getyCoordiante() + 126));
+			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 2, geroid.getPosition().getyCoordiante() + 57));
+			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 72, geroid.getPosition().getyCoordiante() + 49));
+			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 79, geroid.getPosition().getyCoordiante() + 118));
+			// Geroid 2 -> Point 1 = x: 10 y: 126 / Point 2 = x: 2 y: 57 / Point 3 = x: 72 y: 49 / Point 4 = x: 79 y: 118
 			break;
 		case 3:
-			// Geroid 3 definieren
+			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 1, geroid.getPosition().getyCoordiante() + 44));
+			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 78, geroid.getPosition().getyCoordiante() + 96));
+			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 6, geroid.getPosition().getyCoordiante() + 137));
+			// Geroid 3 -> Point 1 = x: 1 y: 44 / Point 2 = x: 78 y: 96 / Point 3 = x: 6 y: 137
 			break;
 		case 4:
-			// Geroid 4 definieren
+			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 1, geroid.getPosition().getyCoordiante() + 124));
+			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 56, geroid.getPosition().getyCoordiante() + 46));
+			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 79, geroid.getPosition().getyCoordiante() + 179));
+			// Geroid 4 -> Point 1 = x: 1 y: 124 / Point 2 = x: 56 y: 46 / Point 3 = x: 79 y: 179
 			break;
 		case 5:
-			// Geroid 5 definieren
+			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 1, geroid.getPosition().getyCoordiante() + 83));
+			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 24, geroid.getPosition().getyCoordiante() + 28));
+			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 78, geroid.getPosition().getyCoordiante() + 51));
+			// Geroid 5 -> Point 1 = x: 1 y: 83 / Point 2 = x: 24 y: 28 / Point 3 = x: 78 y: 51
 			break;
 		}
 		return collisionPoints;
