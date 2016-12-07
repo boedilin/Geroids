@@ -36,6 +36,8 @@ public class Game {
 	Thread gameThread;
 	private final int MAX_COUNT_GEROIDS = 10;
 	private final int LENGTH_OF_TICK_IN_MS = 15;
+	private int geroidMinMovement = 1;
+	private int level = 1;
 
 	public Game(MyWebSocketHandler websocketHandler) {
 		this.webSocketHandler = websocketHandler;
@@ -68,6 +70,11 @@ public class Game {
 				while (isRunning) {
 					if (counter % 10 == 0) {
 						generateGeroid();
+					}
+					if (counter % 3600 == 0) {
+						score.addingScoreForTimeBonus(50);
+						level += 1;
+						geroidMinMovement += 1;
 					}
 					updateGamefield();
 					sendNewValues();
@@ -208,6 +215,7 @@ public class Game {
 		obj.put("Gameover", !isRunning);
 		obj.put("Name", this.account.getNickname());
 		obj.put("Score", score.getScore());
+		obj.put("Level", level);
 		webSocketHandler.sendMessage(obj.toJSONString());
 
 	}
@@ -218,7 +226,7 @@ public class Game {
 	private void generateGeroid() {
 		if (geroids.size() < MAX_COUNT_GEROIDS) {
 			Position pos = new Position(new Random().nextInt(900), TOP_OF_SCREEN, GEROID_WIDTH, GEROID_HEIGHT);
-			Movement mov = new Movement(0, new Random().nextInt(10) + 1);
+			Movement mov = new Movement(0, new Random().nextInt(10) + geroidMinMovement);
 			Geroid geroid = new Geroid(pos, mov);
 			// synchronized (geroids) {
 			geroids.add(geroid);

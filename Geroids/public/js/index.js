@@ -171,7 +171,7 @@ function canvasApp() {
         context.fillStyle = "white";
         context.fillText("Score " + Score.toString(), 10, 25);
     }
-
+    
     function drawGameover() {
         context.drawImage(gameover, 0, canvas.height / 3, canvas.width, canvas.height / 4);
     }

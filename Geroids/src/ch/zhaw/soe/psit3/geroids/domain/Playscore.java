@@ -44,6 +44,10 @@ public class Playscore {
 		setScore(score + killBonus*geroidSpeed);
 	}
 	
+	public void addingScoreForTimeBonus(int timebonus){
+		setScore(score + timebonus);
+	}
+	
 	public void decreaseScoreForPassingGeroid(int geroidSpeed){
 		setScore(score - passingGeroidDecrease);
 	}
