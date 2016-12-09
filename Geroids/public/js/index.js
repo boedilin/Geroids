@@ -134,7 +134,24 @@ function canvasApp() {
     }
 
     function drawFigure(figureJSON) {
-        context.drawImage(spaceShip, figureJSON.position.xStart * canvasXFactor, figureJSON.position.yStart * canvasYFactor, 80 * canvasXFactor, 117 * canvasYFactor);
+        context.drawImage(spaceShip, figureJSON.position.xStart * canvasXFactor, figureJSON.position.yStart * canvasYFactor, figureJSON.position.xLength * canvasXFactor, figureJSON.position.yLength * canvasYFactor);
+//        context.fillStyle="#FF0000";
+//    	context.fillRect((27+figureJSON.position.xStart) * canvasXFactor, (3+figureJSON.position.yStart) * canvasYFactor,2,2);
+//    	context.fillStyle="#FF0000";
+//    	context.fillRect((33+figureJSON.position.xStart) * canvasXFactor, (3+figureJSON.position.yStart) * canvasYFactor,2,2);
+//    	context.fillStyle="#FF0000";
+//    	context.fillRect((15+figureJSON.position.xStart) * canvasXFactor, (16+figureJSON.position.yStart) * canvasYFactor,2,2);
+//    	context.fillStyle="#FF0000";
+//    	context.fillRect((46+figureJSON.position.xStart) * canvasXFactor, (16+figureJSON.position.yStart) * canvasYFactor,2,2);
+//    	context.fillStyle="#FF0000";
+//     	context.fillRect((2+figureJSON.position.xStart) * canvasXFactor, (54+figureJSON.position.yStart) * canvasYFactor,2,2);
+//     	context.fillStyle="#FF0000";
+//     	context.fillRect((58+figureJSON.position.xStart) * canvasXFactor, (54+figureJSON.position.yStart) * canvasYFactor,2,2);
+//     	context.fillStyle="#FF0000";
+//     	context.fillRect((2+figureJSON.position.xStart) * canvasXFactor, (72+figureJSON.position.yStart) * canvasYFactor,2,2);
+//     	context.fillStyle="#FF0000";
+//     	context.fillRect((58+figureJSON.position.xStart) * canvasXFactor, (72+figureJSON.position.yStart) * canvasYFactor,2,2);
+     	
     }
 
     function drawGeroids(GeroidJSON) {
@@ -149,7 +166,7 @@ function canvasApp() {
 //            	context.fillStyle="#FF0000";
 //            	context.fillRect((63+GeroidJSON[i].position.xStart) * canvasXFactor, (100+GeroidJSON[i].position.yStart) * canvasYFactor,5,5);
 //            	context.fillStyle="#FF0000";
-//            	context.fillRect((7+GeroidJSON[i].position.xStart) * canvasXFactor, (83+GeroidJSON[i].position.yStart) * canvasYFactor,5,5); 
+//            	context.fillRect((11+GeroidJSON[i].position.xStart) * canvasXFactor, (81+GeroidJSON[i].position.yStart) * canvasYFactor,5,5); 
             }
             if (GeroidJSON[i].id == 2) {
                 context.drawImage(geroid2, GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, 100 * canvasXFactor, 100 * canvasYFactor);
@@ -185,9 +202,9 @@ function canvasApp() {
 //                context.fillStyle="#FF0000";
 //            	context.fillRect((31+GeroidJSON[i].position.xStart) * canvasXFactor, (35+GeroidJSON[i].position.yStart) * canvasYFactor,5,5);
 //            	context.fillStyle="#FF0000";
-//            	context.fillRect((4+GeroidJSON[i].position.xStart) * canvasXFactor, (100+GeroidJSON[i].position.yStart) * canvasYFactor,5,5);
+//            	context.fillRect((4+GeroidJSON[i].position.xStart) * canvasXFactor, (95+GeroidJSON[i].position.yStart) * canvasYFactor,5,5);
 //            	context.fillStyle="#FF0000";
-//            	context.fillRect((96+GeroidJSON[i].position.xStart) * canvasXFactor, (62+GeroidJSON[i].position.yStart) * canvasYFactor,5,5); 
+//            	context.fillRect((96+GeroidJSON[i].position.xStart) * canvasXFactor, (56+GeroidJSON[i].position.yStart) * canvasYFactor,5,5); 
             }
         }
     }
