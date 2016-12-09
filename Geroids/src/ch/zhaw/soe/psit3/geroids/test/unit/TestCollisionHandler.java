@@ -56,7 +56,7 @@ public class TestCollisionHandler {
 	
 	@Test(expected = NullPointerException.class)  
 	public void testCheckIfGeroidIsCollidingWithProjectileNull(){
-		collisionHandler.checkIfGeroidIsCollidingWithProjectile(geroidNull, projectileNull);
+		collisionHandler.checkCollisionWithGeroid(geroidNull, projectileNull.getPosition());
 	}
 	
 	@Test(expected = NullPointerException.class)  
@@ -82,7 +82,7 @@ public class TestCollisionHandler {
 	
 	@Test  
 	public void testCheckIfGeroidIsCollidingWithProjectileNoCollision(){
-		assertEquals(false, collisionHandler.checkIfGeroidIsCollidingWithProjectile(geroidNoCollision, projectileNoCollision));
+		assertEquals(false, collisionHandler.checkCollisionWithGeroid(geroidNoCollision, projectileNoCollision.getPosition()));
 	}
 
 	@Test
@@ -94,7 +94,7 @@ public class TestCollisionHandler {
 
 	@Test  
 	public void testCheckIfGeroidIsCollidingWithProjectileCollision(){
-		assertEquals(true, collisionHandler.checkIfGeroidIsCollidingWithProjectile(geroidCollision, projectileCollision));
+		assertEquals(true, collisionHandler.checkCollisionWithGeroid(geroidCollision, projectileCollision.getPosition()));
 	}
 	
 	@Test  

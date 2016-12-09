@@ -115,7 +115,7 @@ public class Game {
 				Iterator<Projectile> projectileIterator = projectiles.iterator();
 				while (projectileIterator.hasNext()) {
 					Projectile myProjectile = projectileIterator.next();
-					if (collisionHandler.checkIfGeroidIsCollidingWithProjectile(myGeroid, myProjectile)) {
+					if (collisionHandler.checkCollisionWithGeroid(myGeroid, myProjectile.getPosition())) {
 						score.addingScoreIfGeroidKilled(myGeroid.getMovement().getySpeed());
 						geroidIterator.remove();
 						projectileIterator.remove();
