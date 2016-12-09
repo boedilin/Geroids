@@ -71,15 +71,24 @@ public class Figure {
 		return obj;
 	}
 
+	/**
+	 * @return Position
+	 */
 	public Position getPosition() {
 
 		return this.position;
 	}
-	//for tests only
+
+	/**
+	 * @return XCoordinate
+	 */
 	public int getXCoordinate(){
 		return position.getxCoordiante();
 	}
-	//for tests only
+
+	/**
+	 * @return YCoordinate
+	 */
 	public int getYCoordinate(){
 		return position.getyCoordiante();
 	}
