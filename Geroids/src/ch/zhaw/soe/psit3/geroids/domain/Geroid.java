@@ -1,5 +1,3 @@
-//TODO implement ToJSON() method
-
 package ch.zhaw.soe.psit3.geroids.domain;
 
 import org.json.simple.JSONObject;
