@@ -12,6 +12,7 @@ var geroid5 = new Image();
 var gameover = new Image();
 var audioGame = new Audio('../music/gameMusic.mp3');
 var audioGameOver = new Audio('../music/gameOverMusic.mp3');
+var audioGameOverTheme = new Audio('../music/gameOverTheme.wav');
 spaceShip.src = "../images/ship.png";
 geroid1.src = "../images/element1.png";
 geroid2.src = "../images/element2.png";
@@ -128,8 +129,13 @@ function canvasApp() {
             drawGameover();
             cancelAnimationFrame(requestId);
             showGameoverButtons();
-            audioGameOver.play();
             audioGame.pause();
+            audioGameOverTheme.play();
+            setTimeout(function (){
+
+                audioGameOver.play();
+
+            	}, 1500);
         }
     }
 

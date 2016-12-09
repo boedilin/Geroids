@@ -99,7 +99,8 @@ public class CollisionHandler {
 		return false;
 	}
 
-	private boolean checkIfGeroidIsCollidingWithFigure(Geroid geroid) {
+	private boolean checkIfGeroidIsCollidingWithFigure(Geroid geroid){
+		
 		int figureLeftMostPoint = this.figure.getPosition().getxCoordiante();
 		int figureRightMostPoint = figureLeftMostPoint + this.figure.getPosition().getxLength();
 		int geroidLeftMostPoint = geroid.getPosition().getxCoordiante();
@@ -200,7 +201,10 @@ public class CollisionHandler {
 		}
 	}
 
-	private void generateFigureCollisionPoints(Figure figure){
+	private void generateFigureCollisionPoints(Figure figure) throws NullPointerException{
+		if(figure == null){
+			throw new NullPointerException();
+		}
 		figureCollisionPoints.clear();
 		figureCollisionPoints.add(new Position(figure.getPosition().getxCoordiante() + 27, figure.getPosition().getyCoordiante() + 3));
 		figureCollisionPoints.add(new Position(figure.getPosition().getxCoordiante() + 33, figure.getPosition().getyCoordiante() + 3));
@@ -214,7 +218,10 @@ public class CollisionHandler {
 		figureCollisionPoints.add(new Position(figure.getPosition().getxCoordiante() + 58, figure.getPosition().getyCoordiante() + 72));
 	}
 	
-	private boolean checkCollisionBetweenGeroidAndObject(Geroid geroid, Position position) {
+	private boolean checkCollisionBetweenGeroidAndObject(Geroid geroid, Position position) throws NullPointerException {
+		if(geroid == null || position == null){
+			throw new NullPointerException();
+		}
 		Position higher = firstCollisionPoint;
 		if (firstCollisionPoint.getyCoordiante() > secondCollisionPoint.getyCoordiante()) {
 			higher = secondCollisionPoint;
@@ -250,7 +257,10 @@ public class CollisionHandler {
 		return yCoordinateFromPointOnLine;
 	}
 	
-	private boolean checkOnWhichLineRectangleRange(Geroid geroid, Position position) {
+	private boolean checkOnWhichLineRectangleRange(Geroid geroid, Position position) throws NullPointerException{
+		if(geroid == null || position == null){
+			throw new NullPointerException();
+		}
 		Position leftOrHigherPoint;
 		Position rightOrLowerPoint;
 		for (int i = 0; i < geroidsCollisionPoints.get(geroid).size(); i++) {
@@ -304,7 +314,10 @@ public class CollisionHandler {
 		return false;
 	}
 
-	private ArrayList<Position> selectXLimitPositions(ArrayList<Position> positions) {
+	private ArrayList<Position> selectXLimitPositions(ArrayList<Position> positions) throws NullPointerException {
+		if(positions == null){
+			throw new NullPointerException();
+		}
 		Position min = positions.get(0);
 		Position max = positions.get(0);
 
@@ -323,7 +336,10 @@ public class CollisionHandler {
 		return returnArray;
 	}
 
-	private ArrayList<Position> selectYLimitPositions(ArrayList<Position> positions) {
+	private ArrayList<Position> selectYLimitPositions(ArrayList<Position> positions) throws NullPointerException{
+		if(positions == null){
+			throw new NullPointerException();
+		}
 		Position min = positions.get(0);
 		Position max = positions.get(0);
 
@@ -349,7 +365,10 @@ public class CollisionHandler {
 		return false;
 	}
 
-	private boolean checkRectangleRange(Geroid geroid, Position position, String xory) {
+	private boolean checkRectangleRange(Geroid geroid, Position position, String xory) throws NullPointerException {
+		if(geroid == null || position == null || xory == null){
+			throw new NullPointerException();
+		}
 		int checkPositionValue;
 		int mostLeftOrTop;
 		int mostRightOrLowest;
