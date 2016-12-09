@@ -54,12 +54,14 @@ p {
 @media (max-width: 800px) {
     #appPanel {
         width: 100% !important;
-        height: 90% !important;
+        height: 100% !important;
+        /*90% wenn touchbuttons aktiv sein sollten*/
         margin-left: auto !important;
         margin-right: auto !important;
         /*bei einer kleinen Höhe des Fensters kann so vermieden werden, dass der Inhalt des Formulars
     nicht über das div gamePanel hinausläuft*/
     }
+    /* deaktiviert, weil nicht implementiert.
     #actionButtons {
         text-align: center;
         width: 100%;
@@ -79,7 +81,7 @@ p {
     #rightButton {
         width: 33.33%;
         background-color: red;
-    }
+    }*/
     #appPanelIndex,
     #appPanelStart,
     #appPanelStore,
