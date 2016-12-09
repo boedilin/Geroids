@@ -70,7 +70,7 @@ function canvasApp() {
     function resizeCanvas() {
         if (window.innerWidth <= 800) {
             canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight * 0.9;
+            canvas.height = window.innerHeight;
         } else {
             canvas.width = ((window.innerWidth) / 100) * 62.5;
             canvas.height = window.innerHeight;

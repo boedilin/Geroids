@@ -27,9 +27,9 @@
 
                 var myUser = localStorage.getItem('name')
 
-                for(i = 0; i< data.data.length; i++){
-                    if(myUser.localeCompare(data.data[i].nickname) == 0){
-                        if(i > 19 ) {
+                for (i = 0; i < data.data.length; i++) {
+                    if (myUser.localeCompare(data.data[i].nickname) == 0) {
+                        if (i > 19) {
                             aufSpeicherListeBildHinzufuegen(data.data[i], i + 1);
                         }
                         break;
@@ -46,8 +46,8 @@
                 '<div style="width: 30%;">' + user.date + '</div>' +
                 '</div>';
             $(".list").append(html);
-          
-            
+
+
         };
     </script>
 
@@ -71,7 +71,7 @@
             </div>
             <div class="row">
                 <form class="col-xs-2 col-md-2 col-xs-offset-5 col-md-offset-5 back" action="/start.html" method="get">
-                    <button class="btn btn-default">Back</button>
+                    <button class="btn btn-default" style="margin-bottom: 50px;">Back</button>
                 </form>
             </div>
         </div>
