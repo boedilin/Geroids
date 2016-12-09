@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import ch.zhaw.soe.psit3.geroids.servlets.MyWebSocketHandler;
 
 public class Game {
-	
+
 	public static final int X_WIDTH = 1000;
 	public static final int Y_HEIGHT = 1000;
 	public static final int GEROID_WIDTH = 80;
@@ -19,7 +18,7 @@ public class Game {
 	public static final int LEFT_BOARDER = 0;
 	public static final int RIGHT_BOARDER = X_WIDTH;
 	private static final int TOP_OF_SCREEN = 0;
-	private static final int MAXIMUM_SHOOT_SPEED = 300;
+	private static final int MAXIMUM_SHOOT_SPEED = 3;
 	private long timestampPreviousShot;
 	private Account account;
 	private ArrayList<Geroid> geroids;
@@ -41,11 +40,8 @@ public class Game {
 		this.webSocketHandler = websocketHandler;
 		this.geroids = new ArrayList<Geroid>();
 		this.projectiles = new ArrayList<Projectile>();
-		this.figure = new Figure(new Position(
-				(X_WIDTH - Figure.X_WIDTH_FIGURE)/2,
-				X_WIDTH - Figure.Y_HEIGHT_FIGURE,
-				Figure.X_WIDTH_FIGURE,
-				Figure.Y_HEIGHT_FIGURE));
+		this.figure = new Figure(new Position((X_WIDTH - Figure.X_WIDTH_FIGURE) / 2, X_WIDTH - Figure.Y_HEIGHT_FIGURE,
+				Figure.X_WIDTH_FIGURE, Figure.Y_HEIGHT_FIGURE));
 		this.account = new Account("MyName" + System.currentTimeMillis());
 		this.collisionHandler = new CollisionHandler(X_WIDTH);
 		this.score = new Playscore();
@@ -53,7 +49,7 @@ public class Game {
 
 	/**
 	 * Starts the gamethread. New Thread will run until isRunning is false(got
-	 * hit by a Geroid). Updates Gamefield.
+	 * hit by a Geroid). Updates Gamefield by itself.
 	 * 
 	 */
 	public void startGame() {
@@ -82,19 +78,11 @@ public class Game {
 		gameThread.start();
 	}
 
-	/*
-	 * Main update class. Propagates to the different update Methods.
-	 */
-
 	private void updateGamefield() {
 		updateGeroids();
 		updateProjectiles();
 		handleCollisions();
 	}
-	/*
-	 * Updates the figure corresponding the the command in the commandQueue. a
-	 * => move Left d = > move Right Space => shoot.
-	 */
 
 	private void handleCollisions() {
 		if (collisionHandler.checkAllGeroidsCollisionWithFigure(geroids, figure)) {
@@ -103,12 +91,6 @@ public class Game {
 		checkAllGeroidsCollisionWithProjectiles();
 	}
 
-	/**
-	 * Checks if there are any collisions of geroids and projectiles
-	 * 
-	 * @return Object-array, where array[0] = updated list of geroids and
-	 *         array[1] = updated list of projectiles
-	 */
 	private void checkAllGeroidsCollisionWithProjectiles() {
 		Iterator<Geroid> geroidIterator = geroids.iterator();
 		while (geroidIterator.hasNext()) {
@@ -153,9 +135,6 @@ public class Game {
 		}
 	}
 
-	/*
-	 * updates all geroids in geroids attribute (ArrayList)
-	 */
 	private void updateGeroids() {
 
 		Iterator<Geroid> geroidIterator = geroids.iterator();
@@ -172,9 +151,6 @@ public class Game {
 		}
 	}
 
-	/*
-	 * Updates all Projectiles in projectiles attribute(ArrayList)
-	 */
 	private void updateProjectiles() {
 
 		synchronized (projectiles) {
@@ -197,10 +173,6 @@ public class Game {
 		}
 	}
 
-	/*
-	 * Sends the new Values of Figure, all Geroids and all Projectiles via
-	 * webSocketHandler to the Client.
-	 */
 	@SuppressWarnings("unchecked")
 	private void sendNewValues() {
 		JSONObject obj = new JSONObject();
@@ -292,5 +264,5 @@ public class Game {
 	public Playscore getScore() {
 		return score;
 	}
-	
+
 }

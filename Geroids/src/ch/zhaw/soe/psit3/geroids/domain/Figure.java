@@ -4,84 +4,72 @@ import org.json.simple.JSONObject;
 
 public class Figure {
 
-
 	private Position position;
 	public static final int X_WIDTH_FIGURE = 60;
 	public static final int Y_HEIGHT_FIGURE = 90;
 	public static final int MOVE_WIDTH = 10;
-	
-	public Figure(Position position){
+
+	public Figure(Position position) {
 		this.position = position;
 	}
-	
+
 	/**
-	 * Moves the figure to the Left
+	 * Moves the figure to the left. Amount is set in constant MOVE_WIDTH.
 	 */
-	public void moveLeft(){
+	public void moveLeft() {
 		if (getPosition().getxCoordiante() - Figure.MOVE_WIDTH >= Game.LEFT_BOARDER) {
-			position.setxCoordiante(position.getxCoordiante()-Figure.MOVE_WIDTH);
+			position.setxCoordiante(position.getxCoordiante() - Figure.MOVE_WIDTH);
 		}
 	}
-	
+
 	/**
-	 * Moves the figure to the right
+	 * Moves the figure to the right. Amount is set in constant MOVE_WIDTH.
 	 */
-	public void moveRight(){
+	public void moveRight() {
 		if (getPosition().getxCoordiante() + Figure.MOVE_WIDTH <= Game.RIGHT_BOARDER - Figure.X_WIDTH_FIGURE) {
-			position.setxCoordiante(position.getxCoordiante()+Figure.MOVE_WIDTH);
+			position.setxCoordiante(position.getxCoordiante() + Figure.MOVE_WIDTH);
 		}
 	}
-	
+
 	/**
-	 * Shoots a projectile out of the top middle of the figure. The projectile has a y-Speed of -10 pixel/tick
-	 * @return the projectile that has been shoot
+	 * Shoots a projectile out of the top middle of the figure.
+	 * @return the projectile object that has been created.
 	 */
-	public Projectile shoot(){
-		
-		int xPosInMiddleOfFigure = this.position.getxCoordiante() + this.position.getxLength()/2;
-		int xPosMiddleWithProjectileWidth = xPosInMiddleOfFigure - Projectile.PROJECTILE_SIZE/2;
-		
+	public Projectile shoot() {
+
+		int xPosInMiddleOfFigure = this.position.getxCoordiante() + this.position.getxLength() / 2;
+		int xPosMiddleWithProjectileWidth = xPosInMiddleOfFigure - Projectile.PROJECTILE_SIZE / 2;
+
 		Position pos = new Position(xPosMiddleWithProjectileWidth,
-				this.position.getyCoordiante()-Projectile.PROJECTILE_SIZE,
-				Projectile.PROJECTILE_SIZE,
+				this.position.getyCoordiante() - Projectile.PROJECTILE_SIZE, Projectile.PROJECTILE_SIZE,
 				Projectile.PROJECTILE_SIZE);
 		Projectile projectile = new Projectile(pos);
 		return projectile;
-		
+
 	}
-	
+
 	/**
 	 * Translates the Object inclusive the position attribute into a JSONObject
 	 * @return JSONObject of figure
 	 */
 	@SuppressWarnings("unchecked")
-	public JSONObject toJSONObject(){
+	public JSONObject toJSONObject() {
 		JSONObject obj = new JSONObject();
-		
+
 		obj.put("position", this.position.toJSONObject());
 
 		return obj;
 	}
 
-	/**
-	 * @return Position
-	 */
 	public Position getPosition() {
-
 		return this.position;
 	}
 
-	/**
-	 * @return XCoordinate
-	 */
-	public int getXCoordinate(){
+	public int getXCoordinate() {
 		return position.getxCoordiante();
 	}
 
-	/**
-	 * @return YCoordinate
-	 */
-	public int getYCoordinate(){
+	public int getYCoordinate() {
 		return position.getyCoordiante();
 	}
 }

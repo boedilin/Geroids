@@ -21,7 +21,6 @@ public class Account {
 		return password;
 	}
 	
-	
 	public String geteMail() {
 		return eMail;
 	}
