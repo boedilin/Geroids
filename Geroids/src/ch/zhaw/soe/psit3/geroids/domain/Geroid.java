@@ -15,6 +15,11 @@ public class Geroid {
 	private Position position;
 	private Movement movement;
 	
+	/**
+	 * Creates a geroid with a certain position and Movement
+	 * @param position The start Position of the geroid
+	 * @param movement The Movement pattern of the geroid 
+	 */
 	public Geroid(Position position, Movement movement) {
 		this.position = position;
 		this.movement = movement;

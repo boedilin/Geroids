@@ -35,7 +35,10 @@ public class Game {
 	private final int LENGTH_OF_TICK_IN_MS = 15;
 	private int geroidMinMovement = 1;
 	private int level = 1;
-
+	/**
+	 * Creates a new Game with a specific MyWebSockethandler
+	 * @param websocketHandler The websockethandler object the game should communicate with.
+	 */
 	public Game(MyWebSocketHandler websocketHandler) {
 		this.webSocketHandler = websocketHandler;
 		this.geroids = new ArrayList<Geroid>();

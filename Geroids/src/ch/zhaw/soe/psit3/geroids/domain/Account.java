@@ -8,6 +8,10 @@ public class Account {
 	private String prename;
 	private String surname;
 
+	/**
+	 * Creates a new account with given nickname
+	 * @param nickname nickname for account.
+	 */
 	
 	public Account(String nickname){
 		this.nickname = nickname;

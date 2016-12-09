@@ -9,6 +9,10 @@ public class Figure {
 	public static final int Y_HEIGHT_FIGURE = 90;
 	public static final int MOVE_WIDTH = 10;
 
+	/**
+	 * Creates a Figure at the given startPosition
+	 * @param position Start Position of the Figure object.
+	 */
 	public Figure(Position position) {
 		this.position = position;
 	}
