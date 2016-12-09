@@ -1,5 +1,3 @@
-// kann generisch gemacht werden, da der Websocketserver der selbe ist, wie der
-// Server, der das HTML liefert:"ws://" + location.host
 var ws = new WebSocket("ws://" + location.host);
 var gamefield;
 var counter = 0;
@@ -72,22 +70,13 @@ function canvasApp() {
     var canvasXFactor = theCanvas.width / 1000;
     var canvasYFactor = theCanvas.height / 1000;
 
-    var map = {}; // You could also use an array
+    var map = {};
     onkeydown = onkeyup = function(e) {
-        //e = e || event; // to deal with IE
         if (e.keyCode == keySpace || e.keyCode == keyA || e.keyCode == keyD) {
             map[e.keyCode] = e.type == 'keydown';
         }
     }
 
-    /**
-     * how fast the pressed key can be sent: (85ms)
-     *      var previousTime;
-     *      console.log(new Date().getTime() - previousTime);
-            previousTime = new Date().getTime();
-     */
-
-    // resize the canvas to fill browser window dynamically
     window.addEventListener('resize', resizeCanvas, false);
 
     function resizeCanvas() {
@@ -113,7 +102,6 @@ function canvasApp() {
                 ws.send(key);
             }
         }
-        // do your drawing stuff here
         context.fillStyle = "black";
         context.fillRect(0, 0, canvas.width, canvas.height);
 
