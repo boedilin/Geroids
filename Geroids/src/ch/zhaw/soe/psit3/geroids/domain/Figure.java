@@ -6,17 +6,9 @@ public class Figure {
 
 
 	private Position position;
-	private Skin skin;
-	private Type type;
 	public static final int X_WIDTH_FIGURE = 60;
 	public static final int Y_HEIGHT_FIGURE = 90;
 	public static final int MOVE_WIDTH = 10;
-
-	public Figure(Type type, Skin skin, int x, int y){
-		this.skin = skin;
-		this.type = type;
-		this.position = new Position(x, y);
-	}
 	
 	public Figure(Position position){
 		this.position = position;

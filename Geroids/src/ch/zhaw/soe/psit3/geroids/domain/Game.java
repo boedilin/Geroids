@@ -12,7 +12,6 @@ import ch.zhaw.soe.psit3.geroids.servlets.MyWebSocketHandler;
 
 public class Game {
 	
-	//this configuration could be stored in an configClass maybe?
 	public static final int X_WIDTH = 1000;
 	public static final int Y_HEIGHT = 1000;
 	public static final int GEROID_WIDTH = 80;
@@ -30,7 +29,6 @@ public class Game {
 	private ArrayList<Projectile> projectiles;
 	private CollisionHandler collisionHandler;
 
-	private boolean isName = true;
 	private boolean isRunning = false;
 	private MyWebSocketHandler webSocketHandler;
 	Thread gameThread;
@@ -41,8 +39,6 @@ public class Game {
 
 	public Game(MyWebSocketHandler websocketHandler) {
 		this.webSocketHandler = websocketHandler;
-		// uncommented cause of parse error. send this as json format
-		// websocketHandler.sendMessage("Connected to Server");
 		this.geroids = new ArrayList<Geroid>();
 		this.projectiles = new ArrayList<Projectile>();
 		this.figure = new Figure(new Position(
@@ -137,7 +133,6 @@ public class Game {
 	private void updateFigure(String command) {
 		if (command.length() > 2) {
 			account.setNickname(command);
-			// isName = false;
 		}
 
 		switch (command) {
