@@ -18,7 +18,7 @@ public class Game {
 	public static final int LEFT_BOARDER = 0;
 	public static final int RIGHT_BOARDER = X_WIDTH;
 	private static final int TOP_OF_SCREEN = 0;
-	private static final int MAXIMUM_SHOOT_SPEED = 3;
+	private static final int MAXIMUM_SHOOT_SPEED = 300;
 	private long timestampPreviousShot;
 	private Account account;
 	private ArrayList<Geroid> geroids;
@@ -187,17 +187,13 @@ public class Game {
 
 	}
 
-	/*
-	 * Generates a geroid if less on playfiled than MAX_COUNT_GEROIDS
-	 */
 	private void generateGeroid() {
 		if (geroids.size() < MAX_COUNT_GEROIDS) {
 			Position pos = new Position(new Random().nextInt(900), TOP_OF_SCREEN, GEROID_WIDTH, GEROID_HEIGHT);
 			Movement mov = new Movement(0, new Random().nextInt(10) + geroidMinMovement);
 			Geroid geroid = new Geroid(pos, mov);
-			// synchronized (geroids) {
 			geroids.add(geroid);
-			// }
+		
 		}
 	}
 
