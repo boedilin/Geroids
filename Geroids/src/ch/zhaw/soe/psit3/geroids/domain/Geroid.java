@@ -12,17 +12,8 @@ import org.json.simple.JSONObject;
 
 public class Geroid {
 
-	private int id;
-	private String shape;
 	private Position position;
 	private Movement movement;
-	
-	public Geroid(int id, String shape, Position position, Movement movement) {
-		this.id = id;
-		this.shape = shape;
-		this.position = position;
-		this.movement = movement;
-	}
 	
 	public Geroid(Position position, Movement movement) {
 		this.position = position;
@@ -51,22 +42,6 @@ public class Geroid {
 			return obj;
 	}
 	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getShape() {
-		return shape;
-	}
-
-	public void setShape(String shape) {
-		this.shape = shape;
-	}
-
 	public Position getPosition() {
 		return position;
 	}
