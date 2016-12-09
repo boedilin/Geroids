@@ -1,4 +1,3 @@
-
 package ch.zhaw.soe.psit3.geroids.domain;
 
 public class Movement {
@@ -49,6 +48,5 @@ public class Movement {
 	public void changeYSpeedByGivenFactor(int y) {
 		this.ySpeed = ySpeed * y;
 	}
-	
 
 }

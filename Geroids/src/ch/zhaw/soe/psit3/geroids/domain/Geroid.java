@@ -1,10 +1,3 @@
-/**
- * 
- * @author Matthias
- *
- * Allows creating and setting behaviour of a geroid.
- */
-
 package ch.zhaw.soe.psit3.geroids.domain;
 
 import org.json.simple.JSONObject;
