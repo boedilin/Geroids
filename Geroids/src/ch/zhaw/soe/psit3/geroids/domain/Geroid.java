@@ -1,13 +1,14 @@
-package ch.zhaw.soe.psit3.geroids.domain;
-
-import org.json.simple.JSONObject;
-
 /**
  * 
  * @author Matthias
  *
  * Allows creating and setting behaviour of a geroid.
  */
+
+package ch.zhaw.soe.psit3.geroids.domain;
+
+import org.json.simple.JSONObject;
+
 
 public class Geroid {
 
@@ -28,13 +29,16 @@ public class Geroid {
 		this.movement = movement;
 	}
 
+	/**
+	 * Moves the Geroid object for one Tick. Movement pattern is specified in Movement object.
+	 */
 	public void move() {
 		position.update(movement);
 		
 	}
 	
 	/**
-	 * Returns a JSONObject representation of the Geroid for further usage. Included attributes: id, shape, position
+	 * Returns a JSONObject representation of the Geroid for further usage. Included attributes: position
 	 * @return JSONObject representing current Geroid.
 	 */
 	@SuppressWarnings("unchecked")
