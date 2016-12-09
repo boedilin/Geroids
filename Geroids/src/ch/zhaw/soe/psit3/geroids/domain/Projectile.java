@@ -2,12 +2,12 @@ package ch.zhaw.soe.psit3.geroids.domain;
 
 import org.json.simple.JSONObject;
 
-public class Projectile{
+public class Projectile {
 
 	private Position position;
 	public final static int PROJECTILE_SIZE = 10;
 	private final int MOVEMENT_SPEED = -10;
-	private Movement movement = new Movement(0,MOVEMENT_SPEED);
+	private Movement movement = new Movement(0, MOVEMENT_SPEED);
 
 	/**
 	 * Creates a Prjectile with a given start position
@@ -20,25 +20,24 @@ public class Projectile{
 	/**
 	 * Updates the position of the object by the values of the Movement object;
 	 */
-	
-	public void move(){
+
+	public void move() {
 		position.update(movement);
 	}
-
 
 	/**
 	 * Returns a JSON  representation of the projectile for further usage. 
 	 * @return JSONObject representing current Projectile.
 	 */
 	@SuppressWarnings("unchecked")
-	public JSONObject toJSONObject(){
-			
-			JSONObject obj = new JSONObject();
+	public JSONObject toJSONObject() {
 
-			obj.put("position", this.position.toJSONObject());
-			return obj;
+		JSONObject obj = new JSONObject();
+
+		obj.put("position", this.position.toJSONObject());
+		return obj;
 	}
-	
+
 	public Position getPosition() {
 		return position;
 	}
