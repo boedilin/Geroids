@@ -232,6 +232,11 @@ public class Game {
 		return array;
 	}
 
+	/**
+	 * Receives a message and checks for null values. 
+	 * @param message Message to be received. If null, will get an entry in sys.err.out and will have no other effect.
+	 */
+	
 	public void receiveMessage(String message) {
 		if (message != null) {
 			updateFigure(message);
