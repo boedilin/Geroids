@@ -24,18 +24,6 @@ var firstTime = true;
 var requestId;
 var sendedScore = false;
 
-function goLeft() {
-
-}
-
-function shoot() {
-
-}
-
-function goRight() {
-
-}
-
 function sendScore(score) {
     console.log("try to post score");
     $.ajax({
@@ -91,7 +79,9 @@ function canvasApp() {
         canvasXFactor = canvas.width / 1000;
         canvasYFactor = canvas.height / 1000;
 
+        cancelAnimationFrame(requestId);
         drawStuff();
+
     }
     resizeCanvas();
 
