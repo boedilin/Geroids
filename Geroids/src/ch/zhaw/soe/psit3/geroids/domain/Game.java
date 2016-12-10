@@ -46,7 +46,7 @@ public class Game {
 		this.figure = new Figure(new Position((X_WIDTH - Figure.X_WIDTH_FIGURE) / 2, X_WIDTH - Figure.Y_HEIGHT_FIGURE,
 				Figure.X_WIDTH_FIGURE, Figure.Y_HEIGHT_FIGURE));
 		this.account = new Account("MyName" + System.currentTimeMillis());
-		this.collisionHandler = new CollisionHandler(X_WIDTH);
+		this.collisionHandler = new CollisionHandler(Y_HEIGHT);
 		this.score = new Playscore();
 	}
 

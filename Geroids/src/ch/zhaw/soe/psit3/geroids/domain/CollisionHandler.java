@@ -5,14 +5,18 @@ import java.util.Iterator;
 
 public class CollisionHandler {
 
-	private int xRange;
+	private int yRange;
 	private final int DEFAULTXRANGE = 1000;
 	
-	public CollisionHandler(int xRange) {
-		if(xRange < 0) {
-			this.xRange = DEFAULTXRANGE;
+	/**
+	 * Creates a CollisionHandler with a certain y-axis-Range
+	 * @param yRange, the range of the y-axis
+	 */
+	public CollisionHandler(int yRange) {
+		if(yRange < 0) {
+			this.yRange = DEFAULTXRANGE;
 		} else {
-			this.xRange = xRange;
+			this.yRange = yRange;
 		}
 	}
 
@@ -110,7 +114,7 @@ public class CollisionHandler {
 			throw new NullPointerException();
 		}
 
-		if (geroid.getPosition().getyCoordiante() > this.xRange) {
+		if (geroid.getPosition().getyCoordiante() > this.yRange) {
 			return true;
 		}
 		return false;
@@ -138,11 +142,11 @@ public class CollisionHandler {
 	}
 	
 	/**
-	 * Returns xRange
+	 * Returns yRange
 	 * 
-	 * @return  xRange
+	 * @return  yRange
 	 */
-	public int getXRange() {
-		return xRange;
+	public int getYRange() {
+		return yRange;
 	}
 }
