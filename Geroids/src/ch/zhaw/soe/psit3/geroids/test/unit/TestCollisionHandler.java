@@ -50,7 +50,7 @@ public class TestCollisionHandler {
 	@Test
 	public void testCollisionHandler() {
 		CollisionHandler handler = new CollisionHandler(-5);
-		assertEquals(1000, handler.getXRange());
+		assertEquals(1000, handler.getYRange());
 		
 	}
 	
