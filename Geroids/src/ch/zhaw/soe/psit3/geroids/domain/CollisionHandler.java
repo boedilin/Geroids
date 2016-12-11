@@ -13,6 +13,8 @@ public class CollisionHandler {
 	private ArrayList<Position> figureCollisionPoints;
 	private Position firstCollisionPoint;
 	private Position secondCollisionPoint;
+	private Position leftOrHigherPoint;
+	private Position rightOrLowerPoint;
 	private boolean isTheRightPointOfProjectile;
 	private boolean isFigure;
 
@@ -36,7 +38,7 @@ public class CollisionHandler {
 		while (geroidIterator.hasNext()) {
 			Geroid myGeroid = geroidIterator.next();
 			isFigure = true;
-			for(Position position : figureCollisionPoints){
+			for (Position position : figureCollisionPoints) {
 				if (checkCollisionWithGeroid(myGeroid, position)) {
 					isFigure = false;
 					return true;
@@ -46,7 +48,7 @@ public class CollisionHandler {
 		isFigure = false;
 		return false;
 	}
-	
+
 	/**
 	 * Checks if there is a collisions of a geroid and a projectile
 	 * 
@@ -54,39 +56,10 @@ public class CollisionHandler {
 	 * @throws NullPointerExcepiton
 	 *             if geroid or projectile is null
 	 */
-	public boolean checkCollisionWithGeroid(Geroid geroid, Position position)
-			throws NullPointerException {
+	public boolean checkCollisionWithGeroid(Geroid geroid, Position position) throws NullPointerException {
 		if (geroid == null || position == null) {
 			throw new NullPointerException();
 		}
-		// int projectileLeftMostPosition =
-		// projectile.getPosition().getxCoordiante();
-		// int projectileRightMostPosition = projectileLeftMostPosition +
-		// projectile.getPosition().getxLength();
-		// int geroidLeftMostPoint = geroid.getPosition().getxCoordiante();
-		// int geroidRightMostPoint = geroidLeftMostPoint +
-		// geroid.getPosition().getxLength();
-		//
-		// int projectileHighestPoint =
-		// projectile.getPosition().getyCoordiante();
-		// int geroidLowestPoint = geroid.getPosition().getyCoordiante() +
-		// geroid.getPosition().getyLength();
-		//
-		// if (isInBetween(projectileLeftMostPosition,
-		// projectileRightMostPosition, geroidRightMostPoint)
-		// | isInBetween(projectileLeftMostPosition,
-		// projectileRightMostPosition, geroidLeftMostPoint)
-		// | isInBetween(geroidLeftMostPoint, geroidRightMostPoint,
-		// projectileLeftMostPosition)) { // xcoords
-		//
-		// if (projectileHighestPoint < geroidLowestPoint) {
-		// return true;
-		// } else {
-		// return false;
-		// }
-		// } else {
-		// return false;
-		// }
 		if (checkRectangleRange(geroid, position, "y")) {
 			if (checkRectangleRange(geroid, position, "x")) {
 				if (checkOnWhichLineRectangleRange(geroid, position)) {
@@ -97,38 +70,6 @@ public class CollisionHandler {
 			}
 		}
 		return false;
-	}
-
-	private boolean checkIfGeroidIsCollidingWithFigure(Geroid geroid){
-		
-		int figureLeftMostPoint = this.figure.getPosition().getxCoordiante();
-		int figureRightMostPoint = figureLeftMostPoint + this.figure.getPosition().getxLength();
-		int geroidLeftMostPoint = geroid.getPosition().getxCoordiante();
-		int geroidRightMostPoint = geroidLeftMostPoint + geroid.getPosition().getxLength();
-
-		int figureHighestPoint = this.figure.getPosition().getyCoordiante();
-		int geroidLowestPoint = geroid.getPosition().getyCoordiante() + geroid.getPosition().getyLength();
-
-		if (isInBetween(figureLeftMostPoint, figureRightMostPoint, geroidRightMostPoint)
-				| isInBetween(figureLeftMostPoint, figureRightMostPoint, geroidLeftMostPoint)
-				| isInBetween(geroidLeftMostPoint, geroidRightMostPoint, figureLeftMostPoint)) { // xcoords
-
-			if (figureHighestPoint < geroidLowestPoint) {
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
-	}
-
-	private boolean isInBetween(int leftBorder, int rightBorder, int searchedNumber) {
-		if (searchedNumber > leftBorder & searchedNumber < rightBorder) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	/**
@@ -201,110 +142,104 @@ public class CollisionHandler {
 		}
 	}
 
-	private void generateFigureCollisionPoints(Figure figure) throws NullPointerException{
-		if(figure == null){
+	private void generateFigureCollisionPoints(Figure figure) throws NullPointerException {
+		if (figure == null) {
 			throw new NullPointerException();
 		}
 		figureCollisionPoints.clear();
-		figureCollisionPoints.add(new Position(figure.getPosition().getxCoordiante() + 27, figure.getPosition().getyCoordiante() + 3));
-		figureCollisionPoints.add(new Position(figure.getPosition().getxCoordiante() + 33, figure.getPosition().getyCoordiante() + 3));
-		figureCollisionPoints.add(new Position(figure.getPosition().getxCoordiante() + 15, figure.getPosition().getyCoordiante() + 16));
-		figureCollisionPoints.add(new Position(figure.getPosition().getxCoordiante() + 46, figure.getPosition().getyCoordiante() + 16));
-		figureCollisionPoints.add(new Position(figure.getPosition().getxCoordiante() + 2, figure.getPosition().getyCoordiante() + 54));
-		figureCollisionPoints.add(new Position(figure.getPosition().getxCoordiante() + 58, figure.getPosition().getyCoordiante() + 54));
-		figureCollisionPoints.add(new Position(figure.getPosition().getxCoordiante() + 2, figure.getPosition().getyCoordiante() + 63));
-		figureCollisionPoints.add(new Position(figure.getPosition().getxCoordiante() + 58, figure.getPosition().getyCoordiante() + 63));
-		figureCollisionPoints.add(new Position(figure.getPosition().getxCoordiante() + 2, figure.getPosition().getyCoordiante() + 72));
-		figureCollisionPoints.add(new Position(figure.getPosition().getxCoordiante() + 58, figure.getPosition().getyCoordiante() + 72));
+		figureCollisionPoints.add(
+				new Position(figure.getPosition().getxCoordiante() + 27, figure.getPosition().getyCoordiante() + 3));
+		figureCollisionPoints.add(
+				new Position(figure.getPosition().getxCoordiante() + 33, figure.getPosition().getyCoordiante() + 3));
+		figureCollisionPoints.add(
+				new Position(figure.getPosition().getxCoordiante() + 15, figure.getPosition().getyCoordiante() + 16));
+		figureCollisionPoints.add(
+				new Position(figure.getPosition().getxCoordiante() + 46, figure.getPosition().getyCoordiante() + 16));
+		figureCollisionPoints.add(
+				new Position(figure.getPosition().getxCoordiante() + 2, figure.getPosition().getyCoordiante() + 54));
+		figureCollisionPoints.add(
+				new Position(figure.getPosition().getxCoordiante() + 58, figure.getPosition().getyCoordiante() + 54));
+		figureCollisionPoints.add(
+				new Position(figure.getPosition().getxCoordiante() + 2, figure.getPosition().getyCoordiante() + 63));
+		figureCollisionPoints.add(
+				new Position(figure.getPosition().getxCoordiante() + 58, figure.getPosition().getyCoordiante() + 63));
+		figureCollisionPoints.add(
+				new Position(figure.getPosition().getxCoordiante() + 2, figure.getPosition().getyCoordiante() + 72));
+		figureCollisionPoints.add(
+				new Position(figure.getPosition().getxCoordiante() + 58, figure.getPosition().getyCoordiante() + 72));
 	}
-	
+
 	private boolean checkCollisionBetweenGeroidAndObject(Geroid geroid, Position position) throws NullPointerException {
-		if(geroid == null || position == null){
+		if (geroid == null || position == null) {
 			throw new NullPointerException();
 		}
-		Position higher = firstCollisionPoint;
-		if (firstCollisionPoint.getyCoordiante() > secondCollisionPoint.getyCoordiante()) {
-			higher = secondCollisionPoint;
-		}
-		int yCoordinateFromPointOnLine = getYCoordinateFromPointOnLine(position, higher);
-		if (checkIfInRange(higher.getyCoordiante(),yCoordinateFromPointOnLine+2, position.getyCoordiante())){
+		int yCoordinateFromPointOnLine = getYCoordinateFromPointOnLine(position, firstCollisionPoint);
+		if (checkIfInRange(firstCollisionPoint.getyCoordiante(), yCoordinateFromPointOnLine, position.getyCoordiante())
+				|| checkIfInRange(secondCollisionPoint.getyCoordiante(), yCoordinateFromPointOnLine,
+						position.getyCoordiante())) {
 			return true;
 		}
-		if (firstCollisionPoint.getyCoordiante() < secondCollisionPoint.getyCoordiante()) {
-			if (higher.getyCoordiante() <= position.getyCoordiante()
-					& position.getyCoordiante() >= yCoordinateFromPointOnLine+1) {
-				return true;
-			}
-		}
-		if (secondCollisionPoint.getyCoordiante() <= position.getyCoordiante()
-				& position.getyCoordiante() >= yCoordinateFromPointOnLine+1) {
-			return true;
-		}
+//		if (Math.abs(firstCollisionPoint.getyCoordiante() - secondCollisionPoint.getyCoordiante()) < 20) {
+//			if (firstCollisionPoint.getxCoordiante() < secondCollisionPoint.getxCoordiante()) {
+//				if (checkIfInRange(firstCollisionPoint.getxCoordiante(), secondCollisionPoint.getxCoordiante(),
+//						position.getxCoordiante())) {
+//					return true;
+//				}
+//			}
+//			if (checkIfInRange(secondCollisionPoint.getxCoordiante(), firstCollisionPoint.getxCoordiante(),
+//					position.getxCoordiante())) {
+//				return true;
+//			}
+//		}
 		return false;
 	}
 
 	private int getYCoordinateFromPointOnLine(Position position, Position higher) {
 		double xRange = (double) Math.abs(firstCollisionPoint.getxCoordiante() - secondCollisionPoint.getxCoordiante());
 		double yRange = (double) Math.abs(firstCollisionPoint.getyCoordiante() - secondCollisionPoint.getyCoordiante());
-		double rate = (double) Math.abs(position.getxCoordiante() - higher.getxCoordiante()) / xRange;
+		double rate = (double) ((Math.abs(position.getxCoordiante() - higher.getxCoordiante())) / xRange);
 		int yCoordinateFromPointOnLine;
 		if (isTheRightPointOfProjectile) {
-			rate = (double) Math.abs(position.getxCoordiante()+1 + Projectile.PROJECTILE_SIZE
-					- higher.getxCoordiante()) / xRange;
+			rate = (double) ((Math
+					.abs(position.getxCoordiante() + Projectile.PROJECTILE_SIZE - higher.getxCoordiante())) / xRange);
 			isTheRightPointOfProjectile = false;
 		}
 		yCoordinateFromPointOnLine = higher.getyCoordiante() + (int) Math.round(rate * yRange);
 		return yCoordinateFromPointOnLine;
 	}
-	
-	private boolean checkOnWhichLineRectangleRange(Geroid geroid, Position position) throws NullPointerException{
-		if(geroid == null || position == null){
+
+	private boolean checkOnWhichLineRectangleRange(Geroid geroid, Position position) throws NullPointerException {
+		if (geroid == null || position == null) {
 			throw new NullPointerException();
 		}
-		Position leftOrHigherPoint;
-		Position rightOrLowerPoint;
 		for (int i = 0; i < geroidsCollisionPoints.get(geroid).size(); i++) {
-			if (i == geroidsCollisionPoints.get(geroid).size() - 1) {
-				leftOrHigherPoint = geroidsCollisionPoints.get(geroid).get(i);
-				rightOrLowerPoint = geroidsCollisionPoints.get(geroid).get(0);
-			}else{
-				leftOrHigherPoint = geroidsCollisionPoints.get(geroid).get(i);
-				rightOrLowerPoint = geroidsCollisionPoints.get(geroid).get(i+1);
-			}
+			checkIfLastPoint(geroid, i);
 			if (leftOrHigherPoint.getxCoordiante() > rightOrLowerPoint.getxCoordiante()) {
-				Position swap = leftOrHigherPoint;
-				leftOrHigherPoint = rightOrLowerPoint;
-				rightOrLowerPoint = swap;
+				swapPoints();
 			}
-
-			if(isFigure){
-				if (checkIfInRange(leftOrHigherPoint.getxCoordiante(), rightOrLowerPoint.getxCoordiante(), position.getxCoordiante())){
+			if (!isFigure) {
+				if (checkIfInRange(leftOrHigherPoint.getxCoordiante(), rightOrLowerPoint.getxCoordiante(),
+						position.getxCoordiante() + Projectile.PROJECTILE_SIZE)) {
+					this.isTheRightPointOfProjectile = true;
+					
 					if (leftOrHigherPoint.getyCoordiante() > rightOrLowerPoint.getyCoordiante()) {
-						Position swap = leftOrHigherPoint;
-						leftOrHigherPoint = rightOrLowerPoint;
-						rightOrLowerPoint = swap;
+						swapPoints();
 					}
-					if (checkIfInRange(leftOrHigherPoint.getyCoordiante(), rightOrLowerPoint.getyCoordiante(), position.getyCoordiante())) {
+					if (checkIfInRange(leftOrHigherPoint.getyCoordiante(), rightOrLowerPoint.getyCoordiante(),
+							position.getyCoordiante())) {
 						this.firstCollisionPoint = leftOrHigherPoint;
 						this.secondCollisionPoint = rightOrLowerPoint;
 						return true;
 					}
 				}
 			}
-			
-			if (checkIfInRange(leftOrHigherPoint.getxCoordiante(), rightOrLowerPoint.getxCoordiante(), position.getxCoordiante())
-					|| checkIfInRange(leftOrHigherPoint.getxCoordiante(), rightOrLowerPoint.getxCoordiante(),
-							position.getxCoordiante() + Projectile.PROJECTILE_SIZE)) {
-				if (checkIfInRange(leftOrHigherPoint.getxCoordiante(), rightOrLowerPoint.getxCoordiante(),
-						position.getxCoordiante() + Projectile.PROJECTILE_SIZE)) {
-					this.isTheRightPointOfProjectile = true;
-				}
+			if (checkIfInRange(leftOrHigherPoint.getxCoordiante(), rightOrLowerPoint.getxCoordiante(),
+					position.getxCoordiante())) {
 				if (leftOrHigherPoint.getyCoordiante() > rightOrLowerPoint.getyCoordiante()) {
-					Position swap = leftOrHigherPoint;
-					leftOrHigherPoint = rightOrLowerPoint;
-					rightOrLowerPoint = swap;
+					swapPoints();
 				}
-				if (checkIfInRange(leftOrHigherPoint.getyCoordiante(), rightOrLowerPoint.getyCoordiante(), position.getyCoordiante())) {
+				if (checkIfInRange(leftOrHigherPoint.getyCoordiante(), rightOrLowerPoint.getyCoordiante(),
+						position.getyCoordiante())) {
 					this.firstCollisionPoint = leftOrHigherPoint;
 					this.secondCollisionPoint = rightOrLowerPoint;
 					return true;
@@ -314,43 +249,50 @@ public class CollisionHandler {
 		return false;
 	}
 
-	private ArrayList<Position> selectXLimitPositions(ArrayList<Position> positions) throws NullPointerException {
-		if(positions == null){
-			throw new NullPointerException();
-		}
-		Position min = positions.get(0);
-		Position max = positions.get(0);
-
-		for (int i = 1; i < positions.size(); i++) {
-			if (positions.get(i).getxCoordiante() < min.getxCoordiante()) {
-				min = positions.get(i);
-			}
-			if (positions.get(i).getxCoordiante() > max.getxCoordiante()) {
-				max = positions.get(i);
-			}
-		}
-		ArrayList<Position> returnArray = new ArrayList<Position>();
-		returnArray.add(min);
-		returnArray.add(max);
-
-		return returnArray;
+	private void swapPoints() {
+		Position swap = leftOrHigherPoint;
+		leftOrHigherPoint = rightOrLowerPoint;
+		rightOrLowerPoint = swap;
 	}
 
-	private ArrayList<Position> selectYLimitPositions(ArrayList<Position> positions) throws NullPointerException{
-		if(positions == null){
+	private void checkIfLastPoint(Geroid geroid, int i) {
+		if (i == geroidsCollisionPoints.get(geroid).size() - 1) {
+			leftOrHigherPoint = geroidsCollisionPoints.get(geroid).get(i);
+			rightOrLowerPoint = geroidsCollisionPoints.get(geroid).get(0);
+		} else {
+			leftOrHigherPoint = geroidsCollisionPoints.get(geroid).get(i);
+			rightOrLowerPoint = geroidsCollisionPoints.get(geroid).get(i + 1);
+		}
+	}
+
+	private ArrayList<Position> selectLimitPositions(ArrayList<Position> positions, String xory)
+			throws NullPointerException {
+		if (positions == null) {
 			throw new NullPointerException();
 		}
 		Position min = positions.get(0);
 		Position max = positions.get(0);
 
-		for (int i = 1; i < positions.size(); i++) {
-			if (positions.get(i).getyCoordiante() < min.getyCoordiante()) {
-				min = positions.get(i);
+		if (xory.equals("x")) {
+			for (int i = 1; i < positions.size(); i++) {
+				if (positions.get(i).getxCoordiante() < min.getxCoordiante()) {
+					min = positions.get(i);
+				}
+				if (positions.get(i).getxCoordiante() > max.getxCoordiante()) {
+					max = positions.get(i);
+				}
 			}
-			if (positions.get(i).getyCoordiante() > max.getyCoordiante()) {
-				max = positions.get(i);
+		} else {
+			for (int i = 1; i < positions.size(); i++) {
+				if (positions.get(i).getyCoordiante() < min.getyCoordiante()) {
+					min = positions.get(i);
+				}
+				if (positions.get(i).getyCoordiante() > max.getyCoordiante()) {
+					max = positions.get(i);
+				}
 			}
 		}
+
 		ArrayList<Position> returnArray = new ArrayList<Position>();
 		returnArray.add(min);
 		returnArray.add(max);
@@ -366,7 +308,7 @@ public class CollisionHandler {
 	}
 
 	private boolean checkRectangleRange(Geroid geroid, Position position, String xory) throws NullPointerException {
-		if(geroid == null || position == null || xory == null){
+		if (geroid == null || position == null || xory == null) {
 			throw new NullPointerException();
 		}
 		int checkPositionValue;
@@ -374,12 +316,12 @@ public class CollisionHandler {
 		int mostRightOrLowest;
 		ArrayList<Position> sortedList;
 		if (xory.equals("x")) {
-			sortedList = selectXLimitPositions(geroidsCollisionPoints.get(geroid));
+			sortedList = selectLimitPositions(geroidsCollisionPoints.get(geroid), xory);
 			checkPositionValue = position.getxCoordiante();
 			mostLeftOrTop = sortedList.get(0).getxCoordiante();
 			mostRightOrLowest = sortedList.get(1).getxCoordiante();
 		} else {
-			sortedList = selectYLimitPositions(geroidsCollisionPoints.get(geroid));
+			sortedList = selectLimitPositions(geroidsCollisionPoints.get(geroid), xory);
 			checkPositionValue = position.getyCoordiante();
 			mostLeftOrTop = sortedList.get(0).getyCoordiante();
 			mostRightOrLowest = sortedList.get(1).getyCoordiante();
@@ -404,7 +346,7 @@ public class CollisionHandler {
 			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 63,
 					geroid.getPosition().getyCoordiante() + 100));
 			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 11,
-					geroid.getPosition().getyCoordiante() +81));
+					geroid.getPosition().getyCoordiante() + 81));
 			break;
 		case 2:
 			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 17,
@@ -417,7 +359,7 @@ public class CollisionHandler {
 					geroid.getPosition().getyCoordiante() + 28));
 			break;
 		case 3:
-			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 25,
+			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 21,
 					geroid.getPosition().getyCoordiante() + 32));
 			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 81,
 					geroid.getPosition().getyCoordiante() + 70));
@@ -436,7 +378,7 @@ public class CollisionHandler {
 			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 31,
 					geroid.getPosition().getyCoordiante() + 35));
 			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 96,
-					geroid.getPosition().getyCoordiante() + 62));
+					geroid.getPosition().getyCoordiante() + 56));
 			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 4,
 					geroid.getPosition().getyCoordiante() + 95));
 			break;
