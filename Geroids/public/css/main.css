@@ -248,3 +248,7 @@ a:hover {
     padding-top: 8px;
     background-color: Transparent;
 }
+
+#maxCharacters {
+    font-size: 10px;
+}
