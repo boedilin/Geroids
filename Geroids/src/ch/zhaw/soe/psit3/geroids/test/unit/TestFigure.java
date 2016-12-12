@@ -52,16 +52,5 @@ public class TestFigure {
 		figure.moveRight();
 		verify(positionMock).setxCoordiante(Game.X_WIDTH/2 + Figure.MOVE_WIDTH);
 	}
-	
-	//check if shoot() fires a projectile in the middle of figure
-	//not finished yet! problem with mockito Projectile$$EnhancerByMockitoWithCGLIB$$6b6dd9fb
-	//cannot be returned by getyCoordiante() getyCoordiante() should return int
-	@Test
-	public void testProjectileFiresInMiddleOfFigure(){
-		when(positionMock.getxCoordiante()).thenReturn(Game.X_WIDTH/2);
-		when(positionMock.getxLength()).thenReturn(Figure.X_WIDTH_FIGURE);
-		when(positionMock.getyCoordiante()).thenReturn(Game.Y_HEIGHT-Figure.Y_HEIGHT_FIGURE-10);
-		when(figure.shoot()).thenReturn(projectileMock);
-	}
 
 }
