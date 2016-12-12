@@ -15,15 +15,20 @@ public class CollisionHandler {
 	private Position rightOrLowerPoint;
 	private boolean isTheRightPointOfProjectile;
 	private boolean isFigure;
+	private static final int DEFAULTYRANGE = 1000;
 
 	/**
 	 * Creates a CollisionHandler with a certain y-axis-Range
 	 * @param yRange, the range of the y-axis
 	 */
-	public CollisionHandler(int yRange) throws NullPointerException {
+	public CollisionHandler(int yRange) {
+		if(yRange <= 0){
+			this.yRange = DEFAULTYRANGE;
+		} else {
+			this.yRange = yRange;
+		}
 		geroidsCollisionPoints = new HashMap<Geroid, ArrayList<Position>>();
 		figureCollisionPoints = new ArrayList<Position>();
-		this.yRange = yRange;
 	}
 
 	/**
@@ -150,6 +155,10 @@ public class CollisionHandler {
 				new Position(figure.getPosition().getxCoordiante() + 2, figure.getPosition().getyCoordiante() + 72));
 		figureCollisionPoints.add(
 				new Position(figure.getPosition().getxCoordiante() + 58, figure.getPosition().getyCoordiante() + 72));
+	}
+	
+	public int getYRange(){
+		return yRange;
 	}
 
 	private boolean checkCollisionBetweenGeroidAndObject(Geroid geroid, Position position) throws NullPointerException {

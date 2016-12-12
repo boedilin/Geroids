@@ -1,18 +1,13 @@
 package ch.zhaw.soe.psit3.geroids.test.system;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
-import java.util.ArrayList;
-import java.util.Iterator;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import ch.zhaw.soe.psit3.geroids.domain.Figure;
 import ch.zhaw.soe.psit3.geroids.domain.Game;
-import ch.zhaw.soe.psit3.geroids.domain.Geroid;
 import ch.zhaw.soe.psit3.geroids.domain.Position;
 import ch.zhaw.soe.psit3.geroids.servlets.MyWebSocketHandler;
 
