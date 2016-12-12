@@ -15,15 +15,20 @@ public class CollisionHandler {
 	private Position rightOrLowerPoint;
 	private boolean isTheRightPointOfProjectile;
 	private boolean isFigure;
+	private static final int DEFAULTYRANGE = 1000;
 
 	/**
 	 * Creates a CollisionHandler with a certain y-axis-Range
 	 * @param yRange, the range of the y-axis
 	 */
-	public CollisionHandler(int yRange) throws NullPointerException {
+	public CollisionHandler(int yRange) {
+		if(yRange < 0){
+			this.yRange = DEFAULTYRANGE;
+		} else {
+			this.yRange = yRange;
+		}
 		geroidsCollisionPoints = new HashMap<Geroid, ArrayList<Position>>();
 		figureCollisionPoints = new ArrayList<Position>();
-		this.yRange = yRange;
 	}
 
 	/**
