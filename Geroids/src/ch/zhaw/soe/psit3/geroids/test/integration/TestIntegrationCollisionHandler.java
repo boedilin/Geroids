@@ -34,10 +34,10 @@ public class TestIntegrationCollisionHandler {
 	public void setUp() {
 		geroids = new ArrayList<Geroid>();
 		figureNoCollision = new Figure(new Position(50,5));
-		figureCollision = new Figure(new Position(10,2));
+		figureCollision = new Figure(new Position(10,1));
 		projectiles = new ArrayList<Projectile>();
-		geroidNoCollision = new Geroid(1, new Position(1,1,3,3), new Movement(1,1));
-		geroidCollision = new Geroid(2, new Position(9,1,2,2), new Movement(1,1));
+		geroidNoCollision = new Geroid(1, new Position(1,1), new Movement(1,1));
+		geroidCollision = new Geroid(2, new Position(10,1), new Movement(1,1));
 		geroidOutofGamefield = new Geroid(3, new Position(1,1001), new Movement(1,1));
 		projectileOutofGamefield = new Projectile(new Position(1,-2));
 		projectileNoCollision = new Projectile(new Position(5,5));
