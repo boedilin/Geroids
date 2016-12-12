@@ -34,9 +34,12 @@ public class Game {
 	private final int MAX_COUNT_GEROIDS = 10;
 	private final int LENGTH_OF_TICK_IN_MS = 15;
 	private int level = 1;
+
 	/**
 	 * Creates a new Game with a specific MyWebSockethandler
-	 * @param websocketHandler The websockethandler object the game should communicate with.
+	 * 
+	 * @param websocketHandler
+	 *            The websockethandler object the game should communicate with.
 	 */
 	public Game(MyWebSocketHandler websocketHandler) {
 		this.webSocketHandler = websocketHandler;
@@ -193,7 +196,7 @@ public class Game {
 		if (geroids.size() < MAX_COUNT_GEROIDS) {
 			Position pos = new Position(new Random().nextInt(900), TOP_OF_SCREEN, GEROID_WIDTH, GEROID_HEIGHT);
 			Movement mov = new Movement(0, new Random().nextInt(10) + 1);
-			Geroid geroid = new Geroid(new Random().nextInt(5)+1, pos, mov);
+			Geroid geroid = new Geroid(new Random().nextInt(5) + 1, pos, mov);
 			// synchronized (geroids) {
 			geroids.add(geroid);
 			collisionHandler.addGeroidsCollisionPoints(geroid);
@@ -237,10 +240,13 @@ public class Game {
 	}
 
 	/**
-	 * Receives a message and checks for null values. 
-	 * @param message Message to be received. If null, will get an entry in sys.err.out and will have no other effect.
+	 * Receives a message and checks for null values.
+	 * 
+	 * @param message
+	 *            Message to be received. If null, will get an entry in
+	 *            sys.err.out and will have no other effect.
 	 */
-	
+
 	public void receiveMessage(String message) {
 		if (message != null) {
 			updateFigure(message);

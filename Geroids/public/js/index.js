@@ -118,24 +118,7 @@ function canvasApp() {
     }
 
     function drawFigure(figureJSON) {
-        context.drawImage(spaceShip, figureJSON.position.xStart * canvasXFactor, figureJSON.position.yStart * canvasYFactor, figureJSON.position.xLength * canvasXFactor, figureJSON.position.yLength * canvasYFactor);
-//        context.fillStyle="#FF0000";
-//    	context.fillRect((27+figureJSON.position.xStart) * canvasXFactor, (3+figureJSON.position.yStart) * canvasYFactor,2,2);
-//    	context.fillStyle="#FF0000";
-//    	context.fillRect((33+figureJSON.position.xStart) * canvasXFactor, (3+figureJSON.position.yStart) * canvasYFactor,2,2);
-//    	context.fillStyle="#FF0000";
-//    	context.fillRect((15+figureJSON.position.xStart) * canvasXFactor, (16+figureJSON.position.yStart) * canvasYFactor,2,2);
-//    	context.fillStyle="#FF0000";
-//    	context.fillRect((46+figureJSON.position.xStart) * canvasXFactor, (16+figureJSON.position.yStart) * canvasYFactor,2,2);
-//    	context.fillStyle="#FF0000";
-//     	context.fillRect((2+figureJSON.position.xStart) * canvasXFactor, (54+figureJSON.position.yStart) * canvasYFactor,2,2);
-//     	context.fillStyle="#FF0000";
-//     	context.fillRect((58+figureJSON.position.xStart) * canvasXFactor, (54+figureJSON.position.yStart) * canvasYFactor,2,2);
-//     	context.fillStyle="#FF0000";
-//     	context.fillRect((2+figureJSON.position.xStart) * canvasXFactor, (72+figureJSON.position.yStart) * canvasYFactor,2,2);
-//     	context.fillStyle="#FF0000";
-//     	context.fillRect((58+figureJSON.position.xStart) * canvasXFactor, (72+figureJSON.position.yStart) * canvasYFactor,2,2);
-     	
+        context.drawImage(spaceShip, figureJSON.position.xStart * canvasXFactor, figureJSON.position.yStart * canvasYFactor, figureJSON.position.xLength * canvasXFactor, figureJSON.position.yLength * canvasYFactor);  	
     }
 
     function drawGeroids(GeroidJSON) {
@@ -143,53 +126,19 @@ function canvasApp() {
         for (i in GeroidJSON) {
             if (GeroidJSON[i].id == 1) {
                 context.drawImage(geroid1, GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, 100 * canvasXFactor, 100 * canvasYFactor);
-//                context.fillStyle="#FF0000";
-//            	context.fillRect((23+GeroidJSON[i].position.xStart) * canvasXFactor, (27+GeroidJSON[i].position.yStart) * canvasYFactor,5,5);
-//            	context.fillStyle="#FF0000";
-//            	context.fillRect((GeroidJSON[i].position.xStart+79) * canvasXFactor, (43+GeroidJSON[i].position.yStart) * canvasYFactor,5,5);
-//            	context.fillStyle="#FF0000";
-//            	context.fillRect((63+GeroidJSON[i].position.xStart) * canvasXFactor, (100+GeroidJSON[i].position.yStart) * canvasYFactor,5,5);
-//            	context.fillStyle="#FF0000";
-//            	context.fillRect((11+GeroidJSON[i].position.xStart) * canvasXFactor, (81+GeroidJSON[i].position.yStart) * canvasYFactor,5,5); 
-            }
+           }
             if (GeroidJSON[i].id == 2) {
                 context.drawImage(geroid2, GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, 100 * canvasXFactor, 100 * canvasYFactor);
-//                context.fillStyle="#FF0000";
-//            	context.fillRect((69+GeroidJSON[i].position.xStart) * canvasXFactor, (28+GeroidJSON[i].position.yStart) * canvasYFactor,5,5);
-//            	context.fillStyle="#FF0000";
-//            	context.fillRect((17+GeroidJSON[i].position.xStart) * canvasXFactor, (47+GeroidJSON[i].position.yStart) * canvasYFactor,5,5);
-//            	context.fillStyle="#FF0000";
-//            	context.fillRect((36+GeroidJSON[i].position.xStart) * canvasXFactor, (100+GeroidJSON[i].position.yStart) * canvasYFactor,5,5);
-//            	context.fillStyle="#FF0000";
-//            	context.fillRect((88+GeroidJSON[i].position.xStart) * canvasXFactor, (81+GeroidJSON[i].position.yStart) * canvasYFactor,5,5); 
             }
             if (GeroidJSON[i].id == 3) {
                 context.drawImage(geroid3, GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, 100 * canvasXFactor, 100 * canvasYFactor);
-//                context.fillStyle=21+GeroidJSON[i].position.xStart) * canvasXFactor, (32+GeroidJSON[i].position.yStart) * canvasYFactor,5,5);
-//            	context.fillStyle="#FF0000";
-//            	context.fillRect((81+GeroidJSON[i].position.xStart) * canvasXFactor, (70+GeroidJSON[i].position.yStart) * canvasYFactor,5,5);
-//            	context.fillStyle="#FF0000";
-//            	context.fillRect(("#FF0000";
-//            	context.fillRect((29+GeroidJSON[i].position.xStart) * canvasXFactor, (100+GeroidJSON[i].position.yStart) * canvasYFactor,5,5); 
-                }
+              }
             if (GeroidJSON[i].id == 4) {
                 context.drawImage(geroid4, GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, 100 * canvasXFactor, 100 * canvasYFactor);
-//                context.fillStyle="#FF0000";
-//            	context.fillRect((59+GeroidJSON[i].position.xStart) * canvasXFactor, (25+GeroidJSON[i].position.yStart) * canvasYFactor,5,5);
-//            	context.fillStyle="#FF0000";
-//            	context.fillRect((28+GeroidJSON[i].position.xStart) * canvasXFactor, (68+GeroidJSON[i].position.yStart) * canvasYFactor,5,5);
-//            	context.fillStyle="#FF0000";
-//            	context.fillRect((71+GeroidJSON[i].position.xStart) * canvasXFactor, (100+GeroidJSON[i].position.yStart) * canvasYFactor,5,5); 
             }
             if (GeroidJSON[i].id == 5) {
                 context.drawImage(geroid5, GeroidJSON[i].position.xStart * canvasXFactor, GeroidJSON[i].position.yStart * canvasYFactor, 100 * canvasXFactor, 100 * canvasYFactor);
-//                context.fillStyle="#FF0000";
-//            	context.fillRect((31+GeroidJSON[i].position.xStart) * canvasXFactor, (35+GeroidJSON[i].position.yStart) * canvasYFactor,5,5);
-//            	context.fillStyle="#FF0000";
-//            	context.fillRect((4+GeroidJSON[i].position.xStart) * canvasXFactor, (95+GeroidJSON[i].position.yStart) * canvasYFactor,5,5);
-//            	context.fillStyle="#FF0000";
-//            	context.fillRect((94+GeroidJSON[i].position.xStart) * canvasXFactor, (56+GeroidJSON[i].position.yStart) * canvasYFactor,5,5); 
-            }
+          }
         }
     }
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+
 public class CollisionHandler {
 
 	private int yRange;
@@ -19,10 +20,12 @@ public class CollisionHandler {
 
 	/**
 	 * Creates a CollisionHandler with a certain y-axis-Range
-	 * @param yRange, the range of the y-axis
+	 * 
+	 * @param yRange,
+	 *            the range of the y-axis
 	 */
 	public CollisionHandler(int yRange) {
-		if(yRange <= 0){
+		if (yRange <= 0) {
 			this.yRange = DEFAULTYRANGE;
 		} else {
 			this.yRange = yRange;
@@ -34,7 +37,8 @@ public class CollisionHandler {
 	/**
 	 * Checks if there are any collisions of geroids and figure
 	 * 
-	 * @param ArrayList<Geroid> with all geroids in game and Figure in game
+	 * @param ArrayList<Geroid>
+	 *            with all geroids in game and Figure in game
 	 * @return true if there is a geroid, which collided with figure
 	 */
 	public boolean checkAllGeroidsCollisionWithFigure(Figure figure, ArrayList<Geroid> geroids) {
@@ -54,12 +58,14 @@ public class CollisionHandler {
 	}
 
 	/**
-	 * Checks if there is a collisions of a geroid and a projectile
+	 * Checks if there is a collisions between a geroid and an other object
+	 * (figure or projectile)
 	 * 
-	 * @param  One specific Geroid and Projectile in game
+	 * @param One
+	 *            specific Geroid and the Position of the object
 	 * @return true, if there was a collision; false, else
 	 * @throws NullPointerExcepiton
-	 *             if geroid or projectile is null
+	 *             if geroid or position is null
 	 */
 	public boolean checkCollisionWithGeroid(Geroid geroid, Position position) throws NullPointerException {
 		if (geroid == null || position == null) {
@@ -120,16 +126,33 @@ public class CollisionHandler {
 		return false;
 	}
 
+	/**
+	 * Generates the collision points for the given geroid
+	 * 
+	 * @param geroid
+	 */
 	public void addGeroidsCollisionPoints(Geroid geroid) {
 		geroidsCollisionPoints.put(geroid, generateCollisionpoints(geroid));
 	}
 
+	/**
+	 * Updates the collision points for the given geroid
+	 * 
+	 * @param geroid
+	 */
 	public void updateCollisionPoints(Geroid geroid) {
 		for (Position position : geroidsCollisionPoints.get(geroid)) {
 			position.update(geroid.getMovement());
 		}
 	}
 
+	/**
+	 * Generates the collision points for the figure related to the figures
+	 * position
+	 * 
+	 * @param figure
+	 * @throws NullPointerException
+	 */
 	public void generateFigureCollisionPoints(Figure figure) throws NullPointerException {
 		if (figure == null) {
 			throw new NullPointerException();
@@ -156,11 +179,11 @@ public class CollisionHandler {
 		figureCollisionPoints.add(
 				new Position(figure.getPosition().getxCoordiante() + 58, figure.getPosition().getyCoordiante() + 72));
 	}
-	
+
 	public int getYRange(){
 		return yRange;
 	}
-
+	
 	private boolean checkCollisionBetweenGeroidAndObject(Geroid geroid, Position position) throws NullPointerException {
 		if (geroid == null || position == null) {
 			throw new NullPointerException();
@@ -213,7 +236,7 @@ public class CollisionHandler {
 				if (checkIfInRange(leftOrHigherPoint.getxCoordiante(), rightOrLowerPoint.getxCoordiante(),
 						position.getxCoordiante() + Projectile.PROJECTILE_SIZE)) {
 					this.isTheRightPointOfProjectile = true;
-					
+
 					if (leftOrHigherPoint.getyCoordiante() > rightOrLowerPoint.getyCoordiante()) {
 						swapPoints();
 					}
