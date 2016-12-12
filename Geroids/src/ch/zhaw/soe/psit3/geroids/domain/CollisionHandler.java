@@ -6,9 +6,7 @@ import java.util.Iterator;
 
 public class CollisionHandler {
 
-	private ArrayList<Geroid> geroids;
-	private Figure figure;
-	private int yRange = 1000;
+	private int yRange;
 	private HashMap<Geroid, ArrayList<Position>> geroidsCollisionPoints;
 	private ArrayList<Position> figureCollisionPoints;
 	private Position firstCollisionPoint;
@@ -18,14 +16,10 @@ public class CollisionHandler {
 	private boolean isTheRightPointOfProjectile;
 	private boolean isFigure;
 
-	public CollisionHandler(Figure figure, ArrayList<Geroid> geroids) throws NullPointerException {
-		if (figure == null || geroids == null) {
-			throw new NullPointerException();
-		}
-		this.geroids = geroids;
-		this.figure = figure;
+	public CollisionHandler(int yRange) throws NullPointerException {
 		geroidsCollisionPoints = new HashMap<Geroid, ArrayList<Position>>();
 		figureCollisionPoints = new ArrayList<Position>();
+		this.yRange = yRange;
 	}
 
 	/**
@@ -33,7 +27,7 @@ public class CollisionHandler {
 	 * 
 	 * @return true if there is a geroid, which collided with figure
 	 */
-	public boolean checkAllGeroidsCollisionWithFigure() {
+	public boolean checkAllGeroidsCollisionWithFigure(Figure figure, ArrayList<Geroid> geroids) {
 		Iterator<Geroid> geroidIterator = geroids.iterator();
 		while (geroidIterator.hasNext()) {
 			Geroid myGeroid = geroidIterator.next();
@@ -115,23 +109,6 @@ public class CollisionHandler {
 		return false;
 	}
 
-	/**
-	 * Updates figure, geroids
-	 * 
-	 * @param List
-	 *            of geroids, figure
-	 * @throws NullPointerExcepiton
-	 *             if geroid or figure is null
-	 */
-	public void updateFigures(ArrayList<Geroid> geroids, Figure figure) throws NullPointerException {
-		if (geroids == null || figure == null) {
-			throw new NullPointerException();
-		}
-		this.geroids = geroids;
-		this.figure = figure;
-		generateFigureCollisionPoints(figure);
-	}
-
 	public void addGeroidsCollisionPoints(Geroid geroid) {
 		geroidsCollisionPoints.put(geroid, generateCollisionpoints(geroid));
 	}
@@ -142,7 +119,7 @@ public class CollisionHandler {
 		}
 	}
 
-	private void generateFigureCollisionPoints(Figure figure) throws NullPointerException {
+	public void generateFigureCollisionPoints(Figure figure) throws NullPointerException {
 		if (figure == null) {
 			throw new NullPointerException();
 		}
@@ -179,18 +156,18 @@ public class CollisionHandler {
 						position.getyCoordiante())) {
 			return true;
 		}
-//		if (Math.abs(firstCollisionPoint.getyCoordiante() - secondCollisionPoint.getyCoordiante()) < 20) {
-//			if (firstCollisionPoint.getxCoordiante() < secondCollisionPoint.getxCoordiante()) {
-//				if (checkIfInRange(firstCollisionPoint.getxCoordiante(), secondCollisionPoint.getxCoordiante(),
-//						position.getxCoordiante())) {
-//					return true;
-//				}
-//			}
-//			if (checkIfInRange(secondCollisionPoint.getxCoordiante(), firstCollisionPoint.getxCoordiante(),
-//					position.getxCoordiante())) {
-//				return true;
-//			}
-//		}
+		if (Math.abs(firstCollisionPoint.getyCoordiante() - secondCollisionPoint.getyCoordiante()) < 20) {
+			if (firstCollisionPoint.getxCoordiante() < secondCollisionPoint.getxCoordiante()) {
+				if (checkIfInRange(firstCollisionPoint.getxCoordiante(), secondCollisionPoint.getxCoordiante(),
+						position.getxCoordiante())) {
+					return true;
+				}
+			}
+			if (checkIfInRange(secondCollisionPoint.getxCoordiante(), firstCollisionPoint.getxCoordiante(),
+					position.getxCoordiante())) {
+				return true;
+			}
+		}
 		return false;
 	}
 
