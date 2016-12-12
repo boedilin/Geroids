@@ -1,7 +1,5 @@
 package ch.zhaw.soe.psit3.geroids.domain;
 
-import java.util.ArrayList;
-
 import org.json.simple.JSONObject;
 
 
@@ -10,11 +8,9 @@ public class Geroid {
 	private Position position;
 	private Movement movement;
 	private int id;
-	private String shape;
 	
 	public Geroid(int id, String shape, Position position, Movement movement) {
 		this.id = id;
-		this.shape = shape;
 		this.position = position;
 		this.movement = movement;
 	}

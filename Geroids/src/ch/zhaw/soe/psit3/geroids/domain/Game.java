@@ -33,7 +33,6 @@ public class Game {
 	Thread gameThread;
 	private final int MAX_COUNT_GEROIDS = 10;
 	private final int LENGTH_OF_TICK_IN_MS = 15;
-	private int geroidMinMovement = 1;
 	private int level = 1;
 	/**
 	 * Creates a new Game with a specific MyWebSockethandler
@@ -69,7 +68,6 @@ public class Game {
 					if (counter % 3600 == 0) {
 						score.addingScoreForTimeBonus(50);
 						level += 1;
-						geroidMinMovement += 1;
 					}
 					updateGamefield();
 					sendNewValues();

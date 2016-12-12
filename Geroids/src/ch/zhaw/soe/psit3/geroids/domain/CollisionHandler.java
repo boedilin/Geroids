@@ -22,7 +22,7 @@ public class CollisionHandler {
 	 * @param yRange, the range of the y-axis
 	 */
 	public CollisionHandler(int yRange) {
-		if(yRange < 0){
+		if(yRange <= 0){
 			this.yRange = DEFAULTYRANGE;
 		} else {
 			this.yRange = yRange;
@@ -155,6 +155,10 @@ public class CollisionHandler {
 				new Position(figure.getPosition().getxCoordiante() + 2, figure.getPosition().getyCoordiante() + 72));
 		figureCollisionPoints.add(
 				new Position(figure.getPosition().getxCoordiante() + 58, figure.getPosition().getyCoordiante() + 72));
+	}
+	
+	public int getYRange(){
+		return yRange;
 	}
 
 	private boolean checkCollisionBetweenGeroidAndObject(Geroid geroid, Position position) throws NullPointerException {
