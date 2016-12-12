@@ -9,11 +9,6 @@ public class Geroid {
 	private Movement movement;
 	private int id;
 	
-	public Geroid(int id, String shape, Position position, Movement movement) {
-		this.id = id;
-		this.position = position;
-		this.movement = movement;
-	}
 	/**
 	 * Creates a geroid with a certain position and Movement
 	 * @param position The start Position of the geroid
