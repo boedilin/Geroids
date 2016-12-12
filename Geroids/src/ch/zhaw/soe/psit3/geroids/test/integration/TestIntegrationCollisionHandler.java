@@ -64,7 +64,7 @@ public class TestIntegrationCollisionHandler {
 	
 	@Test
 	public void testCheckAllGeroidsCollisionWithFigureNoCollision(){
-		collisionHandler.setFigure(true);
+		collisionHandler.setIsFigure(true);
 		geroids.add(geroidNoCollision);
 		collisionHandler.addGeroidsCollisionPoints(geroids.get(0));
 		collisionHandler.generateFigureCollisionPoints(figureNoCollision);
@@ -79,7 +79,7 @@ public class TestIntegrationCollisionHandler {
 
 	@Test
 	public void testCheckAllGeroidsCollisionWithFigureCollision(){
-		collisionHandler.setFigure(true);
+		collisionHandler.setIsFigure(true);
 		geroids.add(geroidCollision);
 		collisionHandler.addGeroidsCollisionPoints(geroids.get(0));
 		collisionHandler.generateFigureCollisionPoints(figureCollision);

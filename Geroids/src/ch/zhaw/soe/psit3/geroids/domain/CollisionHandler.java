@@ -175,7 +175,7 @@ public class CollisionHandler {
 		return yRange;
 	}
 
-	public void setFigure(boolean isFigure) {
+	public void setIsFigure(boolean isFigure) {
 		this.isFigure = isFigure;
 	}
 
