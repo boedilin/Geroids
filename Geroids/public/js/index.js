@@ -161,8 +161,6 @@ function canvasApp() {
 
 ws.onopen = function() {
     console.log("Websocket opened!");
-    audioGameOver.pause();
-    audioGame.play();
     if (localStorage.getItem('name') != null) {
         ws.send(localStorage.getItem('name'));
     }
@@ -182,3 +180,8 @@ ws.onclose = function() {
 ws.onerror = function(err) {
     console.log("Error: " + err);
 };
+
+function startMusic() {
+    audioGameOver.pause();
+    audioGame.play();
+}
