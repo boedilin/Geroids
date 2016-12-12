@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-
 public class CollisionHandler {
 
 	private int yRange;
@@ -157,33 +156,29 @@ public class CollisionHandler {
 		if (figure == null) {
 			throw new NullPointerException();
 		}
+		int figureXCoordinate = figure.getPosition().getxCoordiante();
+		int figureYCoordinate = figure.getPosition().getyCoordiante();
 		figureCollisionPoints.clear();
-		figureCollisionPoints.add(
-				new Position(figure.getPosition().getxCoordiante() + 27, figure.getPosition().getyCoordiante() + 3));
-		figureCollisionPoints.add(
-				new Position(figure.getPosition().getxCoordiante() + 33, figure.getPosition().getyCoordiante() + 3));
-		figureCollisionPoints.add(
-				new Position(figure.getPosition().getxCoordiante() + 15, figure.getPosition().getyCoordiante() + 16));
-		figureCollisionPoints.add(
-				new Position(figure.getPosition().getxCoordiante() + 46, figure.getPosition().getyCoordiante() + 16));
-		figureCollisionPoints.add(
-				new Position(figure.getPosition().getxCoordiante() + 2, figure.getPosition().getyCoordiante() + 54));
-		figureCollisionPoints.add(
-				new Position(figure.getPosition().getxCoordiante() + 58, figure.getPosition().getyCoordiante() + 54));
-		figureCollisionPoints.add(
-				new Position(figure.getPosition().getxCoordiante() + 2, figure.getPosition().getyCoordiante() + 63));
-		figureCollisionPoints.add(
-				new Position(figure.getPosition().getxCoordiante() + 58, figure.getPosition().getyCoordiante() + 63));
-		figureCollisionPoints.add(
-				new Position(figure.getPosition().getxCoordiante() + 2, figure.getPosition().getyCoordiante() + 72));
-		figureCollisionPoints.add(
-				new Position(figure.getPosition().getxCoordiante() + 58, figure.getPosition().getyCoordiante() + 72));
+		figureCollisionPoints.add(new Position(figureXCoordinate + 27, figureYCoordinate + 3));
+		figureCollisionPoints.add(new Position(figureXCoordinate + 33, figureYCoordinate + 3));
+		figureCollisionPoints.add(new Position(figureXCoordinate + 15, figureYCoordinate + 16));
+		figureCollisionPoints.add(new Position(figureXCoordinate + 46, figureYCoordinate + 16));
+		figureCollisionPoints.add(new Position(figureXCoordinate + 2, figureYCoordinate + 54));
+		figureCollisionPoints.add(new Position(figureXCoordinate + 58, figureYCoordinate + 54));
+		figureCollisionPoints.add(new Position(figureXCoordinate + 2, figureYCoordinate + 63));
+		figureCollisionPoints.add(new Position(figureXCoordinate + 58, figureYCoordinate + 63));
+		figureCollisionPoints.add(new Position(figureXCoordinate + 2, figureYCoordinate + 72));
+		figureCollisionPoints.add(new Position(figureXCoordinate + 58, figureYCoordinate + 72));
 	}
 
-	public int getYRange(){
+	public int getYRange() {
 		return yRange;
 	}
-	
+
+	public void setFigure(boolean isFigure) {
+		this.isFigure = isFigure;
+	}
+
 	private boolean checkCollisionBetweenGeroidAndObject(Geroid geroid, Position position) throws NullPointerException {
 		if (geroid == null || position == null) {
 			throw new NullPointerException();
@@ -352,50 +347,35 @@ public class CollisionHandler {
 
 	private ArrayList<Position> generateCollisionpoints(Geroid geroid) {
 		ArrayList<Position> collisionPoints = new ArrayList<Position>();
+		int geroidXCoordinate = geroid.getPosition().getxCoordiante();
+		int geroidYCoordinate = geroid.getPosition().getyCoordiante();
 		switch (geroid.getId()) {
 		case 1:
-			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 23,
-					geroid.getPosition().getyCoordiante() + 27));
-			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 79,
-					geroid.getPosition().getyCoordiante() + 43));
-			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 63,
-					geroid.getPosition().getyCoordiante() + 100));
-			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 11,
-					geroid.getPosition().getyCoordiante() + 81));
+			collisionPoints.add(new Position(geroidXCoordinate + 23, geroidYCoordinate + 27));
+			collisionPoints.add(new Position(geroidXCoordinate + 79, geroidYCoordinate + 43));
+			collisionPoints.add(new Position(geroidXCoordinate + 63, geroidYCoordinate + 100));
+			collisionPoints.add(new Position(geroidXCoordinate + 11, geroidYCoordinate + 81));
 			break;
 		case 2:
-			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 17,
-					geroid.getPosition().getyCoordiante() + 47));
-			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 36,
-					geroid.getPosition().getyCoordiante() + 100));
-			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 88,
-					geroid.getPosition().getyCoordiante() + 81));
-			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 69,
-					geroid.getPosition().getyCoordiante() + 28));
+			collisionPoints.add(new Position(geroidXCoordinate + 17, geroidYCoordinate + 47));
+			collisionPoints.add(new Position(geroidXCoordinate + 36, geroidYCoordinate + 100));
+			collisionPoints.add(new Position(geroidXCoordinate + 88, geroidYCoordinate + 81));
+			collisionPoints.add(new Position(geroidXCoordinate + 69, geroidYCoordinate + 28));
 			break;
 		case 3:
-			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 21,
-					geroid.getPosition().getyCoordiante() + 32));
-			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 81,
-					geroid.getPosition().getyCoordiante() + 70));
-			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 29,
-					geroid.getPosition().getyCoordiante() + 100));
+			collisionPoints.add(new Position(geroidXCoordinate + 21, geroidYCoordinate + 32));
+			collisionPoints.add(new Position(geroidXCoordinate + 81, geroidYCoordinate + 70));
+			collisionPoints.add(new Position(geroidXCoordinate + 29, geroidYCoordinate + 100));
 			break;
 		case 4:
-			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 59,
-					geroid.getPosition().getyCoordiante() + 25));
-			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 28,
-					geroid.getPosition().getyCoordiante() + 68));
-			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 71,
-					geroid.getPosition().getyCoordiante() + 100));
+			collisionPoints.add(new Position(geroidXCoordinate + 59, geroidYCoordinate + 25));
+			collisionPoints.add(new Position(geroidXCoordinate + 28, geroidYCoordinate + 68));
+			collisionPoints.add(new Position(geroidXCoordinate + 71, geroidYCoordinate + 100));
 			break;
 		case 5:
-			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 31,
-					geroid.getPosition().getyCoordiante() + 35));
-			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 96,
-					geroid.getPosition().getyCoordiante() + 56));
-			collisionPoints.add(new Position(geroid.getPosition().getxCoordiante() + 4,
-					geroid.getPosition().getyCoordiante() + 95));
+			collisionPoints.add(new Position(geroidXCoordinate + 31, geroidYCoordinate + 35));
+			collisionPoints.add(new Position(geroidXCoordinate + 96, geroidYCoordinate + 56));
+			collisionPoints.add(new Position(geroidXCoordinate + 4, geroidYCoordinate + 95));
 			break;
 		}
 		return collisionPoints;

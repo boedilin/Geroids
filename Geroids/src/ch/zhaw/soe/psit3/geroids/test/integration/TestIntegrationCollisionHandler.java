@@ -41,7 +41,7 @@ public class TestIntegrationCollisionHandler {
 		geroidOutofGamefield = new Geroid(3, new Position(1,1001), new Movement(1,1));
 		projectileOutofGamefield = new Projectile(new Position(1,-2));
 		projectileNoCollision = new Projectile(new Position(5,5));
-		projectileCollision = new Projectile(new Position(10,1));
+		projectileCollision = new Projectile(new Position(70,30));
 		geroids.add(geroidNoCollision);
 		projectiles.add(projectileNoCollision);
 		collisionHandler = new CollisionHandler(1000);
@@ -64,22 +64,31 @@ public class TestIntegrationCollisionHandler {
 	
 	@Test
 	public void testCheckAllGeroidsCollisionWithFigureNoCollision(){
+		collisionHandler.setFigure(true);
+		geroids.add(geroidNoCollision);
+		collisionHandler.addGeroidsCollisionPoints(geroids.get(0));
+		collisionHandler.generateFigureCollisionPoints(figureNoCollision);
 		assertEquals(false, collisionHandler.checkAllGeroidsCollisionWithFigure(figureNoCollision, geroids));
 	}
 	
 	@Test  
 	public void testCheckIfGeroidIsCollidingWithProjectileNoCollision(){
+		collisionHandler.addGeroidsCollisionPoints(geroidNoCollision);
 		assertEquals(false, collisionHandler.checkCollisionWithGeroid(geroidNoCollision, projectileNoCollision.getPosition()));
 	}
 
 	@Test
 	public void testCheckAllGeroidsCollisionWithFigureCollision(){
+		collisionHandler.setFigure(true);
 		geroids.add(geroidCollision);
+		collisionHandler.addGeroidsCollisionPoints(geroids.get(0));
+		collisionHandler.generateFigureCollisionPoints(figureCollision);
 		assertEquals(true, collisionHandler.checkAllGeroidsCollisionWithFigure(figureCollision, geroids));
 	}
 
 	@Test  
 	public void testCheckIfGeroidIsCollidingWithProjectileCollision(){
+		collisionHandler.addGeroidsCollisionPoints(geroidCollision);
 		assertEquals(true, collisionHandler.checkCollisionWithGeroid(geroidCollision, projectileCollision.getPosition()));
 	}
 	
