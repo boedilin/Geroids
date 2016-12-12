@@ -4,15 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import ch.zhaw.soe.psit3.geroids.servlets.MyWebSocketHandler;
 
 public class Game {
-	
-	//this configuration could be stored in an configClass maybe?
+
 	public static final int X_WIDTH = 1000;
 	public static final int Y_HEIGHT = 1000;
 	public static final int GEROID_WIDTH = 80;
@@ -30,24 +28,23 @@ public class Game {
 	private ArrayList<Projectile> projectiles;
 	private CollisionHandler collisionHandler;
 
-	private boolean isName = true;
 	private boolean isRunning = false;
 	private MyWebSocketHandler webSocketHandler;
 	Thread gameThread;
 	private final int MAX_COUNT_GEROIDS = 10;
 	private final int LENGTH_OF_TICK_IN_MS = 15;
-
+	private int geroidMinMovement = 1;
+	private int level = 1;
+	/**
+	 * Creates a new Game with a specific MyWebSockethandler
+	 * @param websocketHandler The websockethandler object the game should communicate with.
+	 */
 	public Game(MyWebSocketHandler websocketHandler) {
 		this.webSocketHandler = websocketHandler;
-		// uncommented cause of parse error. send this as json format
-		// websocketHandler.sendMessage("Connected to Server");
 		this.geroids = new ArrayList<Geroid>();
 		this.projectiles = new ArrayList<Projectile>();
-		this.figure = new Figure(new Position(
-				(X_WIDTH - Figure.X_WIDTH_FIGURE)/2,
-				X_WIDTH - Figure.Y_HEIGHT_FIGURE,
-				Figure.X_WIDTH_FIGURE,
-				Figure.Y_HEIGHT_FIGURE));
+		this.figure = new Figure(new Position((X_WIDTH - Figure.X_WIDTH_FIGURE) / 2, X_WIDTH - Figure.Y_HEIGHT_FIGURE,
+				Figure.X_WIDTH_FIGURE, Figure.Y_HEIGHT_FIGURE));
 		this.account = new Account("MyName" + System.currentTimeMillis());
 		this.collisionHandler = new CollisionHandler(Y_HEIGHT);
 		this.score = new Playscore();
@@ -55,7 +52,7 @@ public class Game {
 
 	/**
 	 * Starts the gamethread. New Thread will run until isRunning is false(got
-	 * hit by a Geroid). Updates Gamefield.
+	 * hit by a Geroid). Updates Gamefield by itself.
 	 * 
 	 */
 	public void startGame() {
@@ -69,6 +66,11 @@ public class Game {
 					if (counter % 10 == 0) {
 						generateGeroid();
 					}
+					if (counter % 3600 == 0) {
+						score.addingScoreForTimeBonus(50);
+						level += 1;
+						geroidMinMovement += 1;
+					}
 					updateGamefield();
 					sendNewValues();
 					counter++;
@@ -79,20 +81,12 @@ public class Game {
 		gameThread.start();
 	}
 
-	/*
-	 * Main update class. Propagates to the different update Methods.
-	 */
-
 	private void updateGamefield() {
 		collisionHandler.generateFigureCollisionPoints(figure);
 		updateGeroids();
 		updateProjectiles();
 		handleCollisions();
 	}
-	/*
-	 * Updates the figure corresponding the the command in the commandQueue. a
-	 * => move Left d = > move Right Space => shoot.
-	 */
 
 	private void handleCollisions() {
 		if (collisionHandler.checkAllGeroidsCollisionWithFigure(figure, geroids)) {
@@ -101,12 +95,6 @@ public class Game {
 		checkAllGeroidsCollisionWithProjectiles();
 	}
 
-	/**
-	 * Checks if there are any collisions of geroids and projectiles
-	 * 
-	 * @return Object-array, where array[0] = updated list of geroids and
-	 *         array[1] = updated list of projectiles
-	 */
 	private void checkAllGeroidsCollisionWithProjectiles() {
 		Iterator<Geroid> geroidIterator = geroids.iterator();
 		while (geroidIterator.hasNext()) {
@@ -130,7 +118,6 @@ public class Game {
 	private void updateFigure(String command) {
 		if (command.length() > 2) {
 			account.setNickname(command);
-			// isName = false;
 		}
 
 		switch (command) {
@@ -151,9 +138,6 @@ public class Game {
 		}
 	}
 
-	/*
-	 * updates all geroids in geroids attribute (ArrayList)
-	 */
 	private void updateGeroids() {
 
 		Iterator<Geroid> geroidIterator = geroids.iterator();
@@ -171,9 +155,6 @@ public class Game {
 		}
 	}
 
-	/*
-	 * Updates all Projectiles in projectiles attribute(ArrayList)
-	 */
 	private void updateProjectiles() {
 
 		synchronized (projectiles) {
@@ -196,10 +177,6 @@ public class Game {
 		}
 	}
 
-	/*
-	 * Sends the new Values of Figure, all Geroids and all Projectiles via
-	 * webSocketHandler to the Client.
-	 */
 	@SuppressWarnings("unchecked")
 	private void sendNewValues() {
 		JSONObject obj = new JSONObject();
@@ -209,13 +186,11 @@ public class Game {
 		obj.put("Gameover", !isRunning);
 		obj.put("Name", this.account.getNickname());
 		obj.put("Score", score.getScore());
+		obj.put("Level", level);
 		webSocketHandler.sendMessage(obj.toJSONString());
 
 	}
 
-	/*
-	 * Generates a geroid if less on playfiled than MAX_COUNT_GEROIDS
-	 */
 	private void generateGeroid() {
 		if (geroids.size() < MAX_COUNT_GEROIDS) {
 			Position pos = new Position(new Random().nextInt(900), TOP_OF_SCREEN, GEROID_WIDTH, GEROID_HEIGHT);
@@ -263,6 +238,11 @@ public class Game {
 		return array;
 	}
 
+	/**
+	 * Receives a message and checks for null values. 
+	 * @param message Message to be received. If null, will get an entry in sys.err.out and will have no other effect.
+	 */
+	
 	public void receiveMessage(String message) {
 		if (message != null) {
 			updateFigure(message);
@@ -291,5 +271,5 @@ public class Game {
 	public Playscore getScore() {
 		return score;
 	}
-	
+
 }

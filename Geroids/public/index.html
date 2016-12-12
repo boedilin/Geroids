@@ -35,7 +35,8 @@
                         <label for="fname">Please enter your Nickname</label>
                         <input type="text" id="name" placeholder="Name" name="name" required  
                         oninvalid="this.setCustomValidity('Please enter a name')"
-    					oninput="setCustomValidity('')">
+    					oninput="setCustomValidity('')" maxlength="20">
+						<p id="maxCharacters">Maximum 20 characters</p>
                         <button onclick="myFunction()" class="btn btn-default">Submit</button>
                     </form>
                 </div>

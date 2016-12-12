@@ -1,5 +1,3 @@
-// kann generisch gemacht werden, da der Websocketserver der selbe ist, wie der
-// Server, der das HTML liefert:"ws://" + location.host
 var ws = new WebSocket("ws://" + location.host);
 var gamefield;
 var counter = 0;
@@ -27,18 +25,6 @@ var firstTime = true;
 var requestId;
 var sendedScore = false;
 
-function goLeft() {
-
-}
-
-function shoot() {
-
-}
-
-function goRight() {
-
-}
-
 function sendScore(score) {
     console.log("try to post score");
     $.ajax({
@@ -52,7 +38,7 @@ function sendScore(score) {
             "date": new Date().toLocaleDateString()
         }
     });
-    sendScore = true;
+    sendedScore = true;
 }
 
 function canvasSupport() {
@@ -73,28 +59,19 @@ function canvasApp() {
     var canvasXFactor = theCanvas.width / 1000;
     var canvasYFactor = theCanvas.height / 1000;
 
-    var map = {}; // You could also use an array
+    var map = {};
     onkeydown = onkeyup = function(e) {
-        //e = e || event; // to deal with IE
         if (e.keyCode == keySpace || e.keyCode == keyA || e.keyCode == keyD) {
             map[e.keyCode] = e.type == 'keydown';
         }
     }
 
-    /**
-     * how fast the pressed key can be sent: (85ms)
-     *      var previousTime;
-     *      console.log(new Date().getTime() - previousTime);
-            previousTime = new Date().getTime();
-     */
-
-    // resize the canvas to fill browser window dynamically
     window.addEventListener('resize', resizeCanvas, false);
 
     function resizeCanvas() {
         if (window.innerWidth <= 800) {
             canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight * 0.9;
+            canvas.height = window.innerHeight;
         } else {
             canvas.width = ((window.innerWidth) / 100) * 62.5;
             canvas.height = window.innerHeight;
@@ -103,7 +80,9 @@ function canvasApp() {
         canvasXFactor = canvas.width / 1000;
         canvasYFactor = canvas.height / 1000;
 
+        cancelAnimationFrame(requestId);
         drawStuff();
+
     }
     resizeCanvas();
 
@@ -114,7 +93,6 @@ function canvasApp() {
                 ws.send(key);
             }
         }
-        // do your drawing stuff here
         context.fillStyle = "black";
         context.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -240,8 +218,6 @@ function canvasApp() {
 
 ws.onopen = function() {
     console.log("Websocket opened!");
-    audioGameOver.pause();
-    audioGame.play();
     if (localStorage.getItem('name') != null) {
         ws.send(localStorage.getItem('name'));
     }
@@ -261,3 +237,8 @@ ws.onclose = function() {
 ws.onerror = function(err) {
     console.log("Error: " + err);
 };
+
+function startMusic() {
+    audioGameOver.pause();
+    audioGame.play();
+}

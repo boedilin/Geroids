@@ -16,6 +16,10 @@ public class CollisionHandler {
 	private boolean isTheRightPointOfProjectile;
 	private boolean isFigure;
 
+	/**
+	 * Creates a CollisionHandler with a certain y-axis-Range
+	 * @param yRange, the range of the y-axis
+	 */
 	public CollisionHandler(int yRange) throws NullPointerException {
 		geroidsCollisionPoints = new HashMap<Geroid, ArrayList<Position>>();
 		figureCollisionPoints = new ArrayList<Position>();
@@ -25,6 +29,7 @@ public class CollisionHandler {
 	/**
 	 * Checks if there are any collisions of geroids and figure
 	 * 
+	 * @param ArrayList<Geroid> with all geroids in game and Figure in game
 	 * @return true if there is a geroid, which collided with figure
 	 */
 	public boolean checkAllGeroidsCollisionWithFigure(Figure figure, ArrayList<Geroid> geroids) {
@@ -46,6 +51,7 @@ public class CollisionHandler {
 	/**
 	 * Checks if there is a collisions of a geroid and a projectile
 	 * 
+	 * @param  One specific Geroid and Projectile in game
 	 * @return true, if there was a collision; false, else
 	 * @throws NullPointerExcepiton
 	 *             if geroid or projectile is null
