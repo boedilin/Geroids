@@ -14,10 +14,10 @@ import ch.zhaw.soe.psit3.geroids.domain.Game;
 
 @WebSocket
 public class MyWebSocketHandler {
-	
+
 	private Session session;
 	private Game game;
-	
+
 	/**
 	 * Print status Code and reason to console
 	 */
@@ -41,13 +41,15 @@ public class MyWebSocketHandler {
 	public void onConnect(Session session) {
 		this.session = session;
 		session.setIdleTimeout(200000); // 200 second timeout
-		
-		//Wenn eine neue Verbindung aufgebaut wird, soll ein neues Game instanziert werden.
-		//Dem Game wird der Websockethandler übergeben, der die Verbidung zum Client handelt.
+
+		// Wenn eine neue Verbindung aufgebaut wird, soll ein neues Game
+		// instanziert werden.
+		// Dem Game wird der Websockethandler übergeben, der die Verbidung zum
+		// Client handelt.
 		game = new Game(this);
 		game.startGame();
 	}
-	
+
 	/**
 	 * send message from client to the game
 	 */
@@ -55,7 +57,7 @@ public class MyWebSocketHandler {
 	public void onMessage(String message) {
 		game.receiveMessage(message);
 	}
-	
+
 	/**
 	 * send message from game to client
 	 */
@@ -63,10 +65,11 @@ public class MyWebSocketHandler {
 	public void sendMessage(ByteBuffer packedData){
 		
 		try {
-			session.getRemote().sendBytes(packedData);
+			session.getRemote().sendBytes(packedData); //.sendString (message)
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+
 }

@@ -1,4 +1,3 @@
-
 package ch.zhaw.soe.psit3.geroids.domain;
 
 public class Movement {
@@ -18,6 +17,22 @@ public class Movement {
 		this.ySpeed = ySpeed;
 	}
 
+		/**
+	 * Changes the X Speed by the provided factor
+	 * @param x The factor the X Speed should be increased
+	 */
+	public void changeXSpeedByGivenFactor(int x) {
+		this.xSpeed = xSpeed * x;
+	}
+
+	/**
+	 * Changes the Y Speed by the given amount
+	 * @param y The factor the Y Speed should be increased
+	 */
+	public void changeYSpeedByGivenFactor(int y) {
+		this.ySpeed = ySpeed * y;
+	}
+	
 	public void setxSpeed(int xSpeed) {
 		this.xSpeed = xSpeed;
 	}
@@ -34,21 +49,6 @@ public class Movement {
 		return ySpeed;
 	}
 
-	/**
-	 * Increases the X Speed by the provided factor
-	 * @param x The factor the X Speed should be increased
-	 */
-	public void increaseXSpeed(int x) {
-		this.xSpeed = xSpeed * x;
-	}
 
-	/**
-	 * Increases the Y Speed by the given amount
-	 * @param y The factor the Y Speed should be increased
-	 */
-	public void increaseYSpeed(int y) {
-		this.ySpeed = ySpeed * y;
-	}
-	
 
 }

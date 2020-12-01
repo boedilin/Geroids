@@ -1,10 +1,9 @@
 @font-face {
-    font-family: "MineCrafter 3 Regular";
+    font-family: "MineCrafter_3_Regular";
     src: url('Minecrafter_3.ttf');
 }
 
 body {
-    /* mit /images/background.png kann das Bild nicht gefunden werden. Mit ../images/background.png aber schon! */
     background: url("../images/background.png") no-repeat center center fixed;
     background-size: cover;
     -moz-background-size: cover;
@@ -17,27 +16,21 @@ body {
     padding: 0;
 }
 
-
-/* to remove the top and left whitespace */
-
 html,
 body {
+    font-family: 'MineCrafter_3_Regular';
     width: 100%;
     height: 100%;
 }
 
-
-/* just to be sure these are full screen*/
-
 canvas {
+    font-family: 'MineCrafter_3_Regular';
     display: block;
 }
 
-
-/* To remove the scrollbars */
-
 p {
-    font-family: 'MineCrafter 3 Regular';
+    font-family: 'MineCrafter_3_Regular';
+    color: white;
 }
 
 .login {
@@ -48,18 +41,59 @@ p {
     margin-left: 13%;
 }
 
+@media (max-width: 800px) {
+    #appPanel {
+        width: 100% !important;
+        height: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+    #appPanelIndex,
+    #appPanelStart,
+    #appPanelStore,
+    #appPanelUnderConstruction,
+    #appPanelImpressum {
+        font-family: 'MineCrafter_3_Regular';
+        background-color: black;
+        color: white;
+        width: 100% !important;
+        min-height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
 #appPanel {
+    font-family: 'MineCrafter_3_Regular';
     background-color: black;
+    color: white;
+    width: 62.5%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#appPanelIndex,
+#appPanelStart,
+#appPanelStore,
+#appPanelUnderConstruction,
+#appPanelImpressum {
+    font-family: 'MineCrafter_3_Regular';
+    background-color: black;
+    color: white;
     width: 62.5%;
     min-height: 100%;
-    /*bei einer kleinen Höhe des Fensters kann so vermieden werden, dass der Inhalt des Formulars
-    nicht über das div gamePanel hinausläuft*/
-    margin-left: 17.5%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#actionButtons {
+    display: none;
 }
 
 input[type=text] {
     color: white;
-    font-family: 'MineCrafter 3 Regular';
+    font-family: 'MineCrafter_3_Regular';
     background-color: black;
     font-size: 18px;
     width: 100%;
@@ -71,7 +105,7 @@ input[type=text] {
 }
 
 label {
-    font-family: 'MineCrafter 3 Regular';
+    font-family: 'MineCrafter_3_Regular';
     color: white;
     margin: 0px;
 }
@@ -85,12 +119,13 @@ label {
 ul {
     list-style-type: none;
     color: white;
-    font-family: 'MineCrafter 3 Regular';
+    font-family: 'MineCrafter_3_Regular';
 }
 
 li {
     margin: 50px;
     text-align: center;
+    background-color: black;
 }
 
 a {
@@ -98,8 +133,130 @@ a {
     text-decoration: none;
 }
 
+.item {
+    color: white;
+    border: 2px solid white;
+    box-sizing: border-box;
+    padding: 10px 10px 10px 10px;
+    margin: 2px 100px 1px;
+}
+
 a:focus,
 a:hover {
     color: white;
     text-decoration: none;
+}
+
+.btn,
+.btn.active,
+.btn:active,
+.btn-default:hover,
+.btn-default:active {
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+}
+
+.extensions {
+    margin: 0px 0px 50px;
+}
+
+.extension {
+    margin: 5px 0px 5px;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.col-md-1,
+.col-xs-1 {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.description,
+.back {
+    padding-top: 15px;
+}
+
+.price {
+    font-size: 10px;
+    padding-top: 15px;
+}
+
+.details {
+    font-size: 8px;
+    margin: 0px;
+}
+
+.introduction {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.astronauts {
+    padding: 20px 0px 20px 50px;
+    width: 100%;
+}
+
+.names {
+    padding: 10px 25px 70px 50px;
+}
+
+.footer {
+    padding: 70px 50px 0px 50px;
+    font-size: 7px;
+}
+
+.construction {
+    padding: 70px 50px 0px 50px;
+}
+
+.constructionImage {
+    padding-bottom: 30px;
+    padding-left: 30px;
+    width: 70%;
+}
+
+.highscore {
+    display: flex;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    text-overflow: ellipsis;
+}
+
+#buttonsWrapper {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    max-width: 140px;
+}
+
+#gameoverbuttons {
+    display: flex;
+    top: 60%;
+    left: 18.75%;
+    right: 18.75%;
+    position: absolute;
+    display: none;
+}
+
+#gameoverbutton {
+    width: 100%;
+    padding-top: 8px;
+    background-color: Transparent;
+}
+
+#maxCharacters {
+    font-size: 10px;
+}
+
+.story {
+    margin-top:100px;
+}
+
+.col-xs-offset-5, .col-md-offset-5 {
+    margin-left:41%;
 }
