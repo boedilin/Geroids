@@ -1,42 +1,34 @@
-//TODO implement ToJSON() method
-
 package ch.zhaw.soe.psit3.geroids.domain;
 
 import org.json.simple.JSONObject;
 
-/**
- * 
- * @author Matthias
- *
- * Allows creating and setting behaviour of a geroid.
- */
 
 public class Geroid {
 
-	private int id;
-	private String shape;
 	private Position position;
 	private Movement movement;
+	private int id;
 	
-	public Geroid(int id, String shape, Position position, Movement movement) {
+	/**
+	 * Creates a geroid with a certain position and Movement
+	 * @param position The start Position of the geroid
+	 * @param movement The Movement pattern of the geroid 
+	 */
+	public Geroid(int id, Position position, Movement movement) {
 		this.id = id;
-		this.shape = shape;
-		this.position = position;
-		this.movement = movement;
-	}
-	
-	public Geroid(Position position, Movement movement) {
 		this.position = position;
 		this.movement = movement;
 	}
 
+	/**
+	 * Moves the Geroid object for one Tick. Movement pattern is specified in Movement object.
+	 */
 	public void move() {
 		position.update(movement);
-		
 	}
 	
 	/**
-	 * Returns a JSONObject representation of the Geroid for further usage. Included attributes: id, shape, position
+	 * Returns a JSONObject representation of the Geroid for further usage. Included attributes: position
 	 * @return JSONObject representing current Geroid.
 	 */
 	@SuppressWarnings("unchecked")
@@ -45,26 +37,11 @@ public class Geroid {
 			JSONObject obj = new JSONObject();
 			
 			obj.put("position", this.position.toJSONObject());
+			obj.put("id", this.id);
 		
 			return obj;
 	}
 	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getShape() {
-		return shape;
-	}
-
-	public void setShape(String shape) {
-		this.shape = shape;
-	}
-
 	public Position getPosition() {
 		return position;
 	}
@@ -79,5 +56,8 @@ public class Geroid {
 
 	public void setMovement(Movement movement) {
 		this.movement = movement;
+	}
+	public int getId() {
+		return id;
 	}
 }

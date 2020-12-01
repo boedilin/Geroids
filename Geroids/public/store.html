@@ -13,6 +13,7 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/modernizr.js"></script>
+    <script type="text/javascript" src="js/store.js"></script>
     <link rel="stylesheet" href="css/main.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -23,102 +24,111 @@
     <![endif]-->
 </head>
 
-<body>
-  <div id=appPanel>
+<body onload="startMusic()">
+    <div id="appPanelStore">
         <div class="container-fluid">
             <div class="row extensions text-center">
-              <div class="row">
-                <div class="col-xs-2 col-md-2">
-                </div>
-                <div class="col-xs-8 col-md-8">
-                    <img src="images/logo_black_2.png" class="startlogo" alt="Geroids" />
-                </div>
-              </div>
-                <div class="row item">
-                  <div class="col-xs-1 col-md-1">
-                      <img src="images/rocket_green.png" class="extension img-responsive" alt="Green" />
-                  </div>
-                  <div class="col-xs-7 col-md-7 description">
-                      Green spaceship
-                  </div>
-                  <div class="col-xs-2 col-md-2 price">
-                      CHF 1.-
-                  </div>
-                  <button type="button" class="btn btn-default col-xs-2 col-md-2">Buy</button>
-                </div>
-                <div class="row item">
-                  <div class="col-xs-1 col-md-1">
-                      <img src="images/rocket_blue.png" class="extension img-responsive" alt="Blue" />
-                  </div>
-                  <div class="col-xs-7 col-md-7 description">
-                      Blue spaceship
-                  </div>
-                  <div class="col-xs-2 col-md-2 price">
-                      CHF 1.-
-                  </div>
-                  <button type="button" class="btn btn-default col-xs-2 col-md-2">Buy</button>
-                </div>
-                <div class="row item">
-                  <div class="col-xs-1 col-md-1">
-                      <img src="images/rocket_red.png" class="extension img-responsive" alt="Red" />
-                  </div>
-                  <div class="col-xs-7 col-md-7 description">
-                      Red spaceship
-                  </div>
-                  <div class="col-xs-2 col-md-2 price">
-                      CHF 1.-
-                  </div>
-                  <button type="button" class="btn btn-default col-xs-2 col-md-2">Buy</button>
-                </div>
-                <div class="row item">
-                  <div class="col-xs-1 col-md-1">
-                      <img src="images/heart.png" class="extension img-responsive" alt="Heart" />
-                  </div>
-                  <div class="col-xs-7 col-md-7 description">
-                      One bonus life
-                  </div>
-                  <div class="col-xs-2 col-md-2 price">
-                      CHF 1.-
-                  </div>
-                      <button type="button" class="btn btn-default col-xs-2 col-md-2">Buy</button>
-                </div>
-                <div class="row item">
-                  <div class="col-xs-1 col-md-1">
-                      <img src="images/explorer_spaceship.png" class="extension img-responsive" alt="Explorer" />
-                  </div>
-                  <div class="col-xs-7 col-md-7 description">
-                      Explorer spaceship
-                      <p class="details">speed: 20</p>
-                      <p class="details">lives: 1</p>
-                  </div>
-                  <div class="col-xs-2 col-md-2 price">
-                      CHF 2.-
-                  </div>
-                      <button type="button" class="btn btn-default col-xs-2 col-md-2">Buy</button>
-               </div>
-                <div class="row item">
-                  <div class="col-xs-1 col-md-1">
-                      <img src="images/enterprise_spaceship.png" class="extension img-responsive" alt="Enterprise" />
-                  </div>
-                  <div class="col-xs-7 col-md-7 description">
-                      Enterprise spaceship
-                      <p class="details"> speed: 30 </p>
-                       <p class="details">lives: 2</p>
-                  </div>
-                  <div class="col-xs-2 col-md-2 price">
-                      CHF 3.-
-                  </div>
-                      <button type="button" class="btn btn-default col-xs-2 col-md-2">Buy</button>
-               </div>
                 <div class="row">
-                  <div class="col-xs-5 col-md-5">
-                  </div>
-                  <form class="col-xs-2 col-md-2 back" action="/start.html" method="get">
-                      <button class="btn btn-default">Back</button>
-                  </form>
+                    <div class="col-xs-8 col-md-8 col-xs-offset-2 col-md-col-xs-2 col-md-offset-2">
+                        <img src="images/logo_black_2.png" class="startlogo" alt="Geroids" />
+                    </div>
                 </div>
-                
+                <div class="row item">
+                    <div class="col-xs-1 col-md-1">
+                        <img src="images/rocket_green.png" class="extension img-responsive" alt="Green" />
+                    </div>
+                    <div class="col-xs-7 col-md-7 description">
+                        Green spaceship
+                    </div>
+                    <div class="col-xs-2 col-md-2 price">
+                        CHF 1.-
+                    </div>
+                    <form class="col-xs-2 col-md-2" action="/underConstruction.html" method="get">
+                        <button class="btn btn-default">Buy</button>
+                    </form>
+                </div>
+                <div class="row item">
+                    <div class="col-xs-1 col-md-1">
+                        <img src="images/rocket_blue.png" class="extension img-responsive" alt="Blue" />
+                    </div>
+                    <div class="col-xs-7 col-md-7 description">
+                        Blue spaceship
+                    </div>
+                    <div class="col-xs-2 col-md-2 price">
+                        CHF 1.-
+                    </div>
+                    <form class="col-xs-2 col-md-2" action="/underConstruction.html" method="get">
+                        <button class="btn btn-default">Buy</button>
+                    </form>
+                </div>
+                <div class="row item">
+                    <div class="col-xs-1 col-md-1">
+                        <img src="images/rocket_red.png" class="extension img-responsive" alt="Red" />
+                    </div>
+                    <div class="col-xs-7 col-md-7 description">
+                        Red spaceship
+                    </div>
+                    <div class="col-xs-2 col-md-2 price">
+                        CHF 1.-
+                    </div>
+                    <form class="col-xs-2 col-md-2" action="/underConstruction.html" method="get">
+                        <button class="btn btn-default">Buy</button>
+                    </form>
+                </div>
+                <div class="row item">
+                    <div class="col-xs-1 col-md-1">
+                        <img src="images/heart.png" class="extension img-responsive" alt="Heart" />
+                    </div>
+                    <div class="col-xs-7 col-md-7 description">
+                        One bonus life
+                    </div>
+                    <div class="col-xs-2 col-md-2 price">
+                        CHF 1.-
+                    </div>
+                    <form class="col-xs-2 col-md-2" action="/underConstruction.html" method="get">
+                        <button class="btn btn-default">Buy</button>
+                    </form>
+                </div>
+                <div class="row item">
+                    <div class="col-xs-1 col-md-1">
+                        <img src="images/explorer_spaceship.png" class="extension img-responsive" alt="Explorer" />
+                    </div>
+                    <div class="col-xs-7 col-md-7 description">
+                        Explorer spaceship
+                        <p class="details">speed: 20</p>
+                        <p class="details">lives: 1</p>
+                    </div>
+                    <div class="col-xs-2 col-md-2 price">
+                        CHF 2.-
+                    </div>
+                    <form class="col-xs-2 col-md-2" action="/underConstruction.html" method="get">
+                        <button class="btn btn-default">Buy</button>
+                    </form>
+                </div>
+                <div class="row item">
+                    <div class="col-xs-1 col-md-1">
+                        <img src="images/enterprise_spaceship.png" class="extension img-responsive" alt="Enterprise" />
+                    </div>
+                    <div class="col-xs-7 col-md-7 description">
+                        Enterprise spaceship
+                        <p class="details"> speed: 30 </p>
+                        <p class="details">lives: 2</p>
+                    </div>
+                    <div class="col-xs-2 col-md-2 price">
+                        CHF 3.-
+                    </div>
+                    <form class="col-xs-2 col-md-2" action="/underConstruction.html" method="get">
+                        <button class="btn btn-default">Buy</button>
+                    </form>
+                </div>
+                <div class="row">
+                    <form class="col-xs-2 col-md-2 col-xs-offset-5 col-md-offset-5 back" action="/start.html" method="get">
+                        <button class="btn btn-default">Back</button>
+                    </form>
+                </div>
+
+            </div>
         </div>
-    </div>
 </body>
+
 </html>

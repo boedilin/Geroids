@@ -18,20 +18,16 @@
 
 </head>
 
-<body>
+<body onload="startMusic()">
+    <div id="gameoverbuttons">
+        <div id="buttonsWrapper">
+            <button id="gameoverbutton" onclick="location.href='game.html';">New Game</button>
+            <button id="gameoverbutton" onclick="location.href='highScore.html';">High Scores</button>
+            <button id="gameoverbutton" onclick="location.href='start.html';">Menu</button>
+        </div>
+    </div>
     <div id="appPanel">
         <canvas id="canvas"></canvas>
-    </div>
-    <div id="actionButtons">
-        <div id="leftButton" onclick="goLeft()">
-            LEFT
-        </div>
-        <div id="shootButton" onclick="shoot()">
-            SHOOT
-        </div>
-        <div id="rightButton" onclick="goRight()">
-            RIGHT
-        </div>
     </div>
 </body>
 

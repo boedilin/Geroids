@@ -1,6 +1,5 @@
 //TODO remove syso's in while loops. Atm neccessairy because of missing synchronized variables.
 
-
 package ch.zhaw.soe.psit3.geroids.test.system;
 
 import static org.junit.Assert.*;
@@ -18,7 +17,7 @@ import ch.zhaw.soe.psit3.geroids.domain.Position;
 import ch.zhaw.soe.psit3.geroids.servlets.MyWebSocketHandler;
 
 public class TestSystemGame {
-	private final int FIGURE_X_POS = 100;
+	private final int FIGURE_X_POS = 500;
 	private final int FIGURE_Y_POS = 898;
 	private final int FIGURE_X_LENGTH = 61;
 	private final int FIGURE_Y_LENGTH = 90;
@@ -34,28 +33,49 @@ public class TestSystemGame {
 		game.setFigure(figure);
 	}
 
-	
 	/**
-	 * Starts a game, moves to the X Coordiante of the nearest geroid and waits for the collision and checks if game is over.
+	 * Starts a game, moves to the X Coordiante of the nearest geroid and waits
+	 * for the collision and checks if game is over.
+	 * 
 	 */
 	@Test
 	public void testGameOver() {
 		ArrayList<Geroid> geroids = game.getGeroids();
 		Geroid nearestXGeroid;
 		game.startGame();
-		
+		if (!waitForEntryInGeroids()) {
+			nearestXGeroid = game.getGeroids().get(0);
+			nearestXGeroid = chooseNearestGeroidsOnXAxis(geroids, nearestXGeroid);
+			moveIntoCollidingXCoordinates(nearestXGeroid);
+			waitUntilCollisionWithGeroid(nearestXGeroid);
+		}
+		assertFalse(game.isRunning());
+	}
+
+	/**
+	 * Starts a game, moves to the X Coordiante of the nearest geroid shoots it
+	 * down and check immediately the playscore.
+	 */
+	@Test
+	public void testPlayscore() {
+		ArrayList<Geroid> geroids = game.getGeroids();
+		Geroid nearestXGeroid;
+		game.startGame();
+
 		waitForEntryInGeroids();
 		nearestXGeroid = game.getGeroids().get(0);
 		nearestXGeroid = chooseNearestGeroidsOnXAxis(geroids, nearestXGeroid);
 		moveIntoCollidingXCoordinates(nearestXGeroid);
-		waitUntilCollisionWithGeroid(nearestXGeroid);
-		
-		assertFalse(game.isRunning());
+		game.getProjectiles().add(figure.shoot());
+		while (game.getScore().getScore() == 0) {
+			System.out.print("");
+		}
+		assertNotEquals(game.getScore().getScore(), 0);
 	}
 
 	private void waitUntilCollisionWithGeroid(Geroid nearestXGeroid) {
-		while(nearestXGeroid.getPosition().getyCoordiante() + nearestXGeroid.getPosition().getyLength() <= FIGURE_Y_POS){
-			
+
+		while (game.isRunning()) {
 			System.out.print("");
 		}
 	}
@@ -68,10 +88,10 @@ public class TestSystemGame {
 			}
 			game.receiveMessage("68");
 
-
 		} else {
 			for (int i = FIGURE_X_POS; i > nearestXGeroid.getPosition().getxCoordiante(); i -= 10) {
 				game.receiveMessage("65");
+
 			}
 			game.receiveMessage("65");
 
@@ -85,19 +105,26 @@ public class TestSystemGame {
 
 			if (Math.abs(next.getPosition().getxCoordiante() - FIGURE_X_POS) < Math
 					.abs(nearestXGeroid.getPosition().getxCoordiante() - FIGURE_X_POS)) {
-				
+
 				nearestXGeroid = next;
 			}
 		}
+
 		return nearestXGeroid;
 	}
 
-	private void waitForEntryInGeroids() {
-		while (game.getGeroids().isEmpty()) {
+	private boolean waitForEntryInGeroids() {
+		boolean hit = false;
+
+		while (game.getGeroids().size() < 4) {
+			if (!game.isRunning()) {
+				hit = true;
+				break;
+			}
 			System.out.print("");
 		}
+
+		return hit;
 	}
 
-
-	
 }

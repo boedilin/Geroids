@@ -25,15 +25,18 @@
     <![endif]-->
 </head>
 
-<body>
-    <div id=appPanel>
+<body onload="startMusic()">
+    <div id="appPanelIndex">
         <div class="container-fluid">
             <div class="row login">
                 <div class="col-xs-8 col-md-8">
                     <img src="images/logo_black_2.png" class="startlogo" alt="Geroids" />
                     <form action="/start.html" method="get">
                         <label for="fname">Please enter your Nickname</label>
-                        <input type="text" id="name" placeholder="Name" name="name">
+                        <input type="text" id="name" placeholder="Name" name="name" required  
+                        oninvalid="this.setCustomValidity('Please enter a name')"
+    					oninput="setCustomValidity('')" maxlength="20">
+						<p id="maxCharacters">Maximum 20 characters</p>
                         <button onclick="myFunction()" class="btn btn-default">Submit</button>
                     </form>
                 </div>
@@ -41,4 +44,5 @@
         </div>
     </div>
 </body>
+
 </html>
